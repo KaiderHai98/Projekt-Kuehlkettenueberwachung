@@ -43,3 +43,11 @@ try:
 
 except Exception as e:
     print("Fehler beim Datenbankzugriff:", e)
+
+finally:
+    #Alles im finally:-Block wird immer ausgeführt, egal ob vorher ein Fehler passiert ist oder nicht
+    # Verbindung schließen
+    if 'cursor' in locals():
+        cursor.close()
+    if 'conn' in locals():
+        conn.close()
