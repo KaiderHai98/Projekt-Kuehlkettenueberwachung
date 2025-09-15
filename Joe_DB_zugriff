@@ -30,5 +30,16 @@ try:
     abfrage = "SELECT * FROM dbo.coolchain WHERE transportid = ? ORDER BY datetime"
     cursor.execute(abfrage, transport_id)
 
+
+    # Ergebnisse abrufen und anzeigen
+    daten = cursor.fetchall()
+    if daten:
+        print (f"\nDaten Transport-ID {transport_id}:")
+        for datensatz in daten:
+            print(datensatz)
+    else:
+        print(f"Keine Daten für Transport-ID {transport_id} gefunden.")
+
+
 except Exception as e:
     print("Fehler beim Datenbankzugriff:", e)
