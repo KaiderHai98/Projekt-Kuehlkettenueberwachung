@@ -1,0 +1,16 @@
+import pyodbc
+
+#Varibalen
+server = 'sc-db-server.database.windows.net'
+database = 'supplychain'
+username = 'rse'
+password = 'Pa$$w0rd'
+
+#Verbindung
+conn_str = (
+    f"DRIVER={{ODBC Driver 17 for SQL Server}};"
+    f"SERVER={server};"
+    f"DATABASE={database};"
+    f"UID={username};"
+    f"PWD={password}"
+)
