@@ -22,3 +22,13 @@ try:
 
     # Cursor erzeugen
     cursor = conn.cursor()
+
+    # Benutzereingabe
+    transport_id = input("Bitte geben Sie eine Transport-ID ein: ")
+
+    # SQL-Abfrage
+    abfrage = "SELECT * FROM dbo.coolchain WHERE transportid = ? ORDER BY datetime"
+    cursor.execute(abfrage, transport_id)
+
+except Exception as e:
+    print("Fehler beim Datenbankzugriff:", e)
