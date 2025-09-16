@@ -1,5 +1,0 @@
-# In Han_Verarbeitung.py
-import Han_DB_Zugriff_Zeiten
-
-# Aufruf einer Funktion oder Klasse daraus
-Han_DB_Zugriff_Zeiten.meine_funktion()
