@@ -24,21 +24,21 @@ try:
     cursor = conn.cursor()
 
     # Benutzereingabe
-    transport_id = input("Bitte geben Sie eine Transport-ID ein: ")
+    transportstationID = input("Bitte geben Sie eine Transportstation-ID ein: ")
 
     # SQL-Abfrage
-    abfrage = "SELECT * FROM dbo.coolchain WHERE transportid = ? ORDER BY datetime"
-    cursor.execute(abfrage, transport_id)
+    abfrage = "SELECT * FROM dbo.tempdata WHERE transportstationID = ? ORDER BY datetime"
+    cursor.execute(abfrage, transportstationID)
 
 
     # Ergebnisse abrufen und anzeigen
     daten = cursor.fetchall()
     if daten:
-        print (f"\nDaten Transport-ID {transport_id}:")
+        print (f"\nDaten Transportstation-ID {transportstationID}:")
         for datensatz in daten:
             print(datensatz)
     else:
-        print(f"Keine Daten für Transport-ID {transport_id} gefunden.")
+        print(f"Keine Daten für Transportstation-ID {transportstationID} gefunden.")
 
 
 except Exception as e:
