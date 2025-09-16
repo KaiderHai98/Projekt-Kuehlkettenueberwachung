@@ -1,0 +1,50 @@
+import pyodbc
+
+SERVER   = "sc-db-server.database.windows.net"
+DATABASE = "supplychain"
+USERNAME = "rse"
+PASSWORD = "Pa$$w0rd"
+DRIVER   = "{ODBC Driver 18 for SQL Server}"
+
+def get_transport_list(transport_id: str):
+    conn_str = (
+        f"DRIVER={DRIVER};"
+        f"SERVER=tcp:{SERVER},1433;"
+        f"DATABASE={DATABASE};"
+        f"UID={USERNAME};"
+        f"PWD={PASSWORD};"
+        "Encrypt=yes;TrustServerCertificate=no;"
+    )
+
+    with pyodbc.connect(conn_str) as conn:
+        cur = conn.cursor()
+
+        # alle Spaltennamen automatisch holen
+        cur.execute("""
+            SELECT COLUMN_NAME
+            FROM INFORMATION_SCHEMA.COLUMNS
+            WHERE TABLE_SCHEMA = 'dbo' AND TABLE_NAME = 'coolchain'
+            ORDER BY ORDINAL_POSITION
+        """)
+        columns = [row[0] for row in cur.fetchall()]
+
+        # SQL dynamisch mit den echten Spalten bauen
+        select_cols = ", ".join(f"[{c}]" for c in columns)
+        sql = f"""
+            SELECT {select_cols}
+            FROM dbo.coolchain
+            WHERE transportid = ?
+            ORDER BY {columns[-1]}
+        """
+
+        cur.execute(sql, transport_id)
+        rows = cur.fetchall()
+        return [dict(zip(columns, row)) for row in rows]
+
+if __name__ == "__main__":
+    tid = input("Gib eine TransportID ein: ").strip()
+    daten = get_transport_list(tid)
+    if daten:
+        print(daten)
+    else:
+        print("Keine Daten gefunden.")
