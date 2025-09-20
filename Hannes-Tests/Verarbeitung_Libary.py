@@ -83,7 +83,48 @@ def check_zeitraeume_10minMax(transport_daten):
     finally:
 
         # Terminal Ausgabe
-        
+
         print(ausgabe)
+
+###################################################################
+# Transportdauer 48h Max ##########################################
+###################################################################
+
+def check_transportdauer(transport_daten):
+
+    try:
+        ausgabe = "Korrekte Transportdauer"
+        startzeit = None
+        endzeit = None
+
+        for eintrag in transport_daten:
+            status = (eintrag[4]).strip("'")
+            zeitpunkt = eintrag[5]
+
+            if status == "in" and startzeit is None:
+                startzeit = zeitpunkt
+            if status == "out":
+                endzeit = zeitpunkt
+
+        if startzeit and endzeit:
+            diff = (endzeit - startzeit).total_seconds() / 3600
+            if diff > 48:
+                ausgabe = "Transportdauer > 48 h"
+
+        return ausgabe
+    
+    except Exception as e:
+        print("Fehler bei der Verarbeitung - Transportdauer 48h Max:", e)
+        return None
+    
+    finally:
+
+        # Terminal Ausgabe
+
+        print(ausgabe) 
+
+###################################################################
+# Transportdauer 48h Max ##########################################
+###################################################################
 
 

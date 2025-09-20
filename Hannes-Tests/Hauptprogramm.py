@@ -3,6 +3,7 @@ from DB_Zugriff_Libary import get_temperatur_daten
 from DB_Zugriff_Libary import get_company_daten
 from Verarbeitung_Libary import pruefe_in_out
 from Verarbeitung_Libary import check_zeitraeume_10minMax
+from Verarbeitung_Libary import check_transportdauer
 import pyodbc
 
 # Verbindungsdaten
@@ -39,4 +40,5 @@ company_daten      = get_company_daten(companyID, verbindungs_i)
 
 in_out_fehler, in_out_aktuell = pruefe_in_out(transport_daten)
 zeitraum_check = check_zeitraeume_10minMax(transport_daten)
+transportdauer_check = check_transportdauer(transport_daten)
 
