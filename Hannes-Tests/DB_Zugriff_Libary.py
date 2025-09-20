@@ -23,7 +23,8 @@ def get_transport_daten(transportid, verbindungs_i):
         cursor.execute(abfrage, transportid)
 
         transport_daten = cursor.fetchall()
-        return transport_daten
+        transport_daten_len = len(transport_daten)  
+        return transport_daten, transport_daten_len
 
     except Exception as e:
         print("Fehler beim Datenbankzugriff - Transportdaten:", e)
@@ -38,9 +39,9 @@ def get_transport_daten(transportid, verbindungs_i):
     # Terminal Ausgabe
 
         if transport_daten:
+            # Datensatz-Aufbau: (ID, CompanyID, TransportID, TransportstationID, direction (Jahr, Monat, Tag, Stunde, Minute, Sekunde))
             print("######### Transport-Daten #########")
-            print(f"{len(transport_daten)} Datensätze gefunden")
-            # Datensatz: (ID, CompanyID, TransportID, TransportstationID, direction (Jahr, Monat, Tag, Stunde, Minute, Sekunde))
+            print(f"{transport_daten_len} Datensätze gefunden")
             for transport_datensatz in transport_daten:
                 print(transport_datensatz)
             print("###################################")
@@ -71,7 +72,8 @@ def get_temperatur_daten(transportstationID, verbindungs_i):
         cursor.execute(abfrage, transportstationID)
 
         temperatur_daten = cursor.fetchall()
-        return temperatur_daten
+        temoratur_daten_len = len(temperatur_daten) 
+        return temperatur_daten, temoratur_daten_len
 
     except Exception as e:
         print("Fehler beim Datenbankzugriff - Temperaturdaten:", e)
@@ -86,9 +88,9 @@ def get_temperatur_daten(transportstationID, verbindungs_i):
         # Terminal Ausgabe
     
         if temperatur_daten:
+            # Datensatz-Aufbau: (ID (Jahr, Monat, Tag, Stunde, Minute) Temperatur)
             print("######### Temperatur-Daten #########")
-            print(f"{len(temperatur_daten)} Datensätze gefunden")
-            # Datensatz: (ID (Jahr, Monat, Tag, Stunde, Minute) Temperatur)
+            print(f"{temoratur_daten_len} Datensätze gefunden")
             for temperatur_datensatz in temperatur_daten:
                 print(temperatur_datensatz)
             print("####################################")
@@ -117,7 +119,8 @@ def get_company_daten(companyID, verbindungs_i):
         cursor.execute(abfrage, companyID)
 
         company_daten = cursor.fetchall()
-        return company_daten
+        company_daten_len = len(company_daten)
+        return company_daten, company_daten_len
 
     except Exception as e:
         print("Fehler beim Datenbankzugriff - Company Daten:", e)
@@ -132,9 +135,9 @@ def get_company_daten(companyID, verbindungs_i):
         # Terminal Ausgabe
     
         if company_daten:
+            # Datensatz-Aufbau: (CompanyID, Company, Straße, Ort, PLZ)
             print("######### Company-Daten #########")
-            print(f"{len(company_daten)} Datensätze gefunden")
-            # Datensatz: (CompanyID, Company, Straße, Ort, PLZ)
+            print(f"{company_daten_len} Datensätze gefunden")
             for company_datensatz in company_daten:
                 print(company_datensatz)
             print("#################################")
@@ -163,7 +166,8 @@ def get_transportstation_daten(transportstationID, verbindungs_i):
         cursor.execute(abfrage, transportstationID)
 
         transportstation_daten = cursor.fetchall()
-        return transportstation_daten
+        transportstation_daten_len = len(transportstation_daten)
+        return transportstation_daten, transportstation_daten_len
 
     except Exception as e:
         print("Fehler beim Datenbankzugriff - transportstation Daten:", e)
@@ -178,9 +182,9 @@ def get_transportstation_daten(transportstationID, verbindungs_i):
         # Terminal Ausgabe
     
         if transportstation_daten:
+            # Datensatz-Aufbau: (TransportstationID, Transportstation, Kategorie, PLZ)
             print("######### Transportstation-Daten #########")
-            print(f"{len(transportstation_daten)} Datensätze gefunden")
-            # Datensatz: (TransportstationID, Transportstation, Kategorie, PLZ)
+            print(f"{transportstation_daten_len} Datensätze gefunden")
             for transportstation_datensatz in transportstation_daten:
                 print(transportstation_datensatz)
             print("##########################################")

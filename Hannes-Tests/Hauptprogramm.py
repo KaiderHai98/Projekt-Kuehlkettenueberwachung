@@ -17,24 +17,25 @@ from DB_Zugriff_Libary import get_transport_daten
 from DB_Zugriff_Libary import get_temperatur_daten
 from DB_Zugriff_Libary import get_company_daten
 from DB_Zugriff_Libary import get_transportstation_daten
-from Verarbeitung_Libary import pruefe_in_out
+from Verarbeitung_Libary import check_in_out
 from Verarbeitung_Libary import check_zeitraeume_10minMax
 from Verarbeitung_Libary import check_transportdauer
+from Verarbeitung_Libary import check_Daten_Eingang
 import pyodbc
 
 # Verbindungsdaten
-server = 'sc-db-server.database.windows.net'
+server   = 'sc-db-server.database.windows.net'
 database = 'supplychain'
 username = 'rse'
 password = 'Pa$$w0rd'
 
 # Verbindungsstring
 verbindungs_i = (
-    f"DRIVER={{ODBC Driver 18 for SQL Server}};"
-    f"SERVER={server};"
-    f"DATABASE={database};"
-    f"UID={username};"
-    f"PWD={password}"
+    f"DRIVER=      {{ODBC Driver 18 for SQL Server}};"
+    f"SERVER=      {server};"
+    f"DATABASE=    {database};"
+    f"UID=         {username};"
+    f"PWD=         {password}"
 )
 
 # Transport-Daten einholen
@@ -46,10 +47,10 @@ companyID          = input("Company-ID: ")
 # Datenbank Zugriff ###############################################
 ###################################################################
    
-transport_daten        = get_transport_daten(transportid, verbindungs_i)
-temperatur_daten       = get_temperatur_daten(transportstationID, verbindungs_i)
-company_daten          = get_company_daten(companyID, verbindungs_i)
-transportstation_daten = get_transportstation_daten(transportstationID, verbindungs_i)
+transport_daten,        transport_daten_len        = get_transport_daten        (transportid, verbindungs_i)
+temperatur_daten,       temoratur_daten_len        = get_temperatur_daten       (transportstationID, verbindungs_i)
+company_daten,          company_daten_len          = get_company_daten          (companyID, verbindungs_i)
+transportstation_daten, transportstation_daten_len = get_transportstation_daten (transportstationID, verbindungs_i)
 
 print ("Datenerfasssung erfolgreich abgeschlossen")
 
@@ -57,7 +58,8 @@ print ("Datenerfasssung erfolgreich abgeschlossen")
 # Daten Kontrolle #################################################
 ###################################################################
 
-in_out_fehler, in_out_aktuell = pruefe_in_out(transport_daten)
-zeitraum_check = check_zeitraeume_10minMax(transport_daten)
-transportdauer_check = check_transportdauer(transport_daten)
+in_out_check                  = check_in_out             (transport_daten)
+zeitraum_check                = check_zeitraeume_10minMax(transport_daten)
+transportdauer_check          = check_transportdauer     (transport_daten)
+eingangs_check                = check_Daten_Eingang      (transport_daten_len, temoratur_daten_len, company_daten_len, transportstation_daten_len)
 

@@ -3,37 +3,42 @@
 # Daten Prüfen - IN / OUT Reihenfolge #############################
 ###################################################################
 
-def pruefe_in_out(transport_daten):
+def check_in_out(transport_daten):
     try:
-        in_out_fehler = []
-        aktuell = None
-        in_out_aktuell = None
-        letzte_zeit = None
+        ausgabe        = []
+        fehler         = []
+        anfangs_status = None
+        status         = None
+        letzter_status = None
+        zeitpunkt      = None
+        letzte_zeit    = None
 
         for eintrag in transport_daten:
-            status = eintrag[4].strip("'").lower()   # Status: ist im 3. Feld 
-            zeitpunkt = eintrag[5]                   # Zeit:   ist im 6. Feld 
+            status    = eintrag[4].strip("'").lower()   # Status: ist im 3. Feld 
+            zeitpunkt = eintrag[5]                      # Zeit:   ist im 6. Feld 
 
-            if aktuell == status:
+            if anfangs_status == status:
 
                 diff = zeitpunkt - letzte_zeit
                 minuten = diff.seconds // 60
                 sekunden = diff.seconds % 60
 
                 if status == "in":
-                    in_out_fehler.append(f"Doppelter Eincheck-Zeitpunkt, Abstand: {minuten} Minuten {sekunden} Sekunden")
+                    fehler.append(f"Doppelter Eincheck-Zeitpunkt, Abstand: {minuten} Minuten {sekunden} Sekunden")
                 if status == "out":
-                    in_out_fehler.append(f"Doppelter Auscheck-Zeitpunkt, Abstand: {minuten} Minuten {sekunden} Sekunden")
+                    fehler.append(f"Doppelter Auscheck-Zeitpunkt, Abstand: {minuten} Minuten {sekunden} Sekunden")
 
             if status == "in":
-                in_out_aktuell = "Eingecheckt"
+                letzter_status = "Eingecheckt"
             if status == "out":
-                in_out_aktuell = "Ausgecheckt"
+                letzter_status = "Ausgecheckt"
 
-            aktuell = status
+            anfangs_status = status
             letzte_zeit = zeitpunkt
 
-        return in_out_fehler, in_out_aktuell
+            ausgabe.append(fehler, letzter_status)
+
+        return ausgabe
     
     except Exception as e:
         print("Fehler bei der Verarbeitung - IN/OUT Prüfung:", e)
@@ -43,14 +48,14 @@ def pruefe_in_out(transport_daten):
 
         # Terminal Ausgabe
 
-        if in_out_fehler:
+        if fehler:
             print("Fehler gefunden:")
-            for i_o_f in in_out_fehler:
-                print("-", i_o_f)
+            for f in fehler:
+                print("-", f)
         else:
             print("Korrekte Reihenfolge")
 
-        print("Letzter Buchungsstand:", in_out_aktuell)
+        print("Letzter Buchungsstand:", letzter_status)
 
 ###################################################################
 # Daten Prüfen: Zeiträume 10min Max ohne Kühlung ##################
@@ -58,21 +63,26 @@ def pruefe_in_out(transport_daten):
 
 def check_zeitraeume_10minMax(transport_daten):
     try:
-        ausgabe = "Korrekte Zeiteinhaltung bei Übergabe"
-        letzte_zeit = None
-        letzte_aktion = None
+        ausgabe       = []
+        fehler        = []
+        status        = None
+        letzte_status = None
+        zeitpunkt     = None
+        letzte_zeit   = None
 
         for eintrag in transport_daten:
             status, zeitpunkt = (eintrag[4]).strip("'"), eintrag[5]
 
-            if status == "in" and letzte_aktion == "out":
+            if status == "in" and letzte_status == "out":
                 diff = (zeitpunkt - letzte_zeit).total_seconds() / 60
                 if diff > 10:
-                    ausgabe = "Übergabe > 10 min"
+                    fehler.append(f"Übergabe > 10 min")
                     break
 
-            letzte_aktion = status
+            letzte_status = status
             letzte_zeit = zeitpunkt
+
+            ausgabe.append(fehler)
 
         return ausgabe
     
@@ -84,7 +94,12 @@ def check_zeitraeume_10minMax(transport_daten):
 
         # Terminal Ausgabe
 
-        print(ausgabe)
+        if fehler:
+            print("Fehler gefunden:")
+            for f in fehler:
+                print("-", f)
+        else:
+            print("Korrekte Zeiträume (<= 10 min)")
 
 ###################################################################
 # Daten Prüfen: Transportdauer 48h Max ############################
@@ -93,9 +108,12 @@ def check_zeitraeume_10minMax(transport_daten):
 def check_transportdauer(transport_daten):
 
     try:
-        ausgabe = "Korrekte Transportdauer"
-        startzeit = None
-        endzeit = None
+        ausgabe    = []
+        fehler     = []
+        status     = None
+        startzeit  = None
+        endzeit    = None
+        zeitpunkt  = None
 
         for eintrag in transport_daten:
             status = (eintrag[4]).strip("'")
@@ -109,7 +127,9 @@ def check_transportdauer(transport_daten):
         if startzeit and endzeit:
             diff = (endzeit - startzeit).total_seconds() / 3600
             if diff > 48:
-                ausgabe = "Transportdauer > 48 h"
+                fehler.append("Transportdauer > 48 h")
+
+            ausgabe.append(fehler)
 
         return ausgabe
     
@@ -121,13 +141,50 @@ def check_transportdauer(transport_daten):
 
         # Terminal Ausgabe
 
-        print(ausgabe) 
+        if fehler:
+            print("Fehler gefunden:")
+            for f in fehler:
+                print("-", f)
+        else:
+            print("Korrekte Transportdauer (<= 48 h)")
 
 ###################################################################
 # Daten Prüfen: Transportstations - Konsistenzprüfung #############
 ###################################################################
 
 ###################################################################
-# Daten Prüfen: Eintags -Prüfung ##################################
+# Daten Prüfen: Eingangs - Prüfung ##################################
 ###################################################################
 
+def check_Daten_Eingang(transport_daten_len, temoratur_daten_len, company_daten_len, transportstation_daten_len):
+    try:
+        ausgabe = []
+        fehler  = []
+
+        if transport_daten_len == 0:
+            fehler.append("Keine Transport-Daten vorhanden")
+        if temoratur_daten_len == 0:
+            fehler.append("Keine Temperatur-Daten vorhanden")
+        if company_daten_len == 0:
+            fehler.append("Keine Company-Daten vorhanden")
+        if transportstation_daten_len == 0:
+            fehler.append("Keine Transportstations-Daten vorhanden")
+
+        ausgabe.append(fehler)
+
+        return ausgabe
+    
+    except Exception as e:
+        print("Fehler bei der Verarbeitung - Eingangs-Prüfung:", e)
+        return None
+
+    finally:
+
+        # Terminal Ausgabe
+
+        if fehler:
+            print("Fehler gefunden:")
+            for f in fehler:
+                print("-", f)
+        else:
+            print("Korrekte Eingang der DB-Daten")
