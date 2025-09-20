@@ -4,13 +4,13 @@ from DB_Zugriff_Libary import get_company_daten
 from Verarbeitung_Libary import pruefe_in_out
 import pyodbc
 
-# Variablen
+# Verbindungsdaten
 server = 'sc-db-server.database.windows.net'
 database = 'supplychain'
 username = 'rse'
 password = 'Pa$$w0rd'
 
-# Verbindung
+# Verbindungsstring
 verbindungs_i = (
     f"DRIVER={{ODBC Driver 18 for SQL Server}};"
     f"SERVER={server};"
@@ -19,7 +19,7 @@ verbindungs_i = (
     f"PWD={password}"
 )
 
-# Beispiel: Daten holen
+# Daten holen
 transportid        = input("Transport-ID: ")
 transportstationID = input("TransportstationID-ID: ")
 companyID          = input("Company-ID: ")
@@ -64,8 +64,8 @@ in_out_fehler, in_out_aktuell = pruefe_in_out(transport_daten)
 
 if in_out_fehler:
     print("Fehler gefunden:")
-    for f in in_out_fehler:
-        print("-", f)
+    for i_o_f in in_out_fehler:
+        print("-", i_o_f)
 else:
     print("Reihenfolge korrekt")
 
