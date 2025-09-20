@@ -48,12 +48,12 @@ def pruefe_in_out(transport_daten):
             for i_o_f in in_out_fehler:
                 print("-", i_o_f)
         else:
-            print("Reihenfolge korrekt")
+            print("Korrekte Reihenfolge")
 
         print("Letzter Buchungsstand:", in_out_aktuell)
 
 ###################################################################
-# Zeiträume 10min Max ohne Kühlung ################################
+# Daten Prüfen: Zeiträume 10min Max ohne Kühlung ##################
 ###################################################################
 
 def check_zeitraeume_10minMax(transport_daten):
@@ -87,7 +87,7 @@ def check_zeitraeume_10minMax(transport_daten):
         print(ausgabe)
 
 ###################################################################
-# Transportdauer 48h Max ##########################################
+# Daten Prüfen: Transportdauer 48h Max ############################
 ###################################################################
 
 def check_transportdauer(transport_daten):
@@ -124,7 +124,10 @@ def check_transportdauer(transport_daten):
         print(ausgabe) 
 
 ###################################################################
-# Transportdauer 48h Max ##########################################
+# Daten Prüfen: Transportstations - Konsistenzprüfung #############
 ###################################################################
 
+###################################################################
+# Daten Prüfen: Eintags -Prüfung ##################################
+###################################################################
 

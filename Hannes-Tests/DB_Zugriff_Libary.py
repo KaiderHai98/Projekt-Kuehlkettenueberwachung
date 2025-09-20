@@ -142,3 +142,43 @@ def get_company_daten(companyID, verbindungs_i):
 # Datenbank Zugriff - Transportstations-Daten #####################
 ###################################################################
 
+def get_transportstation_daten(transportstationID, verbindungs_i):
+    """Holt alle Datensätze für eine TransportstationID"""
+    try:
+        # Verbindung herstellen
+        conn = pyodbc.connect(verbindungs_i)
+        print("Verbindung erfolgreich hergestellt")
+
+        # Cursor erzeugen
+        cursor = conn.cursor()
+
+        # SQL-Abfrage
+        abfrage = """
+            SELECT * 
+            FROM dbo.transportstation 
+            WHERE transportstationID = ?
+        """
+        cursor.execute(abfrage, transportstationID)
+
+        transportstation_daten = cursor.fetchall()
+        return transportstation_daten
+
+    except Exception as e:
+        print("Fehler beim Datenbankzugriff - Company Daten:", e)
+        return None
+
+    finally:
+        if 'cursor' in locals():
+            cursor.close()
+        if 'conn' in locals():
+            conn.close()
+
+        # Terminal Ausgabe
+    
+        if transportstation_daten:
+            print(f"{len(transportstation_daten)} Datensätze gefunden")
+            # Datensatz: (companyID, company, Straße, Ort, PLZ)
+            for transportstation_datensatz in transportstation_daten:
+                print(transportstation_datensatz)
+        else:
+            print("Keine Daten gefunden")

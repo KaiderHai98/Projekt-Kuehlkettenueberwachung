@@ -1,3 +1,18 @@
+###################################################
+## Kopfzeile: CoolChainProjekt
+# 
+# Hauptprogramm
+# Version: XX vom: XX
+# Autoren:
+#
+# Zugehörige Libarys:
+# - DB_Zugriff_Libary.py
+# - Verarbeitung_Libary.py
+# 
+# Funktionsbeschreibung: XX
+###################################################
+
+# Import-Block
 from DB_Zugriff_Libary import get_transport_daten
 from DB_Zugriff_Libary import get_temperatur_daten
 from DB_Zugriff_Libary import get_company_daten
@@ -21,7 +36,7 @@ verbindungs_i = (
     f"PWD={password}"
 )
 
-# Daten holen
+# Transport-Daten einholen
 transportid        = input("Transport-ID: ")
 transportstationID = input("TransportstationID-ID: ")
 companyID          = input("Company-ID: ")
