@@ -187,4 +187,4 @@ def check_Daten_Eingang(transport_daten_len, temoratur_daten_len, company_daten_
             for f in fehler:
                 print("-", f)
         else:
-            print("Korrekte Eingang der DB-Daten")
+            print("Korrekter Eingang der DB-Daten")

@@ -31,11 +31,11 @@ password = 'Pa$$w0rd'
 
 # Verbindungsstring
 verbindungs_i = (
-    f"DRIVER=      {{ODBC Driver 18 for SQL Server}};"
-    f"SERVER=      {server};"
-    f"DATABASE=    {database};"
-    f"UID=         {username};"
-    f"PWD=         {password}"
+    f"DRIVER={{ODBC Driver 18 for SQL Server}};"
+    f"SERVER={server};"
+    f"DATABASE={database};"
+    f"UID={username};"
+    f"PWD={password}"
 )
 
 # Transport-Daten einholen
