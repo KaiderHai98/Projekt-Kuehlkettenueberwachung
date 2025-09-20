@@ -1,3 +1,4 @@
+import pyodbc
 
 ###################################################################
 # Datenbank Zugriff - Transportdaten ##############################
@@ -136,4 +137,8 @@ def get_company_daten(companyID, verbindungs_i):
                 print(company_datensatz)
         else:
             print("Keine Daten gefunden")
+
+###################################################################
+# Datenbank Zugriff - Transportstations-Daten #####################
+###################################################################
 
