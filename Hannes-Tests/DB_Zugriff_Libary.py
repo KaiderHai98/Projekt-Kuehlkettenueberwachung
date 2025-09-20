@@ -39,13 +39,14 @@ def get_transport_daten(transportid, verbindungs_i):
     # Terminal Ausgabe
 
         if transport_daten:
+            print("######### Transport-Daten #########")
             print(f"{len(transport_daten)} Datensätze gefunden")
             # Datensatz: (ID, CompanyID, TransportID, TransportstationID, direction (Jahr, Monat, Tag, Stunde, Minute, Sekunde))
-            transport_datensatz.replace("datetime.datetime", "Datum (J/M/T) und Uhrzeit (H/M/S)")
             for transport_datensatz in transport_daten:
                 print(transport_datensatz)
+            print("###################################")
         else:
-            print("Keine Daten gefunden")
+            print("Keine Transport-Daten gefunden")
     
 
 ###################################################################
@@ -87,12 +88,14 @@ def get_temperatur_daten(transportstationID, verbindungs_i):
         # Terminal Ausgabe
     
         if temperatur_daten:
+            print("######### Temperatur-Daten #########")
             print(f"{len(temperatur_daten)} Datensätze gefunden")
             # Datensatz: (ID (Jahr, Monat, Tag, Stunde, Minute) Temperatur)
             for temperatur_datensatz in temperatur_daten:
                 print(temperatur_datensatz)
+            print("####################################")
         else:
-            print("Keine Daten gefunden")
+            print("Keine Temperatur-Daten gefunden")
 
 ###################################################################
 # Datenbank Zugriff - Company-Daten ###############################
@@ -132,12 +135,14 @@ def get_company_daten(companyID, verbindungs_i):
         # Terminal Ausgabe
     
         if company_daten:
+            print("######### Company-Daten #########")
             print(f"{len(company_daten)} Datensätze gefunden")
             # Datensatz: (CompanyID, Company, Straße, Ort, PLZ)
             for company_datensatz in company_daten:
                 print(company_datensatz)
+            print("#################################")
         else:
-            print("Keine Daten gefunden")
+            print("Keine Company-Daten gefunden")
 
 ###################################################################
 # Datenbank Zugriff - Transportstations-Daten #####################
@@ -165,7 +170,7 @@ def get_transportstation_daten(transportstationID, verbindungs_i):
         return transportstation_daten
 
     except Exception as e:
-        print("Fehler beim Datenbankzugriff - Company Daten:", e)
+        print("Fehler beim Datenbankzugriff - transportstation Daten:", e)
         return None
 
     finally:
@@ -177,9 +182,11 @@ def get_transportstation_daten(transportstationID, verbindungs_i):
         # Terminal Ausgabe
     
         if transportstation_daten:
+            print("######### Transportstation-Daten #########")
             print(f"{len(transportstation_daten)} Datensätze gefunden")
             # Datensatz: (TransportstationID, Transportstation, Kategorie, PLZ)
             for transportstation_datensatz in transportstation_daten:
                 print(transportstation_datensatz)
+            print("##########################################")
         else:
-            print("Keine Daten gefunden")
+            print("Keine Transportstations-Daten gefunden")
