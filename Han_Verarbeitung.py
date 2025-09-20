@@ -1,40 +1,40 @@
 from Han_DB_Zugriff_Zeiten import get_transport_daten
 from Han_DB_Zugriff_Zeiten import get_temperatur_daten
+import pyodbc
+
+# Variablen
+server = 'sc-db-server.database.windows.net'
+database = 'supplychain'
+username = 'rse'
+password = 'Pa$$w0rd'
+
+# Verbindung
+verbindungs_i = (
+    f"DRIVER={{ODBC Driver 18 for SQL Server}};"
+    f"SERVER={server};"
+    f"DATABASE={database};"
+    f"UID={username};"
+    f"PWD={password}"
+)
 
 # Beispiel: Daten holen
-transport_id       = input("Transport-ID: ")
+transportid        = input("Transport-ID: ")
 transportstationID = input("TransportstationID-ID: ")
-daten_transport    = get_transport_daten(transport_id)
-daten_temperatur   = get_temperatur_daten(transportstationID)
-
-
-
-
-    # Ergebnisse abrufen und anzeigen
-    daten = cursor.fetchall()
-    if daten:
-        print (f"\nDaten Transport-ID {transport_id}:")
-        for datensatz in daten:
-            print(datensatz)
-    else:
-        print(f"Keine Daten für Transport-ID {transport_id} gefunden.")
-
-
+transport_daten    = get_transport_daten(transportid: str, verbindungs_i)
+temperatur_daten   = get_temperatur_daten(transportstationID: str, verbindungs_i)
         
-if daten_transport:
-    print(f"{len(daten_transport)} Datensätze gefunden")
+if transport_daten:
+    print(f"{len(transport_daten)} Datensätze gefunden")
     # Hier kannst du mit den Daten weiterarbeiten
-    for row in daten_transport:
-        # z.B. einzelne Werte nutzen
-        print(row.datetime, row.temperatur, row.feuchtigkeit)
+    for transport_datensatz in transport_daten:
+        print(transport_datensatz)
 else:
     print("Keine Daten gefunden")
 
-if daten_temperatur:
-    print(f"{len(daten_temperatur)} Datensätze gefunden")
+if temperatur_daten:
+    print(f"{len(temperatur_daten)} Datensätze gefunden")
     # Hier kannst du mit den Daten weiterarbeiten
-    for row in daten_temperatur:
-        # z.B. einzelne Werte nutzen
-        print(row.datetime, row.temperatur, row.feuchtigkeit)
+    for temperatur_datensatz in temperatur_daten:
+        print(temperatur_datensatz)
 else:
     print("Keine Daten gefunden")
