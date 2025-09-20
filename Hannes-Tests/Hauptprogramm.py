@@ -60,13 +60,13 @@ else:
 # Daten Kontrolle #################################################
 ###################################################################
 
-fehler, letzter = pruefe_in_out(transport_daten)
+in_out_fehler, in_out_aktuell = pruefe_in_out(transport_daten)
 
-if fehler:
-    print("Fehler:")
-    for f in fehler:
+if in_out_fehler:
+    print("Fehler gefunden:")
+    for f in in_out_fehler:
         print("-", f)
 else:
     print("Reihenfolge korrekt")
 
-print("Letzter Buchungsstand:", letzter)
+print("Letzter Buchungsstand:", in_out_aktuell)
