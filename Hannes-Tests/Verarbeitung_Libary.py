@@ -4,58 +4,86 @@
 ###################################################################
 
 def pruefe_in_out(transport_daten):
-    in_out_fehler = []
-    aktuell = None
-    in_out_aktuell = None
-    letzte_zeit = None
+    try:
+        in_out_fehler = []
+        aktuell = None
+        in_out_aktuell = None
+        letzte_zeit = None
 
-    for eintrag in transport_daten:
-        status = eintrag[4].strip("'").lower()   # Status: ist im 3. Feld 
-        zeitpunkt = eintrag[5]                   # Zeit:   ist im 6. Feld 
+        for eintrag in transport_daten:
+            status = eintrag[4].strip("'").lower()   # Status: ist im 3. Feld 
+            zeitpunkt = eintrag[5]                   # Zeit:   ist im 6. Feld 
 
-        if aktuell == status:
+            if aktuell == status:
 
-            diff = zeitpunkt - letzte_zeit
-            minuten = diff.seconds // 60
-            sekunden = diff.seconds % 60
+                diff = zeitpunkt - letzte_zeit
+                minuten = diff.seconds // 60
+                sekunden = diff.seconds % 60
+
+                if status == "in":
+                    in_out_fehler.append(f"Doppelter Eincheck-Zeitpunkt, Abstand: {minuten} Minuten {sekunden} Sekunden")
+                if status == "out":
+                    in_out_fehler.append(f"Doppelter Auscheck-Zeitpunkt, Abstand: {minuten} Minuten {sekunden} Sekunden")
 
             if status == "in":
-                in_out_fehler.append(f"Doppelter Eincheck-Zeitpunkt, Abstand: {minuten} Minuten {sekunden} Sekunden")
+                in_out_aktuell = "Eingecheckt"
             if status == "out":
-                in_out_fehler.append(f"Doppelter Auscheck-Zeitpunkt, Abstand: {minuten} Minuten {sekunden} Sekunden")
+                in_out_aktuell = "Ausgecheckt"
 
-        if status == "in":
-            in_out_aktuell = "Eingecheckt"
-        if status == "out":
-            in_out_aktuell = "Ausgecheckt"
+            aktuell = status
+            letzte_zeit = zeitpunkt
 
-        aktuell = status
-        letzte_zeit = zeitpunkt
+        return in_out_fehler, in_out_aktuell
+    
+    except Exception as e:
+        print("Fehler bei der Verarbeitung - IN/OUT Prüfung:", e)
+        return None
 
-    return in_out_fehler, in_out_aktuell
+    finally:
+
+        # Terminal Ausgabe
+
+        if in_out_fehler:
+            print("Fehler gefunden:")
+            for i_o_f in in_out_fehler:
+                print("-", i_o_f)
+        else:
+            print("Reihenfolge korrekt")
+
+        print("Letzter Buchungsstand:", in_out_aktuell)
 
 ###################################################################
-# Zeiträume ohne Kühlung ##########################################
+# Zeiträume 10min Max ohne Kühlung ################################
 ###################################################################
 
-def check_zeitraeume(transport_daten):
-    ausgabe = "Korrekte Zeiteinhaltung bei Übergabe"
-    letzte_zeit = None
-    letzte_aktion = None
+def check_zeitraeume_10minMax(transport_daten):
+    try:
+        ausgabe = "Korrekte Zeiteinhaltung bei Übergabe"
+        letzte_zeit = None
+        letzte_aktion = None
 
-    for eintrag in transport_daten:
-        status, zeitpunkt = (eintrag[4]).strip("'"), eintrag[5]
+        for eintrag in transport_daten:
+            status, zeitpunkt = (eintrag[4]).strip("'"), eintrag[5]
 
-        if status == "in" and letzte_aktion == "out":
-            diff = (zeitpunkt - letzte_zeit).total_seconds() / 60
-            if diff > 10:
-                ausgabe = "Übergabe > 10 min"
-                break
+            if status == "in" and letzte_aktion == "out":
+                diff = (zeitpunkt - letzte_zeit).total_seconds() / 60
+                if diff > 10:
+                    ausgabe = "Übergabe > 10 min"
+                    break
 
-        letzte_aktion = status
-        letzte_zeit = zeitpunkt
+            letzte_aktion = status
+            letzte_zeit = zeitpunkt
 
-    return ausgabe
+        return ausgabe
+    
+    except Exception as e:
+        print("Fehler bei der Verarbeitung - Zeitraum Prüfung 10min Max:", e)
+        return None
 
+    finally:
+
+        # Terminal Ausgabe
+        
+        print(ausgabe)
 
 

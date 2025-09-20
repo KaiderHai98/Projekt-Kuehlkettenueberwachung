@@ -2,6 +2,7 @@ from DB_Zugriff_Libary import get_transport_daten
 from DB_Zugriff_Libary import get_temperatur_daten
 from DB_Zugriff_Libary import get_company_daten
 from Verarbeitung_Libary import pruefe_in_out
+from Verarbeitung_Libary import check_zeitraeume_10minMax
 import pyodbc
 
 # Verbindungsdaten
@@ -23,50 +24,19 @@ verbindungs_i = (
 transportid        = input("Transport-ID: ")
 transportstationID = input("TransportstationID-ID: ")
 companyID          = input("Company-ID: ")
-transport_daten    = get_transport_daten(transportid, verbindungs_i)
-temperatur_daten   = get_temperatur_daten(transportstationID, verbindungs_i)
-company_daten      = get_company_daten(companyID, verbindungs_i)
 
 ###################################################################
 # Datenbank Zugriff ###############################################
 ###################################################################
    
-if transport_daten:
-    print(f"{len(transport_daten)} Datensätze gefunden")
-    # Datensatz: (ID, companyID, transportID, transportstationID, direction (Jahr, Monat, Tag, Stunde, Minute, Sekunde))
-    for transport_datensatz in transport_daten:
-        print(transport_datensatz)
-else:
-    print("Keine Daten gefunden")
-
-if temperatur_daten:
-    print(f"{len(temperatur_daten)} Datensätze gefunden")
-    # Datensatz: (ID (Jahr, Monat, Tag, Stunde, Minute) Temperatur)
-    for temperatur_datensatz in temperatur_daten:
-        print(temperatur_datensatz)
-else:
-    print("Keine Daten gefunden")
-
-if company_daten:
-    print(f"{len(company_daten)} Datensätze gefunden")
-    # Datensatz: (companyID, company, Straße, Ort, PLZ)
-    for company_datensatz in company_daten:
-        print(company_datensatz)
-else:
-    print("Keine Daten gefunden")
-
+transport_daten    = get_transport_daten(transportid, verbindungs_i)
+temperatur_daten   = get_temperatur_daten(transportstationID, verbindungs_i)
+company_daten      = get_company_daten(companyID, verbindungs_i)
 
 ###################################################################
 # Daten Kontrolle #################################################
 ###################################################################
 
 in_out_fehler, in_out_aktuell = pruefe_in_out(transport_daten)
+zeitraum_check = check_zeitraeume_10minMax(transport_daten)
 
-if in_out_fehler:
-    print("Fehler gefunden:")
-    for i_o_f in in_out_fehler:
-        print("-", i_o_f)
-else:
-    print("Reihenfolge korrekt")
-
-print("Letzter Buchungsstand:", in_out_aktuell)
