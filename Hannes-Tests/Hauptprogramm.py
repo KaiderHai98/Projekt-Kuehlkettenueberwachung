@@ -17,10 +17,10 @@ from DB_Zugriff_Libary import get_transport_daten
 from DB_Zugriff_Libary import get_temperatur_daten
 from DB_Zugriff_Libary import get_company_daten
 from DB_Zugriff_Libary import get_transportstation_daten
+from Verarbeitung_Libary import check_Daten_Eingang
 from Verarbeitung_Libary import check_in_out
 from Verarbeitung_Libary import check_zeitraeume_10minMax
 from Verarbeitung_Libary import check_transportdauer
-from Verarbeitung_Libary import check_Daten_Eingang
 import pyodbc
 
 # Verbindungsdaten
@@ -58,8 +58,9 @@ print ("Datenerfasssung erfolgreich abgeschlossen")
 # Daten Kontrolle #################################################
 ###################################################################
 
+eingangs_check                = check_Daten_Eingang      (transport_daten_len, temoratur_daten_len, company_daten_len, transportstation_daten_len)
 in_out_check                  = check_in_out             (transport_daten)
 zeitraum_check                = check_zeitraeume_10minMax(transport_daten)
 transportdauer_check          = check_transportdauer     (transport_daten)
-eingangs_check                = check_Daten_Eingang      (transport_daten_len, temoratur_daten_len, company_daten_len, transportstation_daten_len)
+
 

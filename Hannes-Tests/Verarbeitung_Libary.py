@@ -1,3 +1,39 @@
+###################################################################
+# Daten Prüfen: Eingangs - Prüfung ##################################
+###################################################################
+
+def check_Daten_Eingang(transport_daten_len, temoratur_daten_len, company_daten_len, transportstation_daten_len):
+    try:
+        ausgabe = []
+        fehler  = []
+
+        if transport_daten_len == 0:
+            fehler.append("Keine Transport-Daten vorhanden")
+        if temoratur_daten_len == 0:
+            fehler.append("Keine Temperatur-Daten vorhanden")
+        if company_daten_len == 0:
+            fehler.append("Keine Company-Daten vorhanden")
+        if transportstation_daten_len == 0:
+            fehler.append("Keine Transportstations-Daten vorhanden")
+
+        ausgabe.append(fehler)
+
+        return ausgabe
+    
+    except Exception as e:
+        print("Fehler bei der Verarbeitung - Eingangs-Prüfung:", e)
+        return None
+
+    finally:
+
+        # Terminal Ausgabe
+
+        if fehler:
+            print("Fehler gefunden:")
+            for f in fehler:
+                print("-", f)
+        else:
+            print("Korrekter Eingang der DB-Daten")
 
 ###################################################################
 # Daten Prüfen - IN / OUT Reihenfolge #############################
@@ -14,8 +50,8 @@ def check_in_out(transport_daten):
         letzte_zeit    = None
 
         for eintrag in transport_daten:
-            status    = eintrag[4].strip("'").lower()   # Status: ist im 3. Feld 
-            zeitpunkt = eintrag[5]                      # Zeit:   ist im 6. Feld 
+            status    = eintrag[4].strip("'").lower()   # [4] = Status: ist im 3. Feld 
+            zeitpunkt = eintrag[5]                      # [5] = Zeit:   ist im 6. Feld 
 
             if anfangs_status == status:
 
@@ -71,7 +107,8 @@ def check_zeitraeume_10minMax(transport_daten):
         letzte_zeit   = None
 
         for eintrag in transport_daten:
-            status, zeitpunkt = (eintrag[4]).strip("'"), eintrag[5]
+            status    = (eintrag[4]).strip("'").lower() #[4] = Status 
+            zeitpunkt = eintrag[5]                      #[5] = Zeitpunkt
 
             if status == "in" and letzte_status == "out":
                 diff = (zeitpunkt - letzte_zeit).total_seconds() / 60
@@ -116,8 +153,8 @@ def check_transportdauer(transport_daten):
         zeitpunkt  = None
 
         for eintrag in transport_daten:
-            status = (eintrag[4]).strip("'")
-            zeitpunkt = eintrag[5]
+            status    = (eintrag[4]).strip("'").lower()  #[4] = Status
+            zeitpunkt = eintrag[5]                       #[5] = Zeitpunkt
 
             if status == "in" and startzeit is None:
                 startzeit = zeitpunkt
@@ -152,39 +189,52 @@ def check_transportdauer(transport_daten):
 # Daten Prüfen: Transportstations - Konsistenzprüfung #############
 ###################################################################
 
-###################################################################
-# Daten Prüfen: Eingangs - Prüfung ##################################
-###################################################################
-
-def check_Daten_Eingang(transport_daten_len, temoratur_daten_len, company_daten_len, transportstation_daten_len):
+def check_GVZ_vor_KT(transport_daten, transportstation_daten):
     try:
-        ausgabe = []
-        fehler  = []
+        ausgabe       = []
+        fehler        = []
+        status        = None
+        startzeit     = None
+        letzte_gvz_in = None
 
-        if transport_daten_len == 0:
-            fehler.append("Keine Transport-Daten vorhanden")
-        if temoratur_daten_len == 0:
-            fehler.append("Keine Temperatur-Daten vorhanden")
-        if company_daten_len == 0:
-            fehler.append("Keine Company-Daten vorhanden")
-        if transportstation_daten_len == 0:
-            fehler.append("Keine Transportstations-Daten vorhanden")
 
-        ausgabe.append(fehler)
+        for eintrag in transport_daten:
+            station_id = eintrag[3]                     # [3] = TransportstationID
+            status     = eintrag[4].strip("'").lower()  # [4] = Status
+            startzeit  = eintrag[5]                     # [5] = Zeit
+
+            art = None
+            for station in transportstation_daten:
+                if station[0] == station_id:            # [0] = TransportstationID
+                    art = station[2].strip("'")         # [2] = GVZ oder KT
+                    break
+
+            if art == "GVZ" and status == "in":
+                letzte_gvz_in = startzeit
+
+            if art == "KT" and status == "out":
+                if letzte_gvz_in is None:
+                    fehler.append(f"KT-Auschecken ({startzeit}) ohne vorheriges GVZ-Einchecken")
+                elif letzte_gvz_in > startzeit:
+                    fehler.append(
+                        f"GVZ-Einchecken ({letzte_gvz_in}) liegt NACH KT-Auschecken ({startzeit}) bei Station {station_id}"
+                    )
+
+            ausgabe.append(fehler)
 
         return ausgabe
     
     except Exception as e:
-        print("Fehler bei der Verarbeitung - Eingangs-Prüfung:", e)
+        print("Fehler bei der Verarbeitung - GVZ vor KT:", e)
         return None
-
+    
     finally:
 
         # Terminal Ausgabe
-
+        
         if fehler:
-            print("Fehler gefunden:")
+            print("Fehler gefunden (GVZ/KT zeitlich):")
             for f in fehler:
                 print("-", f)
         else:
-            print("Korrekter Eingang der DB-Daten")
+            print("GVZ-Einchecken liegt immer vor KT-Auschecken")
