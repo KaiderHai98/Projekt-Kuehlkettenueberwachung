@@ -193,48 +193,40 @@ def check_GVZ_vor_KT(transport_daten, transportstation_daten):
     try:
         ausgabe       = []
         fehler        = []
-        status        = None
-        startzeit     = None
-        letzte_gvz_in = None
-
+        letzte_gvz_in = None  # Zeitpunkt des letzten GVZ-"in"
 
         for eintrag in transport_daten:
             station_id = eintrag[3]                     # [3] = TransportstationID
-            status     = eintrag[4].strip("'").lower()  # [4] = Status
-            startzeit  = eintrag[5]                     # [5] = Zeit
+            status     = eintrag[4].strip("'").lower()  # [4] = "in" / "out"
+            zeit       = eintrag[5]                     # [5] = Zeitstempel
 
             art = None
             for station in transportstation_daten:
                 if station[0] == station_id:            # [0] = TransportstationID
-                    art = station[2].strip("'")         # [2] = GVZ oder KT
+                    art = station[2].strip("'").upper() # [2] = "GVZ" oder "KT"
                     break
 
             if art == "GVZ" and status == "in":
-                letzte_gvz_in = startzeit
+                letzte_gvz_in = zeit
 
             if art == "KT" and status == "out":
-                if letzte_gvz_in is None:
-                    fehler.append(f"KT-Auschecken ({startzeit}) ohne vorheriges GVZ-Einchecken")
-                elif letzte_gvz_in > startzeit:
-                    fehler.append(
-                        f"GVZ-Einchecken ({letzte_gvz_in}) liegt NACH KT-Auschecken ({startzeit}) bei Station {station_id}"
-                    )
+                if letzte_gvz_in is not None and letzte_gvz_in < zeit:
+                    fehler.append("Einchecken Kühllager liegt zeitlich vor Auschecken LKW")
 
             ausgabe.append(fehler)
 
         return ausgabe
-    
-    except Exception as e:
-        print("Fehler bei der Verarbeitung - GVZ vor KT:", e)
-        return None
-    
-    finally:
 
-        # Terminal Ausgabe
-        
+    except Exception as e:
+        print("Fehler bei der Verarbeitung - GVZ_vor_KT:", e)
+        return None
+
+    finally:
         if fehler:
-            print("Fehler gefunden (GVZ/KT zeitlich):")
+            print("Fehler gefunden:")
             for f in fehler:
                 print("-", f)
         else:
-            print("GVZ-Einchecken liegt immer vor KT-Auschecken")
+            print("Korrekte Reihenfolge GVZ vor KT")
+
+
