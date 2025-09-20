@@ -1,5 +1,6 @@
 from Han_DB_Zugriff_Zeiten import get_transport_daten
 from Han_DB_Zugriff_Zeiten import get_temperatur_daten
+from Han_DB_Zugriff_Zeiten import get_company_daten
 import pyodbc
 
 # Variablen
@@ -20,8 +21,11 @@ verbindungs_i = (
 # Beispiel: Daten holen
 transportid        = input("Transport-ID: ")
 transportstationID = input("TransportstationID-ID: ")
-transport_daten    = get_transport_daten(transportid: str, verbindungs_i)
-temperatur_daten   = get_temperatur_daten(transportstationID: str, verbindungs_i)
+companyID          = input("Company-ID: ")
+transport_daten    = get_transport_daten(transportid, verbindungs_i)
+temperatur_daten   = get_temperatur_daten(transportstationID, verbindungs_i)
+company_daten      = get_company_daten(companyID, verbindungs_i)
+
         
 if transport_daten:
     print(f"{len(transport_daten)} Datensätze gefunden")
@@ -36,5 +40,13 @@ if temperatur_daten:
     # Hier kannst du mit den Daten weiterarbeiten
     for temperatur_datensatz in temperatur_daten:
         print(temperatur_datensatz)
+else:
+    print("Keine Daten gefunden")
+
+if company_daten:
+    print(f"{len(company_daten)} Datensätze gefunden")
+    # Hier kannst du mit den Daten weiterarbeiten
+    for company_datensatz in company_daten:
+        print(company_datensatz)
 else:
     print("Keine Daten gefunden")
