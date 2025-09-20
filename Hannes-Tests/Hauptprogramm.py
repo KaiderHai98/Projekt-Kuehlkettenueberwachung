@@ -51,6 +51,8 @@ temperatur_daten       = get_temperatur_daten(transportstationID, verbindungs_i)
 company_daten          = get_company_daten(companyID, verbindungs_i)
 transportstation_daten = get_transportstation_daten(transportstationID, verbindungs_i)
 
+print ("Datenerfasssung erfolgreich abgeschlossen")
+
 ###################################################################
 # Daten Kontrolle #################################################
 ###################################################################

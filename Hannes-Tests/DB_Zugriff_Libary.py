@@ -9,7 +9,6 @@ def get_transport_daten(transportid, verbindungs_i):
     try:
         # Verbindung herstellen
         conn = pyodbc.connect(verbindungs_i)
-        print("Verbindung erfolgreich hergestellt")
 
         # Cursor erzeugen
         cursor = conn.cursor()
@@ -58,7 +57,6 @@ def get_temperatur_daten(transportstationID, verbindungs_i):
     try:
         # Verbindung herstellen
         conn = pyodbc.connect(verbindungs_i)
-        print("Verbindung erfolgreich hergestellt")
 
         # Cursor erzeugen
         cursor = conn.cursor()
@@ -106,7 +104,6 @@ def get_company_daten(companyID, verbindungs_i):
     try:
         # Verbindung herstellen
         conn = pyodbc.connect(verbindungs_i)
-        print("Verbindung erfolgreich hergestellt")
 
         # Cursor erzeugen
         cursor = conn.cursor()
@@ -153,7 +150,6 @@ def get_transportstation_daten(transportstationID, verbindungs_i):
     try:
         # Verbindung herstellen
         conn = pyodbc.connect(verbindungs_i)
-        print("Verbindung erfolgreich hergestellt")
 
         # Cursor erzeugen
         cursor = conn.cursor()
