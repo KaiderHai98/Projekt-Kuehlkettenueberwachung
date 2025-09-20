@@ -1,6 +1,6 @@
-from Han_DB_Zugriff_Zeiten import get_transport_daten
-from Han_DB_Zugriff_Zeiten import get_temperatur_daten
-from Han_DB_Zugriff_Zeiten import get_company_daten
+from DB_Zugriff_Libary import get_transport_daten
+from DB_Zugriff_Libary import get_temperatur_daten
+from DB_Zugriff_Libary import get_company_daten
 import pyodbc
 
 # Variablen
