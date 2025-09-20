@@ -21,7 +21,7 @@ from Verarbeitung_Libary import check_Daten_Eingang
 from Verarbeitung_Libary import check_in_out
 from Verarbeitung_Libary import check_zeitraeume_10minMax
 from Verarbeitung_Libary import check_transportdauer
-from Verarbeitung_Libary import check_gvz_vor_kt
+from Verarbeitung_Libary import check_GVZ_vor_KT
 import pyodbc
 
 # Verbindungsdaten
@@ -63,6 +63,6 @@ eingangs_check                = check_Daten_Eingang      (transport_daten_len, t
 in_out_check                  = check_in_out             (transport_daten)
 zeitraum_check                = check_zeitraeume_10minMax(transport_daten)
 transportdauer_check          = check_transportdauer     (transport_daten)
-gvz_vor_kt_check              = check_gvz_vor_kt         (transport_daten, transportstation_daten)
+gvz_vor_kt_check              = check_GVZ_vor_KT         (transport_daten, transportstation_daten)
 
 
