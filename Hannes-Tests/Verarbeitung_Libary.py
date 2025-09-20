@@ -36,7 +36,7 @@ def check_in_out(transport_daten):
             anfangs_status = status
             letzte_zeit = zeitpunkt
 
-            ausgabe.append(fehler, letzter_status)
+            ausgabe.append({"fehler": fehler, "status": letzter_status})
 
         return ausgabe
     
