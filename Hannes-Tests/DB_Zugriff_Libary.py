@@ -1,5 +1,9 @@
 import pyodbc
 
+###################################################################
+# Datenbank Zugriff - Transportdaten ##############################
+###################################################################
+
 def get_transport_daten(transportid, verbindungs_i):
     """Holt alle Datensätze für eine Transport-ID"""
     try:
@@ -32,6 +36,10 @@ def get_transport_daten(transportid, verbindungs_i):
         if 'conn' in locals():
             conn.close()
 
+###################################################################
+# Datenbank Zugriff - Temperaturdaten #############################
+###################################################################
+
 def get_temperatur_daten(transportstationID, verbindungs_i):
     """Holt alle Datensätze für eine TransportstationID"""
     try:
@@ -63,7 +71,11 @@ def get_temperatur_daten(transportstationID, verbindungs_i):
             cursor.close()
         if 'conn' in locals():
             conn.close()
-        
+
+###################################################################
+# Datenbank Zugriff - Company-Daten ###############################
+###################################################################
+
 def get_company_daten(companyID, verbindungs_i):
     """Holt alle Datensätze für eine TransportstationID"""
     try:
