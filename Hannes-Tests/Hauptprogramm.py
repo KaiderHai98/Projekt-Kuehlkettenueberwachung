@@ -16,6 +16,7 @@
 from DB_Zugriff_Libary import get_transport_daten
 from DB_Zugriff_Libary import get_temperatur_daten
 from DB_Zugriff_Libary import get_company_daten
+from DB_Zugriff_Libary import get_transportstation_daten
 from Verarbeitung_Libary import pruefe_in_out
 from Verarbeitung_Libary import check_zeitraeume_10minMax
 from Verarbeitung_Libary import check_transportdauer
@@ -45,9 +46,10 @@ companyID          = input("Company-ID: ")
 # Datenbank Zugriff ###############################################
 ###################################################################
    
-transport_daten    = get_transport_daten(transportid, verbindungs_i)
-temperatur_daten   = get_temperatur_daten(transportstationID, verbindungs_i)
-company_daten      = get_company_daten(companyID, verbindungs_i)
+transport_daten        = get_transport_daten(transportid, verbindungs_i)
+temperatur_daten       = get_temperatur_daten(transportstationID, verbindungs_i)
+company_daten          = get_company_daten(companyID, verbindungs_i)
+transportstation_daten = get_transportstation_daten(transportstationID, verbindungs_i)
 
 ###################################################################
 # Daten Kontrolle #################################################

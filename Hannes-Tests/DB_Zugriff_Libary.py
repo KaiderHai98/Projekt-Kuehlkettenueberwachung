@@ -40,7 +40,8 @@ def get_transport_daten(transportid, verbindungs_i):
 
         if transport_daten:
             print(f"{len(transport_daten)} Datensätze gefunden")
-            # Datensatz: (ID, companyID, transportID, transportstationID, direction (Jahr, Monat, Tag, Stunde, Minute, Sekunde))
+            # Datensatz: (ID, CompanyID, TransportID, TransportstationID, direction (Jahr, Monat, Tag, Stunde, Minute, Sekunde))
+            transport_datensatz.replace("datetime.datetime", "Datum (J/M/T) und Uhrzeit (H/M/S)")
             for transport_datensatz in transport_daten:
                 print(transport_datensatz)
         else:
@@ -132,7 +133,7 @@ def get_company_daten(companyID, verbindungs_i):
     
         if company_daten:
             print(f"{len(company_daten)} Datensätze gefunden")
-            # Datensatz: (companyID, company, Straße, Ort, PLZ)
+            # Datensatz: (CompanyID, Company, Straße, Ort, PLZ)
             for company_datensatz in company_daten:
                 print(company_datensatz)
         else:
@@ -177,7 +178,7 @@ def get_transportstation_daten(transportstationID, verbindungs_i):
     
         if transportstation_daten:
             print(f"{len(transportstation_daten)} Datensätze gefunden")
-            # Datensatz: (companyID, company, Straße, Ort, PLZ)
+            # Datensatz: (TransportstationID, Transportstation, Kategorie, PLZ)
             for transportstation_datensatz in transportstation_daten:
                 print(transportstation_datensatz)
         else:
