@@ -1,6 +1,7 @@
 from DB_Zugriff_Libary import get_transport_daten
 from DB_Zugriff_Libary import get_temperatur_daten
 from DB_Zugriff_Libary import get_company_daten
+from Verarbeitung_Libary import pruefe_in_out
 import pyodbc
 
 # Variablen
@@ -26,10 +27,13 @@ transport_daten    = get_transport_daten(transportid, verbindungs_i)
 temperatur_daten   = get_temperatur_daten(transportstationID, verbindungs_i)
 company_daten      = get_company_daten(companyID, verbindungs_i)
 
-        
+###################################################################
+# Datenbank Zugriff ###############################################
+###################################################################
+   
 if transport_daten:
     print(f"{len(transport_daten)} Datensätze gefunden")
-    # Hier kannst du mit den Daten weiterarbeiten
+    # Datensatz: (ID, companyID, transportID, transportstationID, direction (Jahr, Monat, Tag, Stunde, Minute, Sekunde))
     for transport_datensatz in transport_daten:
         print(transport_datensatz)
 else:
@@ -37,7 +41,7 @@ else:
 
 if temperatur_daten:
     print(f"{len(temperatur_daten)} Datensätze gefunden")
-    # Hier kannst du mit den Daten weiterarbeiten
+    # Datensatz: (ID (Jahr, Monat, Tag, Stunde, Minute) Temperatur)
     for temperatur_datensatz in temperatur_daten:
         print(temperatur_datensatz)
 else:
@@ -45,8 +49,24 @@ else:
 
 if company_daten:
     print(f"{len(company_daten)} Datensätze gefunden")
-    # Hier kannst du mit den Daten weiterarbeiten
+    # Datensatz: (companyID, company, Straße, Ort, PLZ)
     for company_datensatz in company_daten:
         print(company_datensatz)
 else:
     print("Keine Daten gefunden")
+
+
+###################################################################
+# Daten Kontrolle #################################################
+###################################################################
+
+fehler, letzter = pruefe_in_out(transport_daten)
+
+if fehler:
+    print("Fehler:")
+    for f in fehler:
+        print("-", f)
+else:
+    print("Reihenfolge korrekt")
+
+print("Letzter Buchungsstand:", letzter)
