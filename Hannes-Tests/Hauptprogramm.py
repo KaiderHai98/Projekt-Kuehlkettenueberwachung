@@ -41,8 +41,7 @@ verbindungs_i = (
 
 # Transport-Daten einholen
 transportid        = input("Transport-ID: ")
-transportstationID = input("TransportstationID-ID: ")
-companyID          = input("Company-ID: ")
+companyID          = 1703 #input("Company-ID: ")
 
 ###################################################################
 # Datenbank Zugriff ###############################################

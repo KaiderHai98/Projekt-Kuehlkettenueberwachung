@@ -151,6 +151,8 @@ def get_company_daten(companyID, verbindungs_i):
 def get_transportstation_daten(transportstationID, verbindungs_i, transport_daten):
     """Holt alle Datensätze für eine TransportstationID"""
     try:
+        transportstation_daten = []
+        
         for eintrag in transport_daten:
             transportstationID = eintrag[3]
 
