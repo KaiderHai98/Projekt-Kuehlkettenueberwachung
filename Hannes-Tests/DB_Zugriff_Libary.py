@@ -148,10 +148,10 @@ def get_company_daten(companyID, verbindungs_i):
 # Datenbank Zugriff - Transportstations-Daten #####################
 ###################################################################
 
-def get_transportstation_daten(transportstationID, verbindungs_i, transport_daten):
+def get_transportstation_daten(transport_daten, verbindungs_i):
     """Holt alle Datensätze für eine TransportstationID"""
     try:
-        transportstation_daten = []
+        ausgabe = []
         
         for eintrag in transport_daten:
             transportstationID = eintrag[3]
@@ -171,8 +171,9 @@ def get_transportstation_daten(transportstationID, verbindungs_i, transport_date
             cursor.execute(abfrage, transportstationID)
 
             transportstation_daten = cursor.fetchall()
-            transportstation_daten_len = len(transportstation_daten)
-            return transportstation_daten, transportstation_daten_len
+            ausgabe.append(transportstation_daten)
+            transportstation_daten_len = len(ausgabe)
+            return ausgabe, transportstation_daten_len
 
     except Exception as e:
         print("Fehler beim Datenbankzugriff - transportstation Daten:", e)
@@ -190,7 +191,7 @@ def get_transportstation_daten(transportstationID, verbindungs_i, transport_date
             # Datensatz-Aufbau: (TransportstationID, Transportstation, Kategorie, PLZ)
             print("######### Transportstation-Daten #########")
             print(f"{transportstation_daten_len} Datensätze gefunden")
-            for transportstation_datensatz in transportstation_daten:
+            for transportstation_datensatz in ausgabe:
                 print(transportstation_datensatz)
             print("##########################################")
         else:
