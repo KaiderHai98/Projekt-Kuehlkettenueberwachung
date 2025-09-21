@@ -1,6 +1,8 @@
 import pyodbc
 from    DB_Zugriff_Libary_V2 import get_transport_daten
 
+#   72359278599178561029675
+
 # Verbindungsdaten
 server   = 'sc-db-server.database.windows.net'
 database = 'supplychain'
@@ -25,3 +27,4 @@ companyID          = 1703 #input("Company-ID: ")
 ###################################################################
    
 transport_daten,        transport_daten_len        = get_transport_daten        (transportid, verbindungs_i)
+temperatur_daten,       temperatur_daten_len       = get_temperatur_daten       (transport_daten, verbindungs_i)
