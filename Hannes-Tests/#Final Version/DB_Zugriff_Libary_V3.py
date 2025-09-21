@@ -1,3 +1,18 @@
+###############################################################################################################
+## Libary: CoolChainProjekt
+#  Datei: Verarbeitung_Libary_V3.py
+#
+# Version: 3 vom: 21.09.2025
+# Autoren:
+#
+# Zugehöriges Hauptprogramm:
+# - Hauptprogramm_V3.py
+# 
+#
+# Funktionsbeschreibung: 
+# Libary zur einholung der Datenbankdaten
+###############################################################################################################
+
 import pyodbc
 
 ###################################################################
@@ -56,7 +71,7 @@ def get_temperatur_daten(transport_daten, verbindungs_i):
         conn = pyodbc.connect(verbindungs_i)
         cursor = conn.cursor()
 
-        # Basis-SQL + Varianten mit/ohne Endzeit
+        # SQL-Abfragen
         sql_ohne_end = """
             SELECT *
             FROM dbo.tempdata
@@ -123,42 +138,48 @@ def get_temperatur_daten(transport_daten, verbindungs_i):
         print(temperatur_daten)
 
 
-
 ###################################################################
 # Datenbank Zugriff - Company-Daten ###############################
 ###################################################################
 
 def get_company_daten(transport_daten, verbindungs_i):
-    """Holt alle Datensätze für eine TransportstationID"""
-    try:
-        # Verbindung herstellen
-        conn = pyodbc.connect(verbindungs_i)
 
-        # Cursor erzeugen
+    company_daten = {}
+
+    try:
+        conn = pyodbc.connect(verbindungs_i)
         cursor = conn.cursor()
 
-        # SQL-Abfrage
-        abfrage = """
-            SELECT * 
-            FROM dbo.company 
+        sql = """
+            SELECT *
+            FROM dbo.company
             WHERE companyID = ?
         """
-        cursor.execute(abfrage, companyID)
 
-        company_daten = cursor.fetchall()
+        # Eindeutige companyIDs aus transport_daten (Index 1 = zweite Spalte)
+        company_ids = {eintrag[1] for eintrag in transport_daten.values()}
+
+        idx = 1
+        for companyID in company_ids:
+            cursor.execute(sql, companyID)
+            zeilen = cursor.fetchall()
+            for zeile in zeilen:
+                company_daten[idx] = list(zeile)
+                idx += 1
+
         company_daten_len = len(company_daten)
-        # Datensatz-Aufbau: (CompanyID, Company, Straße, Ort, PLZ)
         return company_daten, company_daten_len
 
     except Exception as e:
         print("Fehler beim Datenbankzugriff - Company Daten:", e)
-        return None
+        return {}, 0
 
     finally:
         if 'cursor' in locals():
             cursor.close()
         if 'conn' in locals():
             conn.close()
+        print(company_daten)  # optional
 
 
 ###################################################################
@@ -166,35 +187,43 @@ def get_company_daten(transport_daten, verbindungs_i):
 ###################################################################
 
 def get_transportstation_daten(transport_daten, verbindungs_i):
-    """Holt alle Datensätze für eine TransportstationID"""
+
+    transportstation_daten = {}
+
     try:
-
-        # Verbindung herstellen
         conn = pyodbc.connect(verbindungs_i)
-
-        # Cursor erzeugen
         cursor = conn.cursor()
 
-        # SQL-Abfrage
-        abfrage = """
-            SELECT * 
-            FROM dbo.transportstation 
+        sql = """
+            SELECT *
+            FROM dbo.transportstation
             WHERE transportstationID = ?
         """
-        cursor.execute(abfrage, transportstationID)
 
-        transportstation_daten = cursor.fetchall()
+        # Eindeutige transportstationIDs aus transport_daten (Index 3 = 4. Spalte)
+        station_ids = {eintrag[3] for eintrag in transport_daten.values()}
+
+        idx = 1
+        for transportstationID in station_ids:
+            cursor.execute(sql, transportstationID)
+            zeilen = cursor.fetchall()
+            for zeile in zeilen:
+                transportstation_daten[idx] = list(zeile)
+                idx += 1
+
         transportstation_daten_len = len(transportstation_daten)
-        # Datensatz-Aufbau: (TransportstationID, Transportstation, Kategorie, PLZ)
         return transportstation_daten, transportstation_daten_len
 
     except Exception as e:
         print("Fehler beim Datenbankzugriff - transportstation Daten:", e)
-        return None
+        return {}, 0
 
     finally:
         if 'cursor' in locals():
             cursor.close()
         if 'conn' in locals():
             conn.close()
+
+        print(transportstation_daten)
+
 
