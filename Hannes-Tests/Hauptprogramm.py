@@ -48,9 +48,9 @@ companyID          = 1703 #input("Company-ID: ")
 ###################################################################
    
 transport_daten,        transport_daten_len        = get_transport_daten        (transportid, verbindungs_i)
-temperatur_daten,       temoratur_daten_len        = get_temperatur_daten       (transportstationID, verbindungs_i)
+temperatur_daten,       temoratur_daten_len        = get_temperatur_daten       (transport_daten, verbindungs_i)
 company_daten,          company_daten_len          = get_company_daten          (companyID, verbindungs_i)
-transportstation_daten, transportstation_daten_len = get_transportstation_daten (transportstationID, verbindungs_i, transport_daten)
+transportstation_daten, transportstation_daten_len = get_transportstation_daten (transport_daten, verbindungs_i, transport_daten)
 
 print ("Datenerfasssung erfolgreich abgeschlossen")
 
