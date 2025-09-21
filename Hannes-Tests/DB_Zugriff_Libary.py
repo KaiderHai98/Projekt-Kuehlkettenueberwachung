@@ -148,26 +148,29 @@ def get_company_daten(companyID, verbindungs_i):
 # Datenbank Zugriff - Transportstations-Daten #####################
 ###################################################################
 
-def get_transportstation_daten(transportstationID, verbindungs_i):
+def get_transportstation_daten(transportstationID, verbindungs_i, transport_daten):
     """Holt alle Datensätze für eine TransportstationID"""
     try:
-        # Verbindung herstellen
-        conn = pyodbc.connect(verbindungs_i)
+        for eintrag in transport_daten:
+            transportstationID = eintrag[3]
 
-        # Cursor erzeugen
-        cursor = conn.cursor()
+            # Verbindung herstellen
+            conn = pyodbc.connect(verbindungs_i)
 
-        # SQL-Abfrage
-        abfrage = """
-            SELECT * 
-            FROM dbo.transportstation 
-            WHERE transportstationID = ?
-        """
-        cursor.execute(abfrage, transportstationID)
+            # Cursor erzeugen
+            cursor = conn.cursor()
 
-        transportstation_daten = cursor.fetchall()
-        transportstation_daten_len = len(transportstation_daten)
-        return transportstation_daten, transportstation_daten_len
+            # SQL-Abfrage
+            abfrage = """
+                SELECT * 
+                FROM dbo.transportstation 
+                WHERE transportstationID = ?
+            """
+            cursor.execute(abfrage, transportstationID)
+
+            transportstation_daten = cursor.fetchall()
+            transportstation_daten_len = len(transportstation_daten)
+            return transportstation_daten, transportstation_daten_len
 
     except Exception as e:
         print("Fehler beim Datenbankzugriff - transportstation Daten:", e)
