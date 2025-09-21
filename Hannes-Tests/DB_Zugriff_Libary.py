@@ -150,17 +150,16 @@ def get_company_daten(companyID, verbindungs_i):
 
 def get_transportstation_daten(transport_daten, verbindungs_i):
     """Holt alle Datensätze für eine TransportstationID"""
+    ausgabe = []
+    transportstation_daten = [] 
     try:
-        ausgabe = []
-        
+        # Verbindung herstellen (einmal)
+        conn = pyodbc.connect(verbindungs_i)
+        # Cursor erzeugen
+        cursor = conn.cursor()
+
         for eintrag in transport_daten:
             transportstationID = eintrag[3]
-
-            # Verbindung herstellen
-            conn = pyodbc.connect(verbindungs_i)
-
-            # Cursor erzeugen
-            cursor = conn.cursor()
 
             # SQL-Abfrage
             abfrage = """
@@ -168,12 +167,13 @@ def get_transportstation_daten(transport_daten, verbindungs_i):
                 FROM dbo.transportstation 
                 WHERE transportstationID = ?
             """
-            cursor.execute(abfrage, transportstationID)
+            cursor.execute(abfrage, (transportstationID,))
 
             transportstation_daten = cursor.fetchall()
             ausgabe.append(transportstation_daten)
-            transportstation_daten_len = len(ausgabe)
-            return ausgabe, transportstation_daten_len
+
+        transportstation_daten_len = len(ausgabe)
+        return ausgabe, transportstation_daten_len
 
     except Exception as e:
         print("Fehler beim Datenbankzugriff - transportstation Daten:", e)
@@ -186,11 +186,10 @@ def get_transportstation_daten(transport_daten, verbindungs_i):
             conn.close()
 
         # Terminal Ausgabe
-    
-        if transportstation_daten:
+        if ausgabe:
             # Datensatz-Aufbau: (TransportstationID, Transportstation, Kategorie, PLZ)
             print("######### Transportstation-Daten #########")
-            print(f"{transportstation_daten_len} Datensätze gefunden")
+            print(f"{len(ausgabe)} Datensätze gefunden")
             for transportstation_datensatz in ausgabe:
                 print(transportstation_datensatz)
             print("##########################################")
