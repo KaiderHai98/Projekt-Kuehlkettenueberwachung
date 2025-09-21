@@ -1,5 +1,6 @@
 import pyodbc
 from    DB_Zugriff_Libary_V2 import get_transport_daten
+from    DB_Zugriff_Libary_V2 import get_temperatur_daten
 
 #   72359278599178561029675
 
