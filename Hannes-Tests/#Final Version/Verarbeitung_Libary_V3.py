@@ -25,6 +25,10 @@ def verarbeite_transport(transport_daten, temperatur_daten, company_daten, trans
         meldungen.append("Es gibt gar keinen Eintrag")
         return meldungen
 
+    # #########################################
+    # 2. Daten sammeln und sortieren 
+    # #########################################
+
     events = []
 
     for key in transport_daten:
