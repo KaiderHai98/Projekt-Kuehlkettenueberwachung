@@ -93,7 +93,7 @@ def verarbeite_transport(transport_daten, temperatur_daten, company_daten, trans
         letzte_aktion[station] = [status, zeit]
 
     # ##########################################
-    # 5. Fehlende OUTs
+    # 5. Fehlende OUTs - Konsitenzprüfung
     # ##########################################
 
     letzter_status = get_status(events[-1])
@@ -109,7 +109,7 @@ def verarbeite_transport(transport_daten, temperatur_daten, company_daten, trans
         meldungen.append("Auscheck-Zeitpunkt fehlt in der Mitte")
 
     # ##########################################
-    # 6. Aus und wieder Einchecken im gleichen Kühllager
+    # 6. Aus und wieder Einchecken im gleichen Kühllager - Konsitenzprüfung
     # ##########################################
 
     zyklus_gesehen = {}          # station_id -> True/False
@@ -134,7 +134,7 @@ def verarbeite_transport(transport_daten, temperatur_daten, company_daten, trans
         letzter_status_station[station] = status
 
     # ##########################################
-    # 7. GVZ vor KT prüfen
+    # 7. GVZ vor KT prüfen - Konsitenzprüfung
     # ##########################################
 
     kt_aktiv = False
