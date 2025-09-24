@@ -11,21 +11,47 @@
 # - Hauptprogramm_V3.py
 # 
 # Funktionsbeschreibung: 
-# Benutzeroberfläche zur Eingabe der Transport-ID und Anzeige der Ergebnisse
+# Hauptprogramm & Benutzeroberfläche zur Eingabe der Transport-ID und Anzeige der Ergebnisse
 ###############################################################################################################
 
+# Import-Block
 import tkinter as tk
 from tkinter import messagebox, scrolledtext
-import threading
-from Hauptprogramm_V3 import hole_transport_meldungen, verbindungs_i, get_transport_daten
+from DB_Zugriff_Libary_V3 import (
+    get_transport_daten,
+    get_temperatur_daten,
+    get_company_daten,
+    get_transportstation_daten,
+)
+from Verarbeitung_Libary_V3 import verarbeite_transport
+
+# Verbindungsdaten
+server   = 'sc-db-server.database.windows.net'
+database = 'supplychain'
+username = 'rse'
+password = 'Pa$$w0rd'
+
+# Verbindungsstring
+verbindungs_i = (
+    f"DRIVER={{ODBC Driver 18 for SQL Server}};"
+    f"SERVER={server};"
+    f"DATABASE={database};"
+    f"UID={username};"
+    f"PWD={password}"
+)
+
+
+###################################################################
+# GUI Aufbau
+###################################################################
 
 class TransportGUI:
 
-    #Benutzeroberfläche
+    #Benutzeroberfläche initialisieren
     def __init__(self, root):
         self.root = root
-        self.root.title("CoolChain Transportprüfung")
-        self.root.geometry("600x400")
+        self.root.title("CoolChain - Transportprüfung")
+        self.root.geometry("720x480")
         self.root.resizable(True, True)
 
         # Überschrift
@@ -36,28 +62,74 @@ class TransportGUI:
         frame_top.pack(fill="x", padx=12)
 
         # Eingabe-Feld für Transport-ID
-        self.label = tk.Label(root, text="Transport-ID eingeben:")
-        self.label.pack(pady=10)
-
-        self.entry = tk.Entry(root, width=40)
-        self.entry.pack(pady=5)
+        tk.Label(frame_top, text="Transport-ID:").pack(side="left")
+        self.entry = tk.Entry(frame_top, width=40)
+        self.entry.pack(side="left", padx=(6,8))
 
         # Button zum Prüfen
-        self.button = tk.Button(root, text="Prüfen", command=self.pruefe_transport)
-        self.button.pack(pady=10)
+        self.check_btn = tk.Button(frame_top, text="Prüfen", command=self.on_pruefen)
+        self.check_btn.pack(side="left")
 
         # Button Feld reinigen
         self.clear_btn = tk.Button(frame_top, text="Löschen", command=self.on_clear)
         self.clear_btn.pack(side="left", padx=6)
 
         # Textfeld für Ausgaben
-        self.output = tk.Text(root, wrap="word", width=70, height=15)
+        tk.Label(root, text="Meldungen:").pack(anchor="w", padx=12, pady=(10,0))
         self.output = scrolledtext.ScrolledText(root, wrap="word", height=18)
         self.output.pack(fill="both", expand=True, padx=12, pady=(0,12))
-    
-    # Funktion zur Prüfung der Transport-ID
-    def pruefe_transport(self):
+
+        # Statusleiste
+        self.status = tk.StringVar()
+        self.status.set("Bereit")
+        tk.Label(root, textvariable=self.status, anchor="w").pack(fill="x", padx=12, pady=(0,6))
+
+
+###################################################################
+# Bedienfunktionen
+###################################################################
+
+# Funktion zur Prüfung der Transport-ID
+    def on_pruefen(self):
         transportid = self.entry.get().strip()
         if not transportid:
             messagebox.showerror("Fehler", "Bitte eine Transport-ID eingeben!")
             return
+
+        try:
+            # Datenbankzugriffe
+            transport_daten, _        = get_transport_daten(transportid, verbindungs_i)
+            temperatur_daten, _       = get_temperatur_daten(transport_daten, verbindungs_i)
+            company_daten, _          = get_company_daten(transport_daten, verbindungs_i)
+            transportstation_daten, _ = get_transportstation_daten(transport_daten, verbindungs_i)
+
+            # Verarbeitung
+            meldungen = verarbeite_transport(
+                transport_daten, temperatur_daten, company_daten, transportstation_daten
+            )
+
+            # Ausgabe im Textfeld
+            output.delete("1.0", tk.END)
+            output.insert(tk.END, f"Transport-ID: {transportid}\n")
+            output.insert(tk.END, "--------------------------------------------------\n")
+            for m in meldungen:
+                output.insert(tk.END, f" -> {m}\n")
+
+        except Exception as e:
+            messagebox.showerror("Fehler", f"Ein Fehler ist aufgetreten:\n{e}")
+
+#Funktion zum Löschen der Eingabe und Ausgabe
+    def on_clear(self):
+        self.entry.delete(0, tk.END)
+        self.output.delete("1.0", tk.END)
+        self.status.set("Bereit")        
+
+
+###################################################################
+# Programmeinstieg
+###################################################################
+
+if __name__ == "__main__":
+    root = tk.Tk()
+    app = TransportGUI(root)
+    root.mainloop()
