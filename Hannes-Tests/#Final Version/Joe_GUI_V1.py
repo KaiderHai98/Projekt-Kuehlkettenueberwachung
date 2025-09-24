@@ -109,11 +109,11 @@ class TransportGUI:
             )
 
             # Ausgabe im Textfeld
-            output.delete("1.0", tk.END)
-            output.insert(tk.END, f"Transport-ID: {transportid}\n")
-            output.insert(tk.END, "--------------------------------------------------\n")
+            self.output.delete("1.0", tk.END)
+            self.output.insert(tk.END, f"Transport-ID: {transportid}\n")
+            self.output.insert(tk.END, "--------------------------------------------------\n")
             for m in meldungen:
-                output.insert(tk.END, f" -> {m}\n")
+                self.output.insert(tk.END, f" -> {m}\n")
 
         except Exception as e:
             messagebox.showerror("Fehler", f"Ein Fehler ist aufgetreten:\n{e}")
