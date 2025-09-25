@@ -2,7 +2,7 @@
 ## Hauptprogramm: CoolChainProjekt
 #  Datei: Joe_GUI_V1.py
 #
-# Version: 3 vom: 24.09.2025
+# Version: 4 vom: 24.09.2025
 # Autoren:jowoeste
 #
 # Zugehörige Libarys:
@@ -15,8 +15,9 @@
 ###############################################################################################################
 
 # Import-Block
+import pyodbc
 import tkinter as tk
-from tkinter import messagebox, scrolledtext
+from tkinter import messagebox, scrolledtext, ttk
 from DB_Zugriff_Libary_V3 import (
     get_transport_daten,
     get_temperatur_daten,
@@ -74,6 +75,10 @@ class TransportGUI:
         self.clear_btn = tk.Button(frame_top, text="Löschen", command=self.on_clear)
         self.clear_btn.pack(side="left", padx=6)
 
+        # Button: Alle prüfen
+        self.all_btn = tk.Button(frame_top, text="Alle prüfen", command=self.on_alle_pruefen)
+        self.all_btn.pack(side="left", padx=6)
+
         # Textfeld für Ausgaben
         tk.Label(root, text="Meldungen:").pack(anchor="w", padx=12, pady=(10,0))
         self.output = scrolledtext.ScrolledText(root, wrap="word", height=18)
@@ -83,6 +88,10 @@ class TransportGUI:
         self.status = tk.StringVar()
         self.status.set("Bereit")
         tk.Label(root, textvariable=self.status, anchor="w").pack(fill="x", padx=12, pady=(0,6))
+
+        # Fortschrittsbalken
+        self.progress = ttk.Progressbar(root, mode="determinate")
+        self.progress.pack(fill="x", padx=12, pady=(0,6))
 
 
 ###################################################################
@@ -97,6 +106,11 @@ class TransportGUI:
             return
 
         try:
+            # Status aktualisieren: Prüfung läuft
+            self.status.set("Prüfe Transport-ID...")
+            self.root.update_idletasks()
+
+
             # Datenbankzugriffe
             transport_daten, _        = get_transport_daten(transportid, verbindungs_i)
             temperatur_daten, _       = get_temperatur_daten(transport_daten, verbindungs_i)
@@ -114,6 +128,66 @@ class TransportGUI:
             self.output.insert(tk.END, "--------------------------------------------------\n")
             for m in meldungen:
                 self.output.insert(tk.END, f" -> {m}\n")
+            
+            #Status aktualisieren
+            self.status.set("Prüfung abgeschlossen")
+
+        except Exception as e:
+            messagebox.showerror("Fehler", f"Ein Fehler ist aufgetreten:\n{e}")
+
+# Funktion: Alle Transporteid meldungen ausgeben
+    def on_alle_pruefen(self):
+        try:
+            # Status aktualisieren: Prüfung läuft
+            self.status.set("Bitte warten, alle Transporte werden geprüft ...")
+            self.root.update_idletasks()
+
+            # Datenbankverbindung herstellen
+            conn = pyodbc.connect(verbindungs_i)
+            cursor = conn.cursor()
+
+            # Alle Transport-IDs aus der Datenbank holen
+            cursor.execute("SELECT DISTINCT transportid FROM dbo.coolchain ORDER BY transportid")
+            alle_ids = [row[0] for row in cursor.fetchall()]
+
+            cursor.close()
+            conn.close()
+
+            ergebnisse = []
+
+            # Fortschrittsbalken maximal setzen
+            self.progress["maximum"] = len(alle_ids)
+
+            # Für jede Transport-ID die Meldungen holen
+            for i, tid in enumerate(alle_ids, start=1):
+                transport_daten, _        = get_transport_daten(tid, verbindungs_i)
+                temperatur_daten, _       = get_temperatur_daten(transport_daten, verbindungs_i)
+                company_daten, _          = get_company_daten(transport_daten, verbindungs_i)
+                transportstation_daten, _ = get_transportstation_daten(transport_daten, verbindungs_i)
+
+                meldungen = verarbeite_transport(
+                    transport_daten, temperatur_daten, company_daten, transportstation_daten
+                )
+
+                for m in meldungen:
+                    ergebnisse.append((tid, m))
+
+                # Fortschritt aktualisieren
+                self.progress["value"] = 1
+                self.root.update_idletasks()
+
+            # Ergebnisse sortieren nach Meldungstext
+            ergebnisse.sort(key=lambda x: x[1])
+
+            # Ausgabe ins Textfeld
+            self.output.delete("1.0", tk.END)
+            self.output.insert(tk.END, "Alle Transport-IDs - Prüfungen\n")
+            self.output.insert(tk.END, "==================================================\n")
+
+            for tid, m in ergebnisse:
+                self.output.insert(tk.END, f"{tid} -> {m}\n")
+
+            self.status.set(f"{len(alle_ids)} Transporte geprüft")
 
         except Exception as e:
             messagebox.showerror("Fehler", f"Ein Fehler ist aufgetreten:\n{e}")
