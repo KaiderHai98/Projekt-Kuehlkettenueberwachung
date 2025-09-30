@@ -88,10 +88,6 @@ class TransportGUI:
         self.status.set("Bereit")
         tk.Label(root, textvariable=self.status, anchor="w").pack(fill="x", padx=12, pady=(0,6))
 
-        # Fortschrittsbalken
-        self.progress = ttk.Progressbar(root, mode="determinate")
-        self.progress.pack(fill="x", padx=12, pady=(0,6))
-
 
 ###################################################################
 # Bedienfunktionen
@@ -153,9 +149,6 @@ class TransportGUI:
             conn.close()
 
             ergebnisse = []
-
-            # Fortschrittsbalken maximal setzen
-            self.progress["maximum"] = len(alle_ids)
 
             # Für jede Transport-ID die Meldungen holen
             for i, tid in enumerate(alle_ids, start=1):
