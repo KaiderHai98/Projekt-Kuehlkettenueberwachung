@@ -1,13 +1,13 @@
 
 ###############################################################################################################
-## Libary: CoolChainProjekt
+#  Libary: CoolChainProjekt
 #  Datei: Verarbeitung_Libary_V3.py
 #
-# Version: 3 vom: 21.09.2025
+# Version: 4 vom: 30.09.2025
 # Autoren:
 #
 # Zugehöriges Hauptprogramm:
-# - Hauptprogramm_V3.py
+# - Hauptprogramm_V4.py
 # 
 #
 # Funktionsbeschreibung: 
@@ -21,6 +21,12 @@ def verarbeite_transport(transport_daten, temperatur_daten, company_daten, trans
     # 1. Kein Transport vorhanden
     # #########################################
 
+    '''
+    @brief Schritt 1: Kein Transport vorhanden
+    Prüft, ob überhaupt Transportdaten da sind.
+    Wenn nicht, wird sofort "Es gibt gar keinen Eintrag" zurückgegeben.
+    '''
+
     if len(transport_daten) == 0:
         meldungen.append("Es gibt gar keinen Eintrag")
         return meldungen
@@ -29,11 +35,19 @@ def verarbeite_transport(transport_daten, temperatur_daten, company_daten, trans
     # 2. Daten sammeln und sortieren 
     # #########################################
 
-    events = []
+    '''
+    @brief Schritt 2: Daten sammeln und sortieren
+    Holt alle Events aus transport_daten und sortiert sie nach Zeit.
+    Zusätzlich gibt es Hilfsfunktionen:
+    - get_status(): liefert 'in' oder 'out'
+    - get_art(): liefert die Art der Station (GVZ oder KT)
+    '''
+
+    transport_daten_liste = []
 
     for key in transport_daten:
-        events.append(transport_daten[key])
-    events.sort(key=lambda x: x[5])
+        transport_daten_liste.append(transport_daten[key])
+    transport_daten_liste.sort(key=lambda x: x[5])
 
     def get_status(eintrag):
         return str(eintrag[4]).replace("'", "").lower()
@@ -48,11 +62,17 @@ def verarbeite_transport(transport_daten, temperatur_daten, company_daten, trans
     # 2. Übergabe > 10 min
     # #########################################
 
+    '''
+    @brief Schritt 3: Übergabe > 10 min
+    Prüft, ob zwischen einem OUT und dem nächsten IN mehr als 10 Minuten liegen.
+    Falls ja, Meldung "Übergabe > 10 min".
+    '''
+
     letzte_out = None
 
-    for e in events:
-        status = get_status(e)
-        zeit = e[5]
+    for bewegung in transport_daten_liste:
+        status = get_status(bewegung)
+        zeit = bewegung[5]
         if status == "out":
             letzte_out = zeit
         if status == "in" and letzte_out != None:
@@ -68,9 +88,9 @@ def verarbeite_transport(transport_daten, temperatur_daten, company_daten, trans
     erstes_in = None
     letztes_out = None
 
-    for e in events:
-        status = get_status(e)
-        zeit = e[5]
+    for bewegung in transport_daten_liste:
+        status = get_status(bewegung)
+        zeit = bewegung[5]
         if status == "in" and erstes_in == None:
             erstes_in = zeit
         if status == "out":
@@ -86,10 +106,10 @@ def verarbeite_transport(transport_daten, temperatur_daten, company_daten, trans
 
     letzte_aktion = {}
 
-    for e in events:
-        station = e[3]
-        status = get_status(e)
-        zeit = e[5]
+    for bewegung in transport_daten_liste:
+        station = bewegung[3]
+        status = get_status(bewegung)
+        zeit = bewegung[5]
         if station in letzte_aktion:
             if letzte_aktion[station][0] == "out" and status == "out":
                 diff = int((zeit - letzte_aktion[station][1]).total_seconds() / 60)
@@ -100,7 +120,7 @@ def verarbeite_transport(transport_daten, temperatur_daten, company_daten, trans
     # 5. Fehlende OUTs - Konsitenzprüfung
     # ##########################################
 
-    letzter_status = get_status(events[-1])
+    letzter_status = get_status(transport_daten_liste[-1])
     fehlt_in_mitte = False
 
     for station in letzte_aktion:
@@ -119,9 +139,9 @@ def verarbeite_transport(transport_daten, temperatur_daten, company_daten, trans
     zyklus_gesehen = {}          # station_id -> True/False
     letzter_status_station = {}  # station_id -> 'in'/'out'
 
-    for e in events:
-        station = e[3]
-        status  = get_status(e)
+    for bewegung in transport_daten_liste:
+        station = bewegung[3]
+        status  = get_status(bewegung)
         art     = get_art(station)
 
         if station not in zyklus_gesehen:
@@ -143,9 +163,9 @@ def verarbeite_transport(transport_daten, temperatur_daten, company_daten, trans
 
     kt_aktiv = False
 
-    for e in events:
-        art = get_art(e[3])
-        status = get_status(e)
+    for bewegung in transport_daten_liste:
+        art = get_art(bewegung[3])
+        status = get_status(bewegung)
 
         if art == "KT":
             if status == "in":
