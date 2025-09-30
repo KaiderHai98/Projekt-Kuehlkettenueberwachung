@@ -1,6 +1,6 @@
 ###############################################################################################################
-## Hauptprogramm: CoolChainProjekt
-#  Datei: Joe_GUI_V1.py
+# Hauptprogramm: CoolChainProjekt
+#  Datei: Hauptprogramm_V4.py
 #
 # Version: 4 vom: 24.09.2025
 # Autoren:jowoeste
@@ -8,7 +8,6 @@
 # Zugehörige Libarys:
 # - DB_Zugriff_Libary_V3.py
 # - Verarbeitung_Libary_V3.py
-# - Hauptprogramm_V3.py
 # 
 # Funktionsbeschreibung: 
 # Hauptprogramm & Benutzeroberfläche zur Eingabe der Transport-ID und Anzeige der Ergebnisse
@@ -89,10 +88,6 @@ class TransportGUI:
         self.status.set("Bereit")
         tk.Label(root, textvariable=self.status, anchor="w").pack(fill="x", padx=12, pady=(0,6))
 
-        # Fortschrittsbalken
-        self.progress = ttk.Progressbar(root, mode="determinate")
-        self.progress.pack(fill="x", padx=12, pady=(0,6))
-
 
 ###################################################################
 # Bedienfunktionen
@@ -154,9 +149,6 @@ class TransportGUI:
             conn.close()
 
             ergebnisse = []
-
-            # Fortschrittsbalken maximal setzen
-            self.progress["maximum"] = len(alle_ids)
 
             # Für jede Transport-ID die Meldungen holen
             for i, tid in enumerate(alle_ids, start=1):
