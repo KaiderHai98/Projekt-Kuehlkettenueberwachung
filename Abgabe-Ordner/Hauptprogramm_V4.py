@@ -1,6 +1,6 @@
 ###############################################################################################################
-## Hauptprogramm: CoolChainProjekt
-#  Datei: Joe_GUI_V1.py
+# Hauptprogramm: CoolChainProjekt
+#  Datei: Hauptprogramm_V4.py
 #
 # Version: 4 vom: 24.09.2025
 # Autoren:jowoeste
@@ -8,7 +8,6 @@
 # Zugehörige Libarys:
 # - DB_Zugriff_Libary_V3.py
 # - Verarbeitung_Libary_V3.py
-# - Hauptprogramm_V3.py
 # 
 # Funktionsbeschreibung: 
 # Hauptprogramm & Benutzeroberfläche zur Eingabe der Transport-ID und Anzeige der Ergebnisse
