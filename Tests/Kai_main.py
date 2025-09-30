@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import messagebox
-from Kai_db import fetch_transport_data
-from Kai_checks import check_consistency, check_cooling_breaks, check_transport_duration
+from Tests.Kai_db import fetch_transport_data
+from Tests.Kai_checks import check_consistency, check_cooling_breaks, check_transport_duration
 
 def run_checks():
     transport_id = entry.get()
