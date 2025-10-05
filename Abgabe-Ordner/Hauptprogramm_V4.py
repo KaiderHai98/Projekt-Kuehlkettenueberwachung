@@ -1,4 +1,4 @@
-###############################################################################################################
+# ##############################################################################################################
 # Hauptprogramm: CoolChainProjekt
 #  Datei: Hauptprogramm_V4.py
 #
@@ -11,22 +11,7 @@
 # 
 # Funktionsbeschreibung: 
 # Hauptprogramm & Benutzeroberfläche zur Eingabe der Transport-ID und Anzeige der Ergebnisse
-###############################################################################################################
-"""
- \file Hauptprogramm_V4.py
- \brief Hauptprogramm und grafische Benutzeroberfläche zur CoolChain Transportprüfung.
-
- \details Dieses Programm bietet eine tkinter-GUI, um Transportdaten einzeln per ID oder
- alle Transporte aus der Datenbank abzurufen, zu verarbeiten und die
- Ergebnisse anzuzeigen. Es nutzt die externen Module DB_Zugriff_Libary_V3 und
- Verarbeitung_Libary_V3 für Datenbankinteraktion und Geschäftslogik.
-
- \version 4
- \date 30.09.2025
- \author jowoeste
- \see DB_Zugriff_Libary_V3.py
- \see Verarbeitung_Libary_V3.py
-"""
+# ##############################################################################################################
 
 # Import-Block
 import pyodbc
@@ -64,22 +49,34 @@ verbindungs_i = (
     f"PWD={password}"
 )
 
-
-###################################################################
+# ##################################################################
 # GUI Aufbau
-###################################################################
+# ##################################################################
+'''
+ @brief Grafische Benutzeroberfläche zur CoolChain Transportprüfung.
+ @details 
+ 
+ Grafische Benutzeroberfläche zur CoolChain Transportprüfung
 
+ Dieses Programm bietet eine tkinter-GUI, um Transportdaten einzeln per ID oder
+ alle Transporte aus der Datenbank abzurufen, zu verarbeiten und die
+ Ergebnisse anzuzeigen.
+'''
 class TransportGUI:
 
-    """
-    \brief Die Hauptklasse für die grafische Benutzeroberfläche (GUI).
+    # ##################################################################
+    # Benutzeroberfläche initialisieren
+    # ##################################################################
+    '''
+    @brief Die Hauptklasse für die grafische Benutzeroberfläche (GUI).
 
-    \details Initialisiert das Hauptfenster, die Widgets für die Eingabe,
+    @details 
+
+    Benutzeroberfläche initialisieren
+
+    Initialisiert das Hauptfenster, die Widgets für die Eingabe,
     die Steuerung (Buttons) und die Ausgabe (ScrolledText) der Ergebnisse.
-
-    @param root Das Hauptfenster-Objekt von tkinter.
-    """
-    #Benutzeroberfläche initialisieren
+    '''
     def __init__(self, root):
         self.root = root
         self.root.title("CoolChain - Transportprüfung")
@@ -127,20 +124,21 @@ class TransportGUI:
         tk.Label(root, textvariable=self.status, anchor="w").pack(fill="x", padx=12, pady=(0,6))
 
 
-###################################################################
-# Bedienfunktionen
-###################################################################
+    # ##################################################################
+    # Funktion zur Prüfung der Transport-ID
+    # ##################################################################
+    '''
+    @brief Führt die Prüfung eines einzelnen Transports basierend auf der eingegebenen ID durch.
 
-    """
-    \brief Führt die Prüfung eines einzelnen Transports basierend auf der eingegebenen ID durch.
-
-    \details Liest die Transport-ID aus dem Eingabefeld, ruft alle notwendigen Daten
+    @details Liest die Transport-ID aus dem Eingabefeld, ruft alle notwendigen Daten
     (Transport, Temperatur, Unternehmen, Station) aus der Datenbank ab und
     übergibt diese zur Verarbeitung. Die generierten Meldungen werden im
     Ausgabefeld angezeigt. Stellt Status-Updates bereit.
-    """
-    # Funktion zur Prüfung der Transport-ID
+    '''
     def on_pruefen(self):
+
+
+
         transportid = self.entry.get().strip()
         if not transportid:
             messagebox.showerror("Fehler", "Bitte eine Transport-ID eingeben!")
@@ -176,16 +174,19 @@ class TransportGUI:
         except Exception as e:
             messagebox.showerror("Fehler", f"Ein Fehler ist aufgetreten:\n{e}")
 
-    """
-    \brief Führt die Prüfung aller in der Datenbank vorhandenen Transporte durch.
+    # ##################################################################
+    # Funktion: Alle Transporteid meldungen ausgeben
+    # ##################################################################
+    '''
+    @brief Führt die Prüfung aller in der Datenbank vorhandenen Transporte durch.
 
-    \details Ruft zunächst alle eindeutigen Transport-IDs ab. Iteriert dann
+    @details Ruft zunächst alle eindeutigen Transport-IDs ab. Iteriert dann
     über jede ID, holt die zugehörigen Daten, verarbeitet sie und sammelt
     alle generierten Meldungen. Die Ergebnisse werden nach Meldungstext sortiert
     und im Ausgabefeld angezeigt. Stellt Status-Updates bereit.
-    """
-    # Funktion: Alle Transporteid meldungen ausgeben
+    '''
     def on_alle_pruefen(self):
+        
         try:
             # Status aktualisieren: Prüfung läuft
             self.status.set("Bitte warten, alle Transporte werden geprüft ...")
@@ -235,29 +236,32 @@ class TransportGUI:
         except Exception as e:
             messagebox.showerror("Fehler", f"Ein Fehler ist aufgetreten:\n{e}")
 
-    """
-    \brief Löscht die Eingabe im Transport-ID-Feld und leert das Ausgabefeld.
+    # ##################################################################
+    # Funktion zum Löschen der Eingabe und Ausgabe
+    # ##################################################################
+    '''
+    @brief Löscht die Eingabe im Transport-ID-Feld und leert das Ausgabefeld.
 
-    \details Setzt den Status auf "Bereit" zurück.
-    """
-    #Funktion zum Löschen der Eingabe und Ausgabe
+    @details Setzt den Status auf "Bereit" zurück.
+    '''
     def on_clear(self):
+
         self.entry.delete(0, tk.END)
         self.output.delete("1.0", tk.END)
         self.status.set("Bereit")        
 
 
-###################################################################
+# ##################################################################
 # Programmeinstieg
-###################################################################
+# ##################################################################
+'''
+@brief Hauptfunktion des Programms.
 
-"""
- \brief Hauptfunktion des Programms.
-
- \details Erstellt das Hauptfenster (root) und instanziiert die TransportGUI-Klasse.
- Startet die tkinter-Ereignisschleife (mainloop).
-"""
+@details Erstellt das Hauptfenster (root) und instanziiert die TransportGUI-Klasse.
+Startet die tkinter-Ereignisschleife (mainloop).
+'''
 if __name__ == "__main__":
+
     root = tk.Tk()
     app = TransportGUI(root)
     root.mainloop()

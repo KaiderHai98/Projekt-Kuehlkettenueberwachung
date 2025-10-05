@@ -1,5 +1,5 @@
 
-###############################################################################################################
+# #############################################################################################################
 #  Libary: CoolChainProjekt
 #  Datei: Verarbeitung_Libary_V3.py
 #
@@ -12,32 +12,32 @@
 #
 # Funktionsbeschreibung: 
 # Libary zur Verarbeitung der Transportdaten
-###############################################################################################################
+# #############################################################################################################
 
 '''
 @brief def verarbeite_transport Verarbeitet und überprüft die Transportdaten auf Fehler.
 @details
 
- Allgeme Beschreibung:
+Allgemeine Beschreibung:
 
- Diese Funktion führt verschiedene Prüfungen auf den Ablauf
- eines Transports durch (z. B. Übergabezeiten, Transportdauer,
- doppelte OUTs, fehlende OUTs, GVZ/KT-Reihenfolge).
- Alle gefundenen Auffälligkeiten werden als Textmeldungen
- zurückgegeben.
-         
- Eine Liste mit Fehler-Meldungen (Strings):
- - Wenn Fehler gefunden wurden: entsprechende Fehlermeldungen.
- - Wenn keine Fehler gefunden wurden: ["korrekt"].
+Diese Funktion führt verschiedene Prüfungen auf den Ablauf
+eines Transports durch (z. B. Übergabezeiten, Transportdauer,
+doppelte OUTs, fehlende OUTs, GVZ/KT-Reihenfolge).
+Alle gefundenen Auffälligkeiten werden als Textmeldungen
+zurückgegeben.
+        
+Eine Liste mit Fehler-Meldungen (Strings):
+- Wenn Fehler gefunden wurden: entsprechende Fehlermeldungen.
+- Wenn keine Fehler gefunden wurden: ["korrekt"].
 
-    Schritt 1: Kein Transport vorhanden
+    Schritt-1: Kein Transport vorhanden
 
          Wenn in transport_daten keine Einträge gespeichert sind,
          gibt es keinen Transport. In diesem Fall wird sofort die
          Meldung "Es gibt gar keinen Eintrag" zurückgegeben und
          die Funktion beendet.
 
-     Schritt 2: Daten sammeln und sortieren
+    Schritt 2: Daten sammeln und sortieren
 
          Alle Transport-Einträge werden aus transport_daten herausgesucht,
          in eine Liste "transport_daten_liste" gepackt und zeitlich sortiert.
@@ -45,49 +45,49 @@
          - get_status(): liefert 'in' oder 'out' zurück.
          - get_art(): bestimmt die Art der Station (GVZ oder KT).
 
-     Schritt 3: Übergabe > 10 min
+    Schritt 3: Übergabe > 10 min
 
          Nach jedem OUT-Ereignis wird die Zeit bis zum nächsten IN gemessen.
          Liegt dieser Abstand über 10 Minuten, wird die Meldung
          "Übergabe > 10 min" erstellt. Danach wird der OUT-Zeitpunkt zurückgesetzt.
 
-     Schritt 4: Transportdauer > 48h
+    Schritt 4: Transportdauer > 48h
 
          Es wird die Zeit zwischen dem ersten IN und dem letzten OUT berechnet.
          Überschreitet die Transportdauer 48 Stunden, wird die Meldung
          "Transportdauer > 48h" hinzugefügt.
 
-     Schritt 5: Doppelter Auscheck-Zeitpunkt
+    Schritt 5: Doppelter Auscheck-Zeitpunkt
 
          Hier wird geprüft, ob an derselben Station zweimal direkt
          hintereinander ein OUT gespeichert wurde. Wenn ja, wird der
          Zeitunterschied berechnet und in der Meldung ausgegeben.
 
-     Schritt 6: Fehlende OUTs
+    Schritt 6: Fehlende OUTs
 
          Falls ein Transport an einer Station mit "in" endet, aber
          kein "out" folgt, wird dies überprüft:
          - Am Ende des Transports -> Meldung "Auscheck-Zeitpunkt fehlt am Ende".
          - Mitten im Transport -> Meldung "Auscheck-Zeitpunkt fehlt in der Mitte".
 
-     Schritt 7: Aus und wieder Einchecken im gleichen Kühllager
+    Schritt 7: Aus und wieder Einchecken im gleichen Kühllager
 
          Wurde ein Zyklus (IN -> OUT) an einer GVZ-Station abgeschlossen
          und danach erfolgt erneut ein IN an derselben Station,
          wird eine Meldung hinzugefügt.
 
-     Schritt 8: GVZ vor KT prüfen
+    Schritt 8: GVZ vor KT prüfen
 
          Wenn ein KT noch aktiv ist (KT-IN ohne KT-OUT) und in dieser Zeit
          ein GVZ-IN passiert, stimmt die Reihenfolge nicht. In diesem Fall
          wird eine Meldung erstellt.
 
-     Schritt 9: Keine Fehler gefunden
+    Schritt 9: Keine Fehler gefunden
 
          Wenn nach allen Prüfungen keine Meldungen in der Liste stehen,
          wird stattdessen "korrekt" zurückgegeben.
 
-'''
+    '''
 
 def verarbeite_transport(transport_daten, temperatur_daten, company_daten, transportstation_daten):
     meldungen = []
