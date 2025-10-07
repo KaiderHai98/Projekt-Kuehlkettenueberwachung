@@ -52,16 +52,9 @@ verbindungs_i = (
 # ##################################################################
 # GUI Aufbau
 # ##################################################################
-'''
- @brief Grafische Benutzeroberfläche zur CoolChain Transportprüfung.
- @details 
- 
- Grafische Benutzeroberfläche zur CoolChain Transportprüfung
 
- Dieses Programm bietet eine tkinter-GUI, um Transportdaten einzeln per ID oder
- alle Transporte aus der Datenbank abzurufen, zu verarbeiten und die
- Ergebnisse anzuzeigen.
-'''
+ # Grafische Benutzeroberfläche zur CoolChain Transportprüfung
+
 class TransportGUI:
 
     # ##################################################################
@@ -260,12 +253,7 @@ class TransportGUI:
 
 if __name__ == "__main__":
 
-    '''
-    @brief Hauptfunktion des Programms.
-
-    @details Erstellt das Hauptfenster (root) und instanziiert die TransportGUI-Klasse.
-    Startet die tkinter-Ereignisschleife (mainloop).
-    '''
+    # Hauptfunktion des Programms.
 
     root = tk.Tk()
     app = TransportGUI(root)

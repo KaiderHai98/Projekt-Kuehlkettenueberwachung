@@ -1,6 +1,6 @@
 # ===========================================================================
 #  Doxyfile für Projekt-Kuehlkettenueberwachung
-#  Dokumentiert den Ordner "Abgabe-Ordner"
+#  --> Dokumentiert den Ordner "Abgabe-Ordner"
 # ===========================================================================
 
 # --- Projekt-Infos ---
@@ -31,7 +31,7 @@ JAVADOC_AUTOBRIEF      = YES
 MULTILINE_CPP_IS_BRIEF = YES
 
 # ---- doxypypy-Filter ----
-#  Nutze den vollständigen Pfad zu deiner Installation:
+#  Nutze den vollständigen Pfad zu der Installation "doxypypy.exe":
 FILTER_PATTERNS        = *.py="C:/Users/hanne/AppData/Local/Packages/PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0/LocalCache/local-packages/Python313/Scripts/doxypypy.exe -a -c"
 
 # --- Extraktion ---

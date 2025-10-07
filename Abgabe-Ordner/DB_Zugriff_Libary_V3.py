@@ -6,7 +6,7 @@
 # Autoren: Josie Woeste, Hannes Ruhe, Kai Meiners
 #
 # Zugehöriges Hauptprogramm:
-# - Hauptprogramm_V3.py
+# - Hauptprogramm_V4.py
 # 
 #
 # Funktionsbeschreibung: 

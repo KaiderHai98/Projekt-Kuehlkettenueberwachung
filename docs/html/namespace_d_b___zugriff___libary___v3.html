@@ -125,48 +125,52 @@ Funktionen</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Datenbank Zugriff - Company-Daten ###############################. </p>
+<p>Liest Firmendaten aus der Tabelle <em>company</em> basierend auf den in den Transportdaten enthaltenen Company-IDs.</p>
+<p>Die Funktion extrahiert alle eindeutigen Company-IDs aus den übergebenen Transportdaten und ruft für jede ID die zugehörigen Datensätze aus der Tabelle <em>dbo.company</em> ab. Jede gefundene Zeile wird als Liste der Spaltenwerte in einem Dictionary gespeichert, wobei der Schlüssel ein fortlaufender Index (beginnend bei 1) ist.</p>
+<p>Zusätzlich wird die Gesamtanzahl der gefundenen Firmendatensätze zurückgegeben. Bei einem Fehler im Datenbankzugriff wird eine Fehlermeldung ausgegeben und ein leeres Dictionary sowie die Länge 0 zurückgegeben. Die Datenbankverbindung und der Cursor werden im <span class="tt">finally</span>-Block zuverlässig geschlossen. </p>
 
-<p class="definition">Definiert in Zeile <a class="el" href="_d_b___zugriff___libary___v3_8py_source.html#l00145">145</a> der Datei <a class="el" href="_d_b___zugriff___libary___v3_8py_source.html">DB_Zugriff_Libary_V3.py</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  145</span><span class="keyword">def </span>get_company_daten(transport_daten, verbindungs_i):</div>
-<div class="line"><span class="lineno">  146</span> </div>
-<div class="line"><span class="lineno">  147</span>    company_daten = {}</div>
-<div class="line"><span class="lineno">  148</span> </div>
-<div class="line"><span class="lineno">  149</span>    <span class="keywordflow">try</span>:</div>
-<div class="line"><span class="lineno">  150</span>        conn = pyodbc.connect(verbindungs_i)</div>
-<div class="line"><span class="lineno">  151</span>        cursor = conn.cursor()</div>
-<div class="line"><span class="lineno">  152</span> </div>
-<div class="line"><span class="lineno">  153</span>        sql = <span class="stringliteral">&quot;&quot;&quot;</span></div>
-<div class="line"><span class="lineno">  154</span><span class="stringliteral">            SELECT *</span></div>
-<div class="line"><span class="lineno">  155</span><span class="stringliteral">            FROM dbo.company</span></div>
-<div class="line"><span class="lineno">  156</span><span class="stringliteral">            WHERE companyID = ?</span></div>
-<div class="line"><span class="lineno">  157</span><span class="stringliteral">        &quot;&quot;&quot;</span></div>
-<div class="line"><span class="lineno">  158</span> </div>
-<div class="line"><span class="lineno">  159</span>        <span class="comment"># Eindeutige companyIDs aus transport_daten (Index 1 = zweite Spalte)</span></div>
-<div class="line"><span class="lineno">  160</span>        company_ids = {eintrag[1] <span class="keywordflow">for</span> eintrag <span class="keywordflow">in</span> transport_daten.values()}</div>
-<div class="line"><span class="lineno">  161</span> </div>
-<div class="line"><span class="lineno">  162</span>        idx = 1</div>
-<div class="line"><span class="lineno">  163</span>        <span class="keywordflow">for</span> companyID <span class="keywordflow">in</span> company_ids:</div>
-<div class="line"><span class="lineno">  164</span>            cursor.execute(sql, companyID)</div>
-<div class="line"><span class="lineno">  165</span>            zeilen = cursor.fetchall()</div>
-<div class="line"><span class="lineno">  166</span>            <span class="keywordflow">for</span> zeile <span class="keywordflow">in</span> zeilen:</div>
-<div class="line"><span class="lineno">  167</span>                company_daten[idx] = list(zeile)</div>
-<div class="line"><span class="lineno">  168</span>                idx += 1</div>
-<div class="line"><span class="lineno">  169</span> </div>
-<div class="line"><span class="lineno">  170</span>        company_daten_len = len(company_daten)</div>
-<div class="line"><span class="lineno">  171</span>        <span class="keywordflow">return</span> company_daten, company_daten_len</div>
-<div class="line"><span class="lineno">  172</span> </div>
-<div class="line"><span class="lineno">  173</span>    <span class="keywordflow">except</span> Exception <span class="keyword">as</span> e:</div>
-<div class="line"><span class="lineno">  174</span>        print(<span class="stringliteral">&quot;Fehler beim Datenbankzugriff - Company Daten:&quot;</span>, e)</div>
-<div class="line"><span class="lineno">  175</span>        <span class="keywordflow">return</span> {}, 0</div>
-<div class="line"><span class="lineno">  176</span> </div>
-<div class="line"><span class="lineno">  177</span>    <span class="keywordflow">finally</span>:</div>
-<div class="line"><span class="lineno">  178</span>        <span class="keywordflow">if</span> <span class="stringliteral">&#39;cursor&#39;</span> <span class="keywordflow">in</span> locals():</div>
-<div class="line"><span class="lineno">  179</span>            cursor.close()</div>
-<div class="line"><span class="lineno">  180</span>        <span class="keywordflow">if</span> <span class="stringliteral">&#39;conn&#39;</span> <span class="keywordflow">in</span> locals():</div>
-<div class="line"><span class="lineno">  181</span>            conn.close()</div>
-<div class="line"><span class="lineno">  182</span>        print(company_daten)  <span class="comment"># optional</span></div>
-<div class="line"><span class="lineno">  183</span> </div>
-<div class="line"><span class="lineno">  184</span> </div>
+<p class="definition">Definiert in Zeile <a class="el" href="_d_b___zugriff___libary___v3_8py_source.html#l00186">186</a> der Datei <a class="el" href="_d_b___zugriff___libary___v3_8py_source.html">DB_Zugriff_Libary_V3.py</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  186</span>    Die Datenbankverbindung und der Cursor werden im `<span class="keywordflow">finally</span>`-Block zuverlässig geschlossen.</div>
+<div class="line"><span class="lineno">  187</span>    <span class="stringliteral">&#39;&#39;&#39;</span></div>
+<div class="line"><span class="lineno">  188</span><span class="stringliteral"></span> </div>
+<div class="line"><span class="lineno">  189</span><span class="stringliteral">    company_daten = {}</span></div>
+<div class="line"><span class="lineno">  190</span><span class="stringliteral"></span> </div>
+<div class="line"><span class="lineno">  191</span><span class="stringliteral">    try:</span></div>
+<div class="line"><span class="lineno">  192</span><span class="stringliteral">        conn = pyodbc.connect(verbindungs_i)</span></div>
+<div class="line"><span class="lineno">  193</span><span class="stringliteral">        cursor = conn.cursor()</span></div>
+<div class="line"><span class="lineno">  194</span><span class="stringliteral"></span> </div>
+<div class="line"><span class="lineno">  195</span><span class="stringliteral">        sql = &quot;&quot;&quot;</span></div>
+<div class="line"><span class="lineno">  196</span><span class="stringliteral">            SELECT *</span></div>
+<div class="line"><span class="lineno">  197</span><span class="stringliteral">            FROM dbo.company</span></div>
+<div class="line"><span class="lineno">  198</span><span class="stringliteral">            WHERE companyID = ?</span></div>
+<div class="line"><span class="lineno">  199</span><span class="stringliteral">        &quot;&quot;&quot;</span></div>
+<div class="line"><span class="lineno">  200</span><span class="stringliteral"></span> </div>
+<div class="line"><span class="lineno">  201</span><span class="stringliteral">        # Eindeutige companyIDs aus transport_daten (Index 1 = zweite Spalte)</span></div>
+<div class="line"><span class="lineno">  202</span><span class="stringliteral">        company_ids = {eintrag[1] for eintrag in transport_daten.values()}</span></div>
+<div class="line"><span class="lineno">  203</span><span class="stringliteral"></span> </div>
+<div class="line"><span class="lineno">  204</span><span class="stringliteral">        idx = 1</span></div>
+<div class="line"><span class="lineno">  205</span><span class="stringliteral">        for companyID in company_ids:</span></div>
+<div class="line"><span class="lineno">  206</span><span class="stringliteral">            cursor.execute(sql, companyID)</span></div>
+<div class="line"><span class="lineno">  207</span><span class="stringliteral">            zeilen = cursor.fetchall()</span></div>
+<div class="line"><span class="lineno">  208</span><span class="stringliteral">            for zeile in zeilen:</span></div>
+<div class="line"><span class="lineno">  209</span><span class="stringliteral">                company_daten[idx] = list(zeile)</span></div>
+<div class="line"><span class="lineno">  210</span><span class="stringliteral">                idx += 1</span></div>
+<div class="line"><span class="lineno">  211</span><span class="stringliteral"></span> </div>
+<div class="line"><span class="lineno">  212</span><span class="stringliteral">        company_daten_len = len(company_daten)</span></div>
+<div class="line"><span class="lineno">  213</span><span class="stringliteral">        return company_daten, company_daten_len</span></div>
+<div class="line"><span class="lineno">  214</span><span class="stringliteral"></span> </div>
+<div class="line"><span class="lineno">  215</span><span class="stringliteral">    except Exception as e:</span></div>
+<div class="line"><span class="lineno">  216</span><span class="stringliteral">        print(&quot;Fehler beim Datenbankzugriff - Company Daten:&quot;, e)</span></div>
+<div class="line"><span class="lineno">  217</span><span class="stringliteral">        return {}, 0</span></div>
+<div class="line"><span class="lineno">  218</span><span class="stringliteral"></span> </div>
+<div class="line"><span class="lineno">  219</span><span class="stringliteral">    finally:</span></div>
+<div class="line"><span class="lineno">  220</span><span class="stringliteral">        if &#39;cursor&#39; in locals():</span></div>
+<div class="line"><span class="lineno">  221</span><span class="stringliteral">            cursor.close()</span></div>
+<div class="line"><span class="lineno">  222</span><span class="stringliteral">        if &#39;conn&#39; in locals():</span></div>
+<div class="line"><span class="lineno">  223</span><span class="stringliteral">            conn.close()</span></div>
+<div class="line"><span class="lineno">  224</span><span class="stringliteral">        print(company_daten)  # optional</span></div>
+<div class="line"><span class="lineno">  225</span><span class="stringliteral"></span> </div>
+<div class="line"><span class="lineno">  226</span><span class="stringliteral"></span> </div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -190,83 +194,88 @@ Funktionen</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Datenbank Zugriff - Temperaturdaten #############################. </p>
+<p>Liest Temperaturdaten zu Transportstationen aus der Tabelle <em>tempdata</em> basierend auf Transportdaten.</p>
+<p>Die Funktion nutzt zuvor geladene Transportdaten, um für jede Station und jeden "Check-in"-Zeitpunkt (<em>Status = 'in'</em>) die zugehörigen Temperaturmessungen aus der Tabelle <em>dbo.tempdata</em> abzurufen. Dabei wird jeweils der Zeitraum zwischen dem "in"- und dem nächsten "out"-Eintrag derselben Station berücksichtigt. Fehlt ein "out"-Eintrag, werden alle Messungen ab dem Startzeitpunkt einbezogen.</p>
+<p>Die Ergebnisse werden als Dictionary mit fortlaufendem Index (beginnend bei 1) gespeichert, wobei jede Zeile als Liste der Spaltenwerte vorliegt. Zusätzlich wird die Gesamtanzahl der gefundenen Temperaturdatensätze zurückgegeben.</p>
+<p>Bei einem Fehler im Datenbankzugriff wird eine Fehlermeldung ausgegeben und ein leeres Dictionary zurückgegeben. Die Datenbankverbindung und der Cursor werden im <span class="tt">finally</span>-Block zuverlässig geschlossen. </p>
 
-<p class="definition">Definiert in Zeile <a class="el" href="_d_b___zugriff___libary___v3_8py_source.html#l00066">66</a> der Datei <a class="el" href="_d_b___zugriff___libary___v3_8py_source.html">DB_Zugriff_Libary_V3.py</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   66</span><span class="keyword">def </span>get_temperatur_daten(transport_daten, verbindungs_i):</div>
-<div class="line"><span class="lineno">   67</span> </div>
-<div class="line"><span class="lineno">   68</span>    temperatur_daten = {}</div>
-<div class="line"><span class="lineno">   69</span> </div>
-<div class="line"><span class="lineno">   70</span>    <span class="keywordflow">try</span>:</div>
-<div class="line"><span class="lineno">   71</span>        conn = pyodbc.connect(verbindungs_i)</div>
-<div class="line"><span class="lineno">   72</span>        cursor = conn.cursor()</div>
-<div class="line"><span class="lineno">   73</span> </div>
-<div class="line"><span class="lineno">   74</span>        <span class="comment"># SQL-Abfragen</span></div>
-<div class="line"><span class="lineno">   75</span>        sql_ohne_end = <span class="stringliteral">&quot;&quot;&quot;</span></div>
-<div class="line"><span class="lineno">   76</span><span class="stringliteral">            SELECT *</span></div>
-<div class="line"><span class="lineno">   77</span><span class="stringliteral">            FROM dbo.tempdata</span></div>
-<div class="line"><span class="lineno">   78</span><span class="stringliteral">            WHERE transportstationID = ?</span></div>
-<div class="line"><span class="lineno">   79</span><span class="stringliteral">              AND datetime &gt;= ?</span></div>
-<div class="line"><span class="lineno">   80</span><span class="stringliteral">            ORDER BY datetime</span></div>
-<div class="line"><span class="lineno">   81</span><span class="stringliteral">        &quot;&quot;&quot;</span></div>
-<div class="line"><span class="lineno">   82</span>        sql_mit_end = <span class="stringliteral">&quot;&quot;&quot;</span></div>
-<div class="line"><span class="lineno">   83</span><span class="stringliteral">            SELECT *</span></div>
-<div class="line"><span class="lineno">   84</span><span class="stringliteral">            FROM dbo.tempdata</span></div>
-<div class="line"><span class="lineno">   85</span><span class="stringliteral">            WHERE transportstationID = ?</span></div>
-<div class="line"><span class="lineno">   86</span><span class="stringliteral">              AND datetime &gt;= ?</span></div>
-<div class="line"><span class="lineno">   87</span><span class="stringliteral">              AND datetime &lt; ?</span></div>
-<div class="line"><span class="lineno">   88</span><span class="stringliteral">            ORDER BY datetime</span></div>
-<div class="line"><span class="lineno">   89</span><span class="stringliteral">        &quot;&quot;&quot;</span></div>
-<div class="line"><span class="lineno">   90</span> </div>
-<div class="line"><span class="lineno">   91</span>        <span class="comment"># Reihenfolge sicherstellen (dein transport_daten kommt i. d. R. schon sortiert)</span></div>
-<div class="line"><span class="lineno">   92</span>        items = sorted(transport_daten.items(), key=<span class="keyword">lambda</span> kv: kv[0])</div>
-<div class="line"><span class="lineno">   93</span> </div>
-<div class="line"><span class="lineno">   94</span>        idx = 1</div>
-<div class="line"><span class="lineno">   95</span>        <span class="keywordflow">for</span> pos, (_, eintrag) <span class="keywordflow">in</span> enumerate(items):</div>
-<div class="line"><span class="lineno">   96</span>            station_id = eintrag[3]</div>
-<div class="line"><span class="lineno">   97</span>            status_raw = str(eintrag[4])           <span class="comment"># z.B. &quot;&#39;in&#39;&quot;</span></div>
-<div class="line"><span class="lineno">   98</span>            status = status_raw.strip().strip(<span class="stringliteral">&quot;&#39;&quot;</span>).lower()</div>
-<div class="line"><span class="lineno">   99</span>            start_dt = eintrag[5]</div>
-<div class="line"><span class="lineno">  100</span> </div>
-<div class="line"><span class="lineno">  101</span>            <span class="comment"># Nur wenn Ware eingecheckt ist</span></div>
-<div class="line"><span class="lineno">  102</span>            <span class="keywordflow">if</span> status != <span class="stringliteral">&quot;in&quot;</span>:</div>
-<div class="line"><span class="lineno">  103</span>                <span class="keywordflow">continue</span></div>
-<div class="line"><span class="lineno">  104</span> </div>
-<div class="line"><span class="lineno">  105</span>            <span class="comment"># Nächsten &#39;out&#39; für dieselbe Station suchen</span></div>
-<div class="line"><span class="lineno">  106</span>            end_dt = <span class="keywordtype">None</span></div>
-<div class="line"><span class="lineno">  107</span>            <span class="keywordflow">for</span> _, next_entry <span class="keywordflow">in</span> items[pos+1:]:</div>
-<div class="line"><span class="lineno">  108</span>                <span class="keywordflow">if</span> next_entry[3] == station_id:</div>
-<div class="line"><span class="lineno">  109</span>                    next_status = str(next_entry[4]).strip().strip(<span class="stringliteral">&quot;&#39;&quot;</span>).lower()</div>
-<div class="line"><span class="lineno">  110</span>                    <span class="keywordflow">if</span> next_status == <span class="stringliteral">&quot;out&quot;</span>:</div>
-<div class="line"><span class="lineno">  111</span>                        end_dt = next_entry[5]</div>
-<div class="line"><span class="lineno">  112</span>                        <span class="keywordflow">break</span></div>
-<div class="line"><span class="lineno">  113</span> </div>
-<div class="line"><span class="lineno">  114</span>            <span class="comment"># Abfrage ausführen (mit oder ohne Endzeit)</span></div>
-<div class="line"><span class="lineno">  115</span>            <span class="keywordflow">if</span> end_dt <span class="keywordflow">is</span> <span class="keywordtype">None</span>:</div>
-<div class="line"><span class="lineno">  116</span>                cursor.execute(sql_ohne_end, station_id, start_dt)</div>
-<div class="line"><span class="lineno">  117</span>            <span class="keywordflow">else</span>:</div>
-<div class="line"><span class="lineno">  118</span>                cursor.execute(sql_mit_end, station_id, start_dt, end_dt)</div>
-<div class="line"><span class="lineno">  119</span> </div>
-<div class="line"><span class="lineno">  120</span>            zeilen = cursor.fetchall()</div>
-<div class="line"><span class="lineno">  121</span>            <span class="keywordflow">for</span> zeile <span class="keywordflow">in</span> zeilen:</div>
-<div class="line"><span class="lineno">  122</span>                temperatur_daten[idx] = list(zeile)</div>
-<div class="line"><span class="lineno">  123</span>                idx += 1</div>
-<div class="line"><span class="lineno">  124</span> </div>
-<div class="line"><span class="lineno">  125</span>        temperatur_daten_len = len(temperatur_daten)</div>
-<div class="line"><span class="lineno">  126</span>        <span class="keywordflow">return</span> temperatur_daten, temperatur_daten_len</div>
-<div class="line"><span class="lineno">  127</span> </div>
-<div class="line"><span class="lineno">  128</span>    <span class="keywordflow">except</span> Exception <span class="keyword">as</span> e:</div>
-<div class="line"><span class="lineno">  129</span>        print(<span class="stringliteral">&quot;Fehler beim Datenbankzugriff - Temperaturdaten:&quot;</span>, e)</div>
-<div class="line"><span class="lineno">  130</span>        <span class="keywordflow">return</span> {}</div>
-<div class="line"><span class="lineno">  131</span> </div>
-<div class="line"><span class="lineno">  132</span>    <span class="keywordflow">finally</span>:</div>
-<div class="line"><span class="lineno">  133</span>        <span class="keywordflow">if</span> <span class="stringliteral">&#39;cursor&#39;</span> <span class="keywordflow">in</span> locals():</div>
-<div class="line"><span class="lineno">  134</span>            cursor.close()</div>
-<div class="line"><span class="lineno">  135</span>        <span class="keywordflow">if</span> <span class="stringliteral">&#39;conn&#39;</span> <span class="keywordflow">in</span> locals():</div>
-<div class="line"><span class="lineno">  136</span>            conn.close()</div>
-<div class="line"><span class="lineno">  137</span> </div>
-<div class="line"><span class="lineno">  138</span>        print(temperatur_daten)</div>
-<div class="line"><span class="lineno">  139</span> </div>
-<div class="line"><span class="lineno">  140</span> </div>
+<p class="definition">Definiert in Zeile <a class="el" href="_d_b___zugriff___libary___v3_8py_source.html#l00093">93</a> der Datei <a class="el" href="_d_b___zugriff___libary___v3_8py_source.html">DB_Zugriff_Libary_V3.py</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   93</span>    Die Datenbankverbindung und der Cursor werden im `<span class="keywordflow">finally</span>`-Block zuverlässig geschlossen.</div>
+<div class="line"><span class="lineno">   94</span>    <span class="stringliteral">&#39;&#39;&#39;</span></div>
+<div class="line"><span class="lineno">   95</span><span class="stringliteral"></span> </div>
+<div class="line"><span class="lineno">   96</span><span class="stringliteral">    temperatur_daten = {}</span></div>
+<div class="line"><span class="lineno">   97</span><span class="stringliteral"></span> </div>
+<div class="line"><span class="lineno">   98</span><span class="stringliteral">    try:</span></div>
+<div class="line"><span class="lineno">   99</span><span class="stringliteral">        conn = pyodbc.connect(verbindungs_i)</span></div>
+<div class="line"><span class="lineno">  100</span><span class="stringliteral">        cursor = conn.cursor()</span></div>
+<div class="line"><span class="lineno">  101</span><span class="stringliteral"></span> </div>
+<div class="line"><span class="lineno">  102</span><span class="stringliteral">        # SQL-Abfragen</span></div>
+<div class="line"><span class="lineno">  103</span><span class="stringliteral">        sql_ohne_end = &quot;&quot;&quot;</span></div>
+<div class="line"><span class="lineno">  104</span><span class="stringliteral">            SELECT *</span></div>
+<div class="line"><span class="lineno">  105</span><span class="stringliteral">            FROM dbo.tempdata</span></div>
+<div class="line"><span class="lineno">  106</span><span class="stringliteral">            WHERE transportstationID = ?</span></div>
+<div class="line"><span class="lineno">  107</span><span class="stringliteral">              AND datetime &gt;= ?</span></div>
+<div class="line"><span class="lineno">  108</span><span class="stringliteral">            ORDER BY datetime</span></div>
+<div class="line"><span class="lineno">  109</span><span class="stringliteral">        &quot;&quot;&quot;</span></div>
+<div class="line"><span class="lineno">  110</span><span class="stringliteral">        sql_mit_end = &quot;&quot;&quot;</span></div>
+<div class="line"><span class="lineno">  111</span><span class="stringliteral">            SELECT *</span></div>
+<div class="line"><span class="lineno">  112</span><span class="stringliteral">            FROM dbo.tempdata</span></div>
+<div class="line"><span class="lineno">  113</span><span class="stringliteral">            WHERE transportstationID = ?</span></div>
+<div class="line"><span class="lineno">  114</span><span class="stringliteral">              AND datetime &gt;= ?</span></div>
+<div class="line"><span class="lineno">  115</span><span class="stringliteral">              AND datetime &lt; ?</span></div>
+<div class="line"><span class="lineno">  116</span><span class="stringliteral">            ORDER BY datetime</span></div>
+<div class="line"><span class="lineno">  117</span><span class="stringliteral">        &quot;&quot;&quot;</span></div>
+<div class="line"><span class="lineno">  118</span><span class="stringliteral"></span> </div>
+<div class="line"><span class="lineno">  119</span><span class="stringliteral">        # Reihenfolge sicherstellen (dein transport_daten kommt i. d. R. schon sortiert)</span></div>
+<div class="line"><span class="lineno">  120</span><span class="stringliteral">        items = sorted(transport_daten.items(), key=lambda kv: kv[0])</span></div>
+<div class="line"><span class="lineno">  121</span><span class="stringliteral"></span> </div>
+<div class="line"><span class="lineno">  122</span><span class="stringliteral">        idx = 1</span></div>
+<div class="line"><span class="lineno">  123</span><span class="stringliteral">        for pos, (_, eintrag) in enumerate(items):</span></div>
+<div class="line"><span class="lineno">  124</span><span class="stringliteral">            station_id = eintrag[3]</span></div>
+<div class="line"><span class="lineno">  125</span><span class="stringliteral">            status_raw = str(eintrag[4])           # z.B. &quot;&#39;in&#39;&quot;</span></div>
+<div class="line"><span class="lineno">  126</span><span class="stringliteral">            status = status_raw.strip().strip(&quot;&#39;&quot;).lower()</span></div>
+<div class="line"><span class="lineno">  127</span><span class="stringliteral">            start_dt = eintrag[5]</span></div>
+<div class="line"><span class="lineno">  128</span><span class="stringliteral"></span> </div>
+<div class="line"><span class="lineno">  129</span><span class="stringliteral">            # Nur wenn Ware eingecheckt ist</span></div>
+<div class="line"><span class="lineno">  130</span><span class="stringliteral">            if status != &quot;in&quot;:</span></div>
+<div class="line"><span class="lineno">  131</span><span class="stringliteral">                continue</span></div>
+<div class="line"><span class="lineno">  132</span><span class="stringliteral"></span> </div>
+<div class="line"><span class="lineno">  133</span><span class="stringliteral">            # Nächsten &#39;out&#39; für dieselbe Station suchen</span></div>
+<div class="line"><span class="lineno">  134</span><span class="stringliteral">            end_dt = None</span></div>
+<div class="line"><span class="lineno">  135</span><span class="stringliteral">            for _, next_entry in items[pos+1:]:</span></div>
+<div class="line"><span class="lineno">  136</span><span class="stringliteral">                if next_entry[3] == station_id:</span></div>
+<div class="line"><span class="lineno">  137</span><span class="stringliteral">                    next_status = str(next_entry[4]).strip().strip(&quot;&#39;&quot;).lower()</span></div>
+<div class="line"><span class="lineno">  138</span><span class="stringliteral">                    if next_status == &quot;out&quot;:</span></div>
+<div class="line"><span class="lineno">  139</span><span class="stringliteral">                        end_dt = next_entry[5]</span></div>
+<div class="line"><span class="lineno">  140</span><span class="stringliteral">                        break</span></div>
+<div class="line"><span class="lineno">  141</span><span class="stringliteral"></span> </div>
+<div class="line"><span class="lineno">  142</span><span class="stringliteral">            # Abfrage ausführen (mit oder ohne Endzeit)</span></div>
+<div class="line"><span class="lineno">  143</span><span class="stringliteral">            if end_dt is None:</span></div>
+<div class="line"><span class="lineno">  144</span><span class="stringliteral">                cursor.execute(sql_ohne_end, station_id, start_dt)</span></div>
+<div class="line"><span class="lineno">  145</span><span class="stringliteral">            else:</span></div>
+<div class="line"><span class="lineno">  146</span><span class="stringliteral">                cursor.execute(sql_mit_end, station_id, start_dt, end_dt)</span></div>
+<div class="line"><span class="lineno">  147</span><span class="stringliteral"></span> </div>
+<div class="line"><span class="lineno">  148</span><span class="stringliteral">            zeilen = cursor.fetchall()</span></div>
+<div class="line"><span class="lineno">  149</span><span class="stringliteral">            for zeile in zeilen:</span></div>
+<div class="line"><span class="lineno">  150</span><span class="stringliteral">                temperatur_daten[idx] = list(zeile)</span></div>
+<div class="line"><span class="lineno">  151</span><span class="stringliteral">                idx += 1</span></div>
+<div class="line"><span class="lineno">  152</span><span class="stringliteral"></span> </div>
+<div class="line"><span class="lineno">  153</span><span class="stringliteral">        temperatur_daten_len = len(temperatur_daten)</span></div>
+<div class="line"><span class="lineno">  154</span><span class="stringliteral">        return temperatur_daten, temperatur_daten_len</span></div>
+<div class="line"><span class="lineno">  155</span><span class="stringliteral"></span> </div>
+<div class="line"><span class="lineno">  156</span><span class="stringliteral">    except Exception as e:</span></div>
+<div class="line"><span class="lineno">  157</span><span class="stringliteral">        print(&quot;Fehler beim Datenbankzugriff - Temperaturdaten:&quot;, e)</span></div>
+<div class="line"><span class="lineno">  158</span><span class="stringliteral">        return {}</span></div>
+<div class="line"><span class="lineno">  159</span><span class="stringliteral"></span> </div>
+<div class="line"><span class="lineno">  160</span><span class="stringliteral">    finally:</span></div>
+<div class="line"><span class="lineno">  161</span><span class="stringliteral">        if &#39;cursor&#39; in locals():</span></div>
+<div class="line"><span class="lineno">  162</span><span class="stringliteral">            cursor.close()</span></div>
+<div class="line"><span class="lineno">  163</span><span class="stringliteral">        if &#39;conn&#39; in locals():</span></div>
+<div class="line"><span class="lineno">  164</span><span class="stringliteral">            conn.close()</span></div>
+<div class="line"><span class="lineno">  165</span><span class="stringliteral"></span> </div>
+<div class="line"><span class="lineno">  166</span><span class="stringliteral">        print(temperatur_daten)</span></div>
+<div class="line"><span class="lineno">  167</span><span class="stringliteral"></span> </div>
+<div class="line"><span class="lineno">  168</span><span class="stringliteral"></span> </div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -290,48 +299,51 @@ Funktionen</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Datenbank Zugriff - Transportdaten ##############################. </p>
+<p>Liest Transportdaten aus der Datenbanktabelle <em>coolchain</em> anhand einer gegebenen Transport-ID.</p>
+<p>Die Funktion stellt eine Verbindung zur angegebenen SQL-Datenbank her, führt eine Abfrage auf der Tabelle <em>dbo.coolchain</em> aus und sammelt alle Datensätze mit der passenden Transport-ID. Die Ergebnisse werden nach dem Zeitstempel (<em>datetime</em>) sortiert und als Dictionary zurückgegeben, wobei der Schlüssel dem laufenden Index (beginnend bei 1) entspricht und der Wert eine Liste der Spaltenwerte ist. Zusätzlich wird die Gesamtanzahl der gefundenen Datensätze ermittelt. Bei einem Fehler wird eine Fehlermeldung ausgegeben und ein leeres Dictionary zurückgegeben. Die Datenbankverbindung sowie der Cursor werden am Ende der Funktion zuverlässig geschlossen. </p>
 
-<p class="definition">Definiert in Zeile <a class="el" href="_d_b___zugriff___libary___v3_8py_source.html#l00022">22</a> der Datei <a class="el" href="_d_b___zugriff___libary___v3_8py_source.html">DB_Zugriff_Libary_V3.py</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   22</span><span class="keyword">def </span>get_transport_daten(transportid, verbindungs_i):</div>
-<div class="line"><span class="lineno">   23</span> </div>
-<div class="line"><span class="lineno">   24</span>    transport_daten = {}</div>
-<div class="line"><span class="lineno">   25</span> </div>
-<div class="line"><span class="lineno">   26</span>    <span class="keywordflow">try</span>:</div>
-<div class="line"><span class="lineno">   27</span>        <span class="comment"># Verbindung herstellen</span></div>
-<div class="line"><span class="lineno">   28</span>        conn = pyodbc.connect(verbindungs_i)</div>
-<div class="line"><span class="lineno">   29</span>        cursor = conn.cursor()</div>
-<div class="line"><span class="lineno">   30</span> </div>
-<div class="line"><span class="lineno">   31</span>        <span class="comment"># SQL-Abfrage</span></div>
-<div class="line"><span class="lineno">   32</span>        abfrage = <span class="stringliteral">&quot;&quot;&quot;</span></div>
-<div class="line"><span class="lineno">   33</span><span class="stringliteral">            SELECT * </span></div>
-<div class="line"><span class="lineno">   34</span><span class="stringliteral">            FROM dbo.coolchain </span></div>
-<div class="line"><span class="lineno">   35</span><span class="stringliteral">            WHERE transportid = ? </span></div>
-<div class="line"><span class="lineno">   36</span><span class="stringliteral">            ORDER BY datetime</span></div>
-<div class="line"><span class="lineno">   37</span><span class="stringliteral">        &quot;&quot;&quot;</span></div>
-<div class="line"><span class="lineno">   38</span>        cursor.execute(abfrage, transportid)</div>
-<div class="line"><span class="lineno">   39</span> </div>
-<div class="line"><span class="lineno">   40</span>        zeilen = cursor.fetchall()</div>
-<div class="line"><span class="lineno">   41</span> </div>
-<div class="line"><span class="lineno">   42</span>        <span class="keywordflow">for</span> idx, zeile <span class="keywordflow">in</span> enumerate(zeilen, start=1):</div>
-<div class="line"><span class="lineno">   43</span>            <span class="comment"># Row ist ein pyodbc.Row -&gt; in Liste konvertieren</span></div>
-<div class="line"><span class="lineno">   44</span>            transport_daten[idx] = list(zeile)</div>
-<div class="line"><span class="lineno">   45</span> </div>
-<div class="line"><span class="lineno">   46</span>        transport_daten_len = len(transport_daten)</div>
-<div class="line"><span class="lineno">   47</span>        <span class="keywordflow">return</span> transport_daten, transport_daten_len</div>
-<div class="line"><span class="lineno">   48</span> </div>
-<div class="line"><span class="lineno">   49</span>    <span class="keywordflow">except</span> Exception <span class="keyword">as</span> e:</div>
-<div class="line"><span class="lineno">   50</span>        print(<span class="stringliteral">&quot;Fehler beim Datenbankzugriff - Transportdaten:&quot;</span>, e)</div>
-<div class="line"><span class="lineno">   51</span>        <span class="keywordflow">return</span> {}</div>
-<div class="line"><span class="lineno">   52</span> </div>
-<div class="line"><span class="lineno">   53</span>    <span class="keywordflow">finally</span>:</div>
-<div class="line"><span class="lineno">   54</span>        <span class="keywordflow">if</span> <span class="stringliteral">&#39;cursor&#39;</span> <span class="keywordflow">in</span> locals():</div>
-<div class="line"><span class="lineno">   55</span>            cursor.close()</div>
-<div class="line"><span class="lineno">   56</span>        <span class="keywordflow">if</span> <span class="stringliteral">&#39;conn&#39;</span> <span class="keywordflow">in</span> locals():</div>
-<div class="line"><span class="lineno">   57</span>            conn.close()</div>
-<div class="line"><span class="lineno">   58</span>        </div>
-<div class="line"><span class="lineno">   59</span>        print(transport_daten)</div>
-<div class="line"><span class="lineno">   60</span>    </div>
-<div class="line"><span class="lineno">   61</span> </div>
+<p class="definition">Definiert in Zeile <a class="el" href="_d_b___zugriff___libary___v3_8py_source.html#l00033">33</a> der Datei <a class="el" href="_d_b___zugriff___libary___v3_8py_source.html">DB_Zugriff_Libary_V3.py</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   33</span>    Die Datenbankverbindung sowie der Cursor werden am Ende der Funktion zuverlässig geschlossen.</div>
+<div class="line"><span class="lineno">   34</span>    <span class="stringliteral">&#39;&#39;&#39;</span></div>
+<div class="line"><span class="lineno">   35</span><span class="stringliteral"></span> </div>
+<div class="line"><span class="lineno">   36</span><span class="stringliteral">    transport_daten = {}</span></div>
+<div class="line"><span class="lineno">   37</span><span class="stringliteral"></span> </div>
+<div class="line"><span class="lineno">   38</span><span class="stringliteral">    try:</span></div>
+<div class="line"><span class="lineno">   39</span><span class="stringliteral">        # Verbindung herstellen</span></div>
+<div class="line"><span class="lineno">   40</span><span class="stringliteral">        conn = pyodbc.connect(verbindungs_i)</span></div>
+<div class="line"><span class="lineno">   41</span><span class="stringliteral">        cursor = conn.cursor()</span></div>
+<div class="line"><span class="lineno">   42</span><span class="stringliteral"></span> </div>
+<div class="line"><span class="lineno">   43</span><span class="stringliteral">        # SQL-Abfrage</span></div>
+<div class="line"><span class="lineno">   44</span><span class="stringliteral">        abfrage = &quot;&quot;&quot;</span></div>
+<div class="line"><span class="lineno">   45</span><span class="stringliteral">            SELECT * </span></div>
+<div class="line"><span class="lineno">   46</span><span class="stringliteral">            FROM dbo.coolchain </span></div>
+<div class="line"><span class="lineno">   47</span><span class="stringliteral">            WHERE transportid = ? </span></div>
+<div class="line"><span class="lineno">   48</span><span class="stringliteral">            ORDER BY datetime</span></div>
+<div class="line"><span class="lineno">   49</span><span class="stringliteral">        &quot;&quot;&quot;</span></div>
+<div class="line"><span class="lineno">   50</span><span class="stringliteral">        cursor.execute(abfrage, transportid)</span></div>
+<div class="line"><span class="lineno">   51</span><span class="stringliteral"></span> </div>
+<div class="line"><span class="lineno">   52</span><span class="stringliteral">        zeilen = cursor.fetchall()</span></div>
+<div class="line"><span class="lineno">   53</span><span class="stringliteral"></span> </div>
+<div class="line"><span class="lineno">   54</span><span class="stringliteral">        for idx, zeile in enumerate(zeilen, start=1):</span></div>
+<div class="line"><span class="lineno">   55</span><span class="stringliteral">            # Row ist ein pyodbc.Row -&gt; in Liste konvertieren</span></div>
+<div class="line"><span class="lineno">   56</span><span class="stringliteral">            transport_daten[idx] = list(zeile)</span></div>
+<div class="line"><span class="lineno">   57</span><span class="stringliteral"></span> </div>
+<div class="line"><span class="lineno">   58</span><span class="stringliteral">        transport_daten_len = len(transport_daten)</span></div>
+<div class="line"><span class="lineno">   59</span><span class="stringliteral">        return transport_daten, transport_daten_len</span></div>
+<div class="line"><span class="lineno">   60</span><span class="stringliteral"></span> </div>
+<div class="line"><span class="lineno">   61</span><span class="stringliteral">    except Exception as e:</span></div>
+<div class="line"><span class="lineno">   62</span><span class="stringliteral">        print(&quot;Fehler beim Datenbankzugriff - Transportdaten:&quot;, e)</span></div>
+<div class="line"><span class="lineno">   63</span><span class="stringliteral">        return {}</span></div>
+<div class="line"><span class="lineno">   64</span><span class="stringliteral"></span> </div>
+<div class="line"><span class="lineno">   65</span><span class="stringliteral">    finally:</span></div>
+<div class="line"><span class="lineno">   66</span><span class="stringliteral">        if &#39;cursor&#39; in locals():</span></div>
+<div class="line"><span class="lineno">   67</span><span class="stringliteral">            cursor.close()</span></div>
+<div class="line"><span class="lineno">   68</span><span class="stringliteral">        if &#39;conn&#39; in locals():</span></div>
+<div class="line"><span class="lineno">   69</span><span class="stringliteral">            conn.close()</span></div>
+<div class="line"><span class="lineno">   70</span><span class="stringliteral">        </span></div>
+<div class="line"><span class="lineno">   71</span><span class="stringliteral">        print(transport_daten)</span></div>
+<div class="line"><span class="lineno">   72</span><span class="stringliteral">    </span></div>
+<div class="line"><span class="lineno">   73</span><span class="stringliteral"></span> </div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -355,49 +367,53 @@ Funktionen</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Datenbank Zugriff - Transportstations-Daten #####################. </p>
+<p>Liest Daten zu Transportstationen aus der Tabelle <em>transportstation</em> anhand der in den Transportdaten enthaltenen Station-IDs.</p>
+<p>Die Funktion extrahiert alle eindeutigen Transportstations-IDs aus den übergebenen Transportdaten und ruft für jede ID die zugehörigen Datensätze aus der Tabelle <em>dbo.transportstation</em> ab. Jede gefundene Zeile wird als Liste der Spaltenwerte in einem Dictionary gespeichert, wobei der Schlüssel ein fortlaufender Index (beginnend bei 1) ist.</p>
+<p>Zusätzlich wird die Gesamtanzahl der gefundenen Transportstationsdatensätze zurückgegeben. Bei einem Fehler im Datenbankzugriff wird eine Fehlermeldung ausgegeben und ein leeres Dictionary sowie die Länge 0 zurückgegeben. Die Datenbankverbindung und der Cursor werden im <span class="tt">finally</span>-Block zuverlässig geschlossen. </p>
 
-<p class="definition">Definiert in Zeile <a class="el" href="_d_b___zugriff___libary___v3_8py_source.html#l00189">189</a> der Datei <a class="el" href="_d_b___zugriff___libary___v3_8py_source.html">DB_Zugriff_Libary_V3.py</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  189</span><span class="keyword">def </span>get_transportstation_daten(transport_daten, verbindungs_i):</div>
-<div class="line"><span class="lineno">  190</span> </div>
-<div class="line"><span class="lineno">  191</span>    transportstation_daten = {}</div>
-<div class="line"><span class="lineno">  192</span> </div>
-<div class="line"><span class="lineno">  193</span>    <span class="keywordflow">try</span>:</div>
-<div class="line"><span class="lineno">  194</span>        conn = pyodbc.connect(verbindungs_i)</div>
-<div class="line"><span class="lineno">  195</span>        cursor = conn.cursor()</div>
-<div class="line"><span class="lineno">  196</span> </div>
-<div class="line"><span class="lineno">  197</span>        sql = <span class="stringliteral">&quot;&quot;&quot;</span></div>
-<div class="line"><span class="lineno">  198</span><span class="stringliteral">            SELECT *</span></div>
-<div class="line"><span class="lineno">  199</span><span class="stringliteral">            FROM dbo.transportstation</span></div>
-<div class="line"><span class="lineno">  200</span><span class="stringliteral">            WHERE transportstationID = ?</span></div>
-<div class="line"><span class="lineno">  201</span><span class="stringliteral">        &quot;&quot;&quot;</span></div>
-<div class="line"><span class="lineno">  202</span> </div>
-<div class="line"><span class="lineno">  203</span>        <span class="comment"># Eindeutige transportstationIDs aus transport_daten (Index 3 = 4. Spalte)</span></div>
-<div class="line"><span class="lineno">  204</span>        station_ids = {eintrag[3] <span class="keywordflow">for</span> eintrag <span class="keywordflow">in</span> transport_daten.values()}</div>
-<div class="line"><span class="lineno">  205</span> </div>
-<div class="line"><span class="lineno">  206</span>        idx = 1</div>
-<div class="line"><span class="lineno">  207</span>        <span class="keywordflow">for</span> transportstationID <span class="keywordflow">in</span> station_ids:</div>
-<div class="line"><span class="lineno">  208</span>            cursor.execute(sql, transportstationID)</div>
-<div class="line"><span class="lineno">  209</span>            zeilen = cursor.fetchall()</div>
-<div class="line"><span class="lineno">  210</span>            <span class="keywordflow">for</span> zeile <span class="keywordflow">in</span> zeilen:</div>
-<div class="line"><span class="lineno">  211</span>                transportstation_daten[idx] = list(zeile)</div>
-<div class="line"><span class="lineno">  212</span>                idx += 1</div>
-<div class="line"><span class="lineno">  213</span> </div>
-<div class="line"><span class="lineno">  214</span>        transportstation_daten_len = len(transportstation_daten)</div>
-<div class="line"><span class="lineno">  215</span>        <span class="keywordflow">return</span> transportstation_daten, transportstation_daten_len</div>
-<div class="line"><span class="lineno">  216</span> </div>
-<div class="line"><span class="lineno">  217</span>    <span class="keywordflow">except</span> Exception <span class="keyword">as</span> e:</div>
-<div class="line"><span class="lineno">  218</span>        print(<span class="stringliteral">&quot;Fehler beim Datenbankzugriff - transportstation Daten:&quot;</span>, e)</div>
-<div class="line"><span class="lineno">  219</span>        <span class="keywordflow">return</span> {}, 0</div>
-<div class="line"><span class="lineno">  220</span> </div>
-<div class="line"><span class="lineno">  221</span>    <span class="keywordflow">finally</span>:</div>
-<div class="line"><span class="lineno">  222</span>        <span class="keywordflow">if</span> <span class="stringliteral">&#39;cursor&#39;</span> <span class="keywordflow">in</span> locals():</div>
-<div class="line"><span class="lineno">  223</span>            cursor.close()</div>
-<div class="line"><span class="lineno">  224</span>        <span class="keywordflow">if</span> <span class="stringliteral">&#39;conn&#39;</span> <span class="keywordflow">in</span> locals():</div>
-<div class="line"><span class="lineno">  225</span>            conn.close()</div>
-<div class="line"><span class="lineno">  226</span> </div>
-<div class="line"><span class="lineno">  227</span>        print(transportstation_daten)</div>
-<div class="line"><span class="lineno">  228</span> </div>
-<div class="line"><span class="lineno">  229</span> </div>
+<p class="definition">Definiert in Zeile <a class="el" href="_d_b___zugriff___libary___v3_8py_source.html#l00244">244</a> der Datei <a class="el" href="_d_b___zugriff___libary___v3_8py_source.html">DB_Zugriff_Libary_V3.py</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  244</span>    Die Datenbankverbindung und der Cursor werden im `<span class="keywordflow">finally</span>`-Block zuverlässig geschlossen.</div>
+<div class="line"><span class="lineno">  245</span>    <span class="stringliteral">&#39;&#39;&#39;</span></div>
+<div class="line"><span class="lineno">  246</span><span class="stringliteral"></span> </div>
+<div class="line"><span class="lineno">  247</span><span class="stringliteral">    transportstation_daten = {}</span></div>
+<div class="line"><span class="lineno">  248</span><span class="stringliteral"></span> </div>
+<div class="line"><span class="lineno">  249</span><span class="stringliteral">    try:</span></div>
+<div class="line"><span class="lineno">  250</span><span class="stringliteral">        conn = pyodbc.connect(verbindungs_i)</span></div>
+<div class="line"><span class="lineno">  251</span><span class="stringliteral">        cursor = conn.cursor()</span></div>
+<div class="line"><span class="lineno">  252</span><span class="stringliteral"></span> </div>
+<div class="line"><span class="lineno">  253</span><span class="stringliteral">        sql = &quot;&quot;&quot;</span></div>
+<div class="line"><span class="lineno">  254</span><span class="stringliteral">            SELECT *</span></div>
+<div class="line"><span class="lineno">  255</span><span class="stringliteral">            FROM dbo.transportstation</span></div>
+<div class="line"><span class="lineno">  256</span><span class="stringliteral">            WHERE transportstationID = ?</span></div>
+<div class="line"><span class="lineno">  257</span><span class="stringliteral">        &quot;&quot;&quot;</span></div>
+<div class="line"><span class="lineno">  258</span><span class="stringliteral"></span> </div>
+<div class="line"><span class="lineno">  259</span><span class="stringliteral">        # Eindeutige transportstationIDs aus transport_daten (Index 3 = 4. Spalte)</span></div>
+<div class="line"><span class="lineno">  260</span><span class="stringliteral">        station_ids = {eintrag[3] for eintrag in transport_daten.values()}</span></div>
+<div class="line"><span class="lineno">  261</span><span class="stringliteral"></span> </div>
+<div class="line"><span class="lineno">  262</span><span class="stringliteral">        idx = 1</span></div>
+<div class="line"><span class="lineno">  263</span><span class="stringliteral">        for transportstationID in station_ids:</span></div>
+<div class="line"><span class="lineno">  264</span><span class="stringliteral">            cursor.execute(sql, transportstationID)</span></div>
+<div class="line"><span class="lineno">  265</span><span class="stringliteral">            zeilen = cursor.fetchall()</span></div>
+<div class="line"><span class="lineno">  266</span><span class="stringliteral">            for zeile in zeilen:</span></div>
+<div class="line"><span class="lineno">  267</span><span class="stringliteral">                transportstation_daten[idx] = list(zeile)</span></div>
+<div class="line"><span class="lineno">  268</span><span class="stringliteral">                idx += 1</span></div>
+<div class="line"><span class="lineno">  269</span><span class="stringliteral"></span> </div>
+<div class="line"><span class="lineno">  270</span><span class="stringliteral">        transportstation_daten_len = len(transportstation_daten)</span></div>
+<div class="line"><span class="lineno">  271</span><span class="stringliteral">        return transportstation_daten, transportstation_daten_len</span></div>
+<div class="line"><span class="lineno">  272</span><span class="stringliteral"></span> </div>
+<div class="line"><span class="lineno">  273</span><span class="stringliteral">    except Exception as e:</span></div>
+<div class="line"><span class="lineno">  274</span><span class="stringliteral">        print(&quot;Fehler beim Datenbankzugriff - transportstation Daten:&quot;, e)</span></div>
+<div class="line"><span class="lineno">  275</span><span class="stringliteral">        return {}, 0</span></div>
+<div class="line"><span class="lineno">  276</span><span class="stringliteral"></span> </div>
+<div class="line"><span class="lineno">  277</span><span class="stringliteral">    finally:</span></div>
+<div class="line"><span class="lineno">  278</span><span class="stringliteral">        if &#39;cursor&#39; in locals():</span></div>
+<div class="line"><span class="lineno">  279</span><span class="stringliteral">            cursor.close()</span></div>
+<div class="line"><span class="lineno">  280</span><span class="stringliteral">        if &#39;conn&#39; in locals():</span></div>
+<div class="line"><span class="lineno">  281</span><span class="stringliteral">            conn.close()</span></div>
+<div class="line"><span class="lineno">  282</span><span class="stringliteral"></span> </div>
+<div class="line"><span class="lineno">  283</span><span class="stringliteral">        print(transportstation_daten)</span></div>
+<div class="line"><span class="lineno">  284</span><span class="stringliteral"></span> </div>
+<div class="line"><span class="lineno">  285</span><span class="stringliteral"></span> </div>
 </div><!-- fragment -->
 </div>
 </div>
