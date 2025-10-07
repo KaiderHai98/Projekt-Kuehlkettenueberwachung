@@ -3,8 +3,8 @@
 #  Libary: CoolChainProjekt
 #  Datei: Verarbeitung_Libary_V3.py
 #
-# Version: 4 vom: 30.09.2025
-# Autoren:
+# Version: 4 vom: 07.10.2025
+# Autoren: Josie Woeste, Hannes Ruhe, Kai Meiners
 #
 # Zugehöriges Hauptprogramm:
 # - Hauptprogramm_V4.py

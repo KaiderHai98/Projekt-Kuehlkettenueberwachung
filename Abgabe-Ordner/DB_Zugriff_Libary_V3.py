@@ -2,8 +2,8 @@
 ## Libary: CoolChainProjekt
 #  Datei: Verarbeitung_Libary_V3.py
 #
-# Version: 3 vom: 21.09.2025
-# Autoren:
+# Version: 3 vom: 07.10.2025
+# Autoren: Josie Woeste, Hannes Ruhe, Kai Meiners
 #
 # Zugehöriges Hauptprogramm:
 # - Hauptprogramm_V3.py
@@ -20,6 +20,18 @@ import pyodbc
 ###################################################################
 
 def get_transport_daten(transportid, verbindungs_i):
+
+    '''
+    @brief Liest Transportdaten aus der Datenbanktabelle *coolchain* anhand einer gegebenen Transport-ID.
+    @details 
+    Die Funktion stellt eine Verbindung zur angegebenen SQL-Datenbank her, führt eine Abfrage auf der Tabelle 
+    *dbo.coolchain* aus und sammelt alle Datensätze mit der passenden Transport-ID.  
+    Die Ergebnisse werden nach dem Zeitstempel (*datetime*) sortiert und als Dictionary zurückgegeben, 
+    wobei der Schlüssel dem laufenden Index (beginnend bei 1) entspricht und der Wert eine Liste der Spaltenwerte ist.  
+    Zusätzlich wird die Gesamtanzahl der gefundenen Datensätze ermittelt.  
+    Bei einem Fehler wird eine Fehlermeldung ausgegeben und ein leeres Dictionary zurückgegeben.  
+    Die Datenbankverbindung sowie der Cursor werden am Ende der Funktion zuverlässig geschlossen.
+    '''
 
     transport_daten = {}
 
@@ -64,6 +76,22 @@ def get_transport_daten(transportid, verbindungs_i):
 ###################################################################
 
 def get_temperatur_daten(transport_daten, verbindungs_i):
+
+    '''
+    @brief Liest Temperaturdaten zu Transportstationen aus der Tabelle *tempdata* basierend auf Transportdaten.
+    @details 
+    Die Funktion nutzt zuvor geladene Transportdaten, um für jede Station und jeden "Check-in"-Zeitpunkt 
+    (*Status = 'in'*) die zugehörigen Temperaturmessungen aus der Tabelle *dbo.tempdata* abzurufen.  
+    Dabei wird jeweils der Zeitraum zwischen dem "in"- und dem nächsten "out"-Eintrag derselben Station berücksichtigt.  
+    Fehlt ein "out"-Eintrag, werden alle Messungen ab dem Startzeitpunkt einbezogen.  
+
+    Die Ergebnisse werden als Dictionary mit fortlaufendem Index (beginnend bei 1) gespeichert, 
+    wobei jede Zeile als Liste der Spaltenwerte vorliegt. Zusätzlich wird die Gesamtanzahl der gefundenen 
+    Temperaturdatensätze zurückgegeben.  
+
+    Bei einem Fehler im Datenbankzugriff wird eine Fehlermeldung ausgegeben und ein leeres Dictionary zurückgegeben.  
+    Die Datenbankverbindung und der Cursor werden im `finally`-Block zuverlässig geschlossen.
+    '''
 
     temperatur_daten = {}
 
@@ -142,7 +170,21 @@ def get_temperatur_daten(transport_daten, verbindungs_i):
 # Datenbank Zugriff - Company-Daten ###############################
 ###################################################################
 
-def get_company_daten(transport_daten, verbindungs_i):
+def get_company_daten(transport_daten, verbindungs_i):#
+    
+    '''
+    @brief Liest Firmendaten aus der Tabelle *company* basierend auf den in den Transportdaten enthaltenen Company-IDs.
+    @details 
+    Die Funktion extrahiert alle eindeutigen Company-IDs aus den übergebenen Transportdaten und 
+    ruft für jede ID die zugehörigen Datensätze aus der Tabelle *dbo.company* ab.  
+    Jede gefundene Zeile wird als Liste der Spaltenwerte in einem Dictionary gespeichert, 
+    wobei der Schlüssel ein fortlaufender Index (beginnend bei 1) ist.  
+
+    Zusätzlich wird die Gesamtanzahl der gefundenen Firmendatensätze zurückgegeben.  
+    Bei einem Fehler im Datenbankzugriff wird eine Fehlermeldung ausgegeben und ein leeres Dictionary 
+    sowie die Länge 0 zurückgegeben.  
+    Die Datenbankverbindung und der Cursor werden im `finally`-Block zuverlässig geschlossen.
+    '''
 
     company_daten = {}
 
@@ -187,6 +229,20 @@ def get_company_daten(transport_daten, verbindungs_i):
 ###################################################################
 
 def get_transportstation_daten(transport_daten, verbindungs_i):
+
+    '''
+    @brief Liest Daten zu Transportstationen aus der Tabelle *transportstation* anhand der in den Transportdaten enthaltenen Station-IDs.
+    @details 
+    Die Funktion extrahiert alle eindeutigen Transportstations-IDs aus den übergebenen Transportdaten 
+    und ruft für jede ID die zugehörigen Datensätze aus der Tabelle *dbo.transportstation* ab.  
+    Jede gefundene Zeile wird als Liste der Spaltenwerte in einem Dictionary gespeichert, 
+    wobei der Schlüssel ein fortlaufender Index (beginnend bei 1) ist.  
+
+    Zusätzlich wird die Gesamtanzahl der gefundenen Transportstationsdatensätze zurückgegeben.  
+    Bei einem Fehler im Datenbankzugriff wird eine Fehlermeldung ausgegeben und ein leeres Dictionary 
+    sowie die Länge 0 zurückgegeben.  
+    Die Datenbankverbindung und der Cursor werden im `finally`-Block zuverlässig geschlossen.
+    '''
 
     transportstation_daten = {}
 

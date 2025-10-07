@@ -2,8 +2,8 @@
 # Hauptprogramm: CoolChainProjekt
 #  Datei: Hauptprogramm_V4.py
 #
-# Version: 4 vom: 24.09.2025
-# Autoren:jowoeste
+# Version: 4 vom: 07.10.2025
+# Autoren: Josie Woeste, Hannes Ruhe, Kai Meiners
 #
 # Zugehörige Libarys:
 # - DB_Zugriff_Libary_V3.py
@@ -18,7 +18,7 @@ import pyodbc
 import tkinter as tk
 from tkinter import messagebox, scrolledtext, ttk
 
-"""\brief Importiert Funktionen zum Abrufen von Transport- und Temperaurdaten."""
+# Importiert Funktionen zum Abrufen von Transport- und Temperaurdaten
 from DB_Zugriff_Libary_V3 import (
     get_transport_daten,
     get_temperatur_daten,
@@ -26,21 +26,21 @@ from DB_Zugriff_Libary_V3 import (
     get_transportstation_daten,
 )
 
-"""\brief Importiert die Funktion zur Verarbeitung der Transportdaten."""
+# Importiert die Funktion zur Verarbeitung der Transportdaten
 from Verarbeitung_Libary_V3 import verarbeite_transport
 
 # Verbindungsdaten
-"""\brief SQL Server Hostname."""
+# SQL Server Hostname
 server   = 'sc-db-server.database.windows.net'
-"""\brief SQL Datenbankname."""
+# SQL Datenbankname
 database = 'supplychain'
-"""\brief Datenbank-Benutzername."""
+# Datenbank-Benutzername
 username = 'rse'
-"""\brief Datenbank-Passwort."""
+# Datenbank-Passwort
 password = 'Pa$$w0rd'
 
 # Verbindungsstring
-"""\brief ODBC-Verbindungsstring für pyodbc."""
+# ODBC-Verbindungsstring für pyodbc
 verbindungs_i = (
     f"DRIVER={{ODBC Driver 18 for SQL Server}};"
     f"SERVER={server};"
@@ -67,17 +67,20 @@ class TransportGUI:
     # ##################################################################
     # Benutzeroberfläche initialisieren
     # ##################################################################
-    '''
-    @brief Die Hauptklasse für die grafische Benutzeroberfläche (GUI).
 
-    @details 
-
-    Benutzeroberfläche initialisieren
-
-    Initialisiert das Hauptfenster, die Widgets für die Eingabe,
-    die Steuerung (Buttons) und die Ausgabe (ScrolledText) der Ergebnisse.
-    '''
     def __init__(self, root):
+
+        '''
+        @brief Die Hauptklasse für die grafische Benutzeroberfläche (GUI).
+
+        @details 
+
+        Benutzeroberfläche initialisieren
+
+        Initialisiert das Hauptfenster, die Widgets für die Eingabe,
+        die Steuerung (Buttons) und die Ausgabe (ScrolledText) der Ergebnisse.
+        '''
+
         self.root = root
         self.root.title("CoolChain - Transportprüfung")
         self.root.geometry("720x480")
@@ -92,33 +95,29 @@ class TransportGUI:
 
         # Eingabe-Feld für Transport-ID
         tk.Label(frame_top, text="Transport-ID:").pack(side="left")
-        """\brief Das Eingabefeld für die Transport-ID. """
+        # Das Eingabefeld für die Transport-ID
         self.entry = tk.Entry(frame_top, width=40)
         self.entry.pack(side="left", padx=(6,8))
 
-        # Button zum Prüfen
-        """\brief Button zum Starten der Prüfung einer einzelnen Transport-ID. """
+        # Button zum Starten der Prüfung einer einzelnen Transport-ID
         self.check_btn = tk.Button(frame_top, text="Prüfen", command=self.on_pruefen)
         self.check_btn.pack(side="left")
 
-        # Button Feld reinigen
-        """\brief Button zum Renigen der Eingabe und des Ausgabefeldes. """
+        # Button zum Renigen der Eingabe und des Ausgabefeldes
         self.clear_btn = tk.Button(frame_top, text="Löschen", command=self.on_clear)
         self.clear_btn.pack(side="left", padx=6)
 
-        # Button: Alle prüfen
-        """Button zum Starten der Prüfung aller vorhandenen Transporte. """
+        # Button zum Starten der Prüfung aller vorhandenen Transporte
         self.all_btn = tk.Button(frame_top, text="Alle prüfen", command=self.on_alle_pruefen)
         self.all_btn.pack(side="left", padx=6)
 
         # Textfeld für Ausgaben
         tk.Label(root, text="Meldungen:").pack(anchor="w", padx=12, pady=(10,0))
-        """\brief ScrolledText-Widget zur Anzeige der Prüfergebnisse und Meldungen. """
+        # ScrolledText-Widget zur Anzeige der Prüfergebnisse und Meldungen
         self.output = scrolledtext.ScrolledText(root, wrap="word", height=18)
         self.output.pack(fill="both", expand=True, padx=12, pady=(0,12))
 
-        # Statusleiste
-        """\brief Statusleiste zur Anzeige des aktuellen Status der Anwendung. """
+        # Statusleiste zur Anzeige des aktuellen Status der Anwendung
         self.status = tk.StringVar()
         self.status.set("Bereit")
         tk.Label(root, textvariable=self.status, anchor="w").pack(fill="x", padx=12, pady=(0,6))
@@ -127,17 +126,17 @@ class TransportGUI:
     # ##################################################################
     # Funktion zur Prüfung der Transport-ID
     # ##################################################################
-    '''
-    @brief Führt die Prüfung eines einzelnen Transports basierend auf der eingegebenen ID durch.
 
-    @details Liest die Transport-ID aus dem Eingabefeld, ruft alle notwendigen Daten
-    (Transport, Temperatur, Unternehmen, Station) aus der Datenbank ab und
-    übergibt diese zur Verarbeitung. Die generierten Meldungen werden im
-    Ausgabefeld angezeigt. Stellt Status-Updates bereit.
-    '''
     def on_pruefen(self):
 
+        '''
+        @brief Führt die Prüfung eines einzelnen Transports basierend auf der eingegebenen ID durch.
 
+        @details Liest die Transport-ID aus dem Eingabefeld, ruft alle notwendigen Daten
+        (Transport, Temperatur, Unternehmen, Station) aus der Datenbank ab und
+        übergibt diese zur Verarbeitung. Die generierten Meldungen werden im
+        Ausgabefeld angezeigt. Stellt Status-Updates bereit.
+        '''
 
         transportid = self.entry.get().strip()
         if not transportid:
@@ -177,15 +176,17 @@ class TransportGUI:
     # ##################################################################
     # Funktion: Alle Transporteid meldungen ausgeben
     # ##################################################################
-    '''
-    @brief Führt die Prüfung aller in der Datenbank vorhandenen Transporte durch.
 
-    @details Ruft zunächst alle eindeutigen Transport-IDs ab. Iteriert dann
-    über jede ID, holt die zugehörigen Daten, verarbeitet sie und sammelt
-    alle generierten Meldungen. Die Ergebnisse werden nach Meldungstext sortiert
-    und im Ausgabefeld angezeigt. Stellt Status-Updates bereit.
-    '''
     def on_alle_pruefen(self):
+
+        '''
+        @brief Führt die Prüfung aller in der Datenbank vorhandenen Transporte durch.
+
+        @details Ruft zunächst alle eindeutigen Transport-IDs ab. Iteriert dann
+        über jede ID, holt die zugehörigen Daten, verarbeitet sie und sammelt
+        alle generierten Meldungen. Die Ergebnisse werden nach Meldungstext sortiert
+        und im Ausgabefeld angezeigt. Stellt Status-Updates bereit.
+        '''
         
         try:
             # Status aktualisieren: Prüfung läuft
@@ -239,12 +240,14 @@ class TransportGUI:
     # ##################################################################
     # Funktion zum Löschen der Eingabe und Ausgabe
     # ##################################################################
-    '''
-    @brief Löscht die Eingabe im Transport-ID-Feld und leert das Ausgabefeld.
 
-    @details Setzt den Status auf "Bereit" zurück.
-    '''
     def on_clear(self):
+
+        '''
+        @brief Löscht die Eingabe im Transport-ID-Feld und leert das Ausgabefeld.
+
+        @details Setzt den Status auf "Bereit" zurück.
+        '''
 
         self.entry.delete(0, tk.END)
         self.output.delete("1.0", tk.END)
@@ -254,13 +257,15 @@ class TransportGUI:
 # ##################################################################
 # Programmeinstieg
 # ##################################################################
-'''
-@brief Hauptfunktion des Programms.
 
-@details Erstellt das Hauptfenster (root) und instanziiert die TransportGUI-Klasse.
-Startet die tkinter-Ereignisschleife (mainloop).
-'''
 if __name__ == "__main__":
+
+    '''
+    @brief Hauptfunktion des Programms.
+
+    @details Erstellt das Hauptfenster (root) und instanziiert die TransportGUI-Klasse.
+    Startet die tkinter-Ereignisschleife (mainloop).
+    '''
 
     root = tk.Tk()
     app = TransportGUI(root)
