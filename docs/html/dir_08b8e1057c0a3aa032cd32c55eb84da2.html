@@ -99,6 +99,35 @@ Dateien</h2></td></tr>
 <tr class="memitem:Hauptprogramm_5FV4_2Epy" id="r_Hauptprogramm_5FV4_2Epy"><td class="memItemLeft" align="right" valign="top"><a href="_hauptprogramm___v4_8py_source.html"><span class="icondoc"><div class="doc-icon"></div></span></a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_hauptprogramm___v4_8py.html">Hauptprogramm_V4.py</a></td></tr>
 <tr class="memitem:Verarbeitung_5FLibary_5FV3_2Epy" id="r_Verarbeitung_5FLibary_5FV3_2Epy"><td class="memItemLeft" align="right" valign="top"><a href="_verarbeitung___libary___v3_8py_source.html"><span class="icondoc"><div class="doc-icon"></div></span></a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_verarbeitung___libary___v3_8py.html">Verarbeitung_Libary_V3.py</a></td></tr>
 </table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Ausführliche Beschreibung</h2>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md1"></a>
+Projekt-Kühlkettenüberwachung</h1>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md2"></a>
+Schulprojekt:</h1>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md3"></a>
+Eine betriebsinterne Qualitätssicherung zur automatischen Kühlkettenüberwachung</h1>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md4"></a>
+autotoc_md4</h1>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md5"></a>
+autotoc_md5</h1>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md6"></a>
+Doxygen</h1>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md7"></a>
+autotoc_md7</h1>
+<ol type="1">
+<li>FILTER_PATTERNS in der Doxyfile anpassen (im Oberordner Projekt-Kuelkettenueberwachung)</li>
+<li>Doxygen aktualiesieren: doxygen Doxyfile</li>
+<li>Doxygen aufrufen: start docs\html\index.html</li>
+</ol>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md8"></a>
+autotoc_md8</h1>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md9"></a>
+Projektbeschreibung</h1>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md10"></a>
+autotoc_md10</h1>
+<p>Projektbeschreibung:</p>
+<p>Das Projekt „Kühlkettenüberwachung“ prüft Transportvorgänge auf Grundlage von in einer SQL-Datenbank gespeicherten Ereignissen. Die Verarbeitung erfolgt über die Funktion verarbeite_transport, die Transportdaten sammelt, zeitlich sortiert und anschließend definierte Prüfungen ausführt. Zunächst wird erkannt, ob kein Transport vorhanden ist („Es gibt gar keinen Eintrag“). Anschließend werden die drei Kernvorgaben kontrolliert: die Vollständigkeit und zeitliche Stimmigkeit der Kühlketteneinträge (u. a. Erkennung fehlender Auscheck-Zeitpunkte am Ende bzw. in der Mitte eines Vorgangs), die zulässige Unterbrechungsdauer ohne Kühlung von höchstens zehn Minuten zwischen einem out und dem folgenden in („Übergabe &gt; 10 min“) sowie die maximale Transportdauer von 48 Stunden zwischen erstem in und letztem out („Transportdauer &gt; 48h“). Darüber hinaus umfasst die Verarbeitung weitere Konsistenzprüfungen: doppelter Auscheck-Zeitpunkt an derselben Station (Meldung mit Minutenabstand), Aus und wieder Einchecken im gleichen Kühllager nach abgeschlossenem GVZ-Zyklus sowie die Reihenfolge KT vor GVZ, d. h. es wird beanstandet, wenn ein GVZ-Einchecken zeitlich vor dem Auschecken des LKW liegt („Einchecken Kühllager liegt zeitlich vor Auschecken LKW“). Alle festgestellten Auffälligkeiten werden als Textmeldungen zurückgegeben; sind keine vorhanden, lautet das Ergebnis „korrekt“. Die Funktion arbeitet auf den übergebenen Datenstrukturen (transport_daten, temperatur_daten, company_daten, transportstation_daten) und bestimmt Status (in/out) sowie die Art der Station (GVZ/KT) zur Einordnung der Ereignisse.</p>
+<p>Desweiteren befindet sich im Abgabeordner eine ausführbare .exe Datei </p>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <div id="page-nav" class="page-nav-panel">

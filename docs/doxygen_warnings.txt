@@ -1,1 +1,1 @@
-warning: Specified markdown mainpage 'README.md' has not been defined as input file
+warning: Specified markdown mainpage 'README.md' does not exist

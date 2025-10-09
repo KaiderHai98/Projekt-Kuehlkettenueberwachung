@@ -1,7 +1,5 @@
 var searchData=
 [
-  ['get_5fcompany_5fdaten_0',['get_company_daten',['../namespace_d_b___zugriff___libary___v3.html#a7aea8a7e5fc8bd684fe3d2937fb6ba78',1,'DB_Zugriff_Libary_V3']]],
-  ['get_5ftemperatur_5fdaten_1',['get_temperatur_daten',['../namespace_d_b___zugriff___libary___v3.html#a3edd45e35c3dc8c231d742a393229e75',1,'DB_Zugriff_Libary_V3']]],
-  ['get_5ftransport_5fdaten_2',['get_transport_daten',['../namespace_d_b___zugriff___libary___v3.html#a17a02dece649d17b5b86055c310bfd2d',1,'DB_Zugriff_Libary_V3']]],
-  ['get_5ftransportstation_5fdaten_3',['get_transportstation_daten',['../namespace_d_b___zugriff___libary___v3.html#a5048b722f82d51815cf9dadea987bcd8',1,'DB_Zugriff_Libary_V3']]]
+  ['eine_20betriebsinterne_20qualitätssicherung_20zur_20automatischen_20kühlkettenüberwachung_0',['Eine betriebsinterne Qualitätssicherung zur automatischen Kühlkettenüberwachung',['../C:/Users/hanne/Programme/Projekt-Kuehlkettenueberwachung/Abgabe-Ordner/README.md#autotoc_md3',1,'']]],
+  ['entry_1',['entry',['../class_hauptprogramm___v4_1_1_transport_g_u_i.html#a505a09afaa05d0eaec98b631322c81bc',1,'Hauptprogramm_V4::TransportGUI']]]
 ];
