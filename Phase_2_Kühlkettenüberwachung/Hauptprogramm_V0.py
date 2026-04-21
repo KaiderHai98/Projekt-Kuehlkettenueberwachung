@@ -31,7 +31,7 @@ from Verarbeitung_Libary_V3 import verarbeite_transport
 
 # Verbindungsdaten
 # SQL Server Hostname
-server   = 'sc-db-server.database.windows.net'
+server   = 'sc-db-server1.database.windows.net'
 # SQL Datenbankname
 database = 'supplychain'
 # Datenbank-Benutzername
