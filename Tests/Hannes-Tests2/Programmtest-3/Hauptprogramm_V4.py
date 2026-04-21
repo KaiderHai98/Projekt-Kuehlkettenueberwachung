@@ -1,0 +1,299 @@
+# ##############################################################################################################
+# Hauptprogramm: CoolChainProjekt
+#  Datei: Hauptprogramm_V4.py
+#
+# Version: 4 vom: 21.04.2026
+# Autoren: Josie Woeste, Hannes Ruhe, Kai Meiners
+#
+# Zugehörige Libarys:
+# - DB_Zugriff_Libary_V4.py
+# - Verarbeitung_Libary_V4.py
+# 
+# Funktionsbeschreibung: 
+# Hauptprogramm & Benutzeroberfläche zur Eingabe der Transport-ID und Anzeige der Ergebnisse
+# ##############################################################################################################
+
+import tkinter as tk
+from tkinter import messagebox, scrolledtext
+
+from DB_Zugriff_Libary_V4 import (
+    get_transport_daten,
+    get_temperatur_daten,
+    get_company_daten,
+    get_transportstation_daten,
+    get_alle_transport_ids,
+)
+from Verarbeitung_Libary_V4 import verarbeite_transport
+
+server = 'sc-db-server1.database.windows.net'
+database = 'supplychain'
+username = 'rse'
+password = 'Pa$$w0rd'
+
+verbindungs_i = (
+    f"DRIVER={{ODBC Driver 18 for SQL Server}};"
+    f"SERVER={server};"
+    f"DATABASE={database};"
+    f"UID={username};"
+    f"PWD={password};"
+    f"Encrypt=yes;"
+    f"TrustServerCertificate=no;"
+    f"Connection Timeout=30;"
+)
+
+DEFAULT_VISUAL_CROSSING_API_KEY = ""
+
+class TransportGUI:
+
+    '''
+    @brief Kapselt die komplette grafische Benutzeroberfläche des Programms.
+    @details
+    Diese Klasse steuert die Benutzerseite des Projekts.
+    Sie sorgt also dafür, dass ein Anwender eine Transport-ID eingeben,
+    die Prüfung starten und die Ergebnisse verständlich lesen kann.
+
+    Was diese Klasse grob übernimmt:
+    - Aufbau aller sichtbaren GUI-Elemente
+    - Entgegennahme von Benutzereingaben
+    - Start der Datenbankabfragen
+    - Übergabe der geladenen Daten an die Verarbeitungslogik
+    - Anzeige der gefundenen Meldungen im Textfeld
+
+    Warum das wichtig ist:
+    - Das Fachprogramm soll laut Aufgabenstellung einfach nutzbar sein.
+    - Deshalb trennt die Klasse die Bedienoberfläche von der eigentlichen
+      Datenverarbeitung.
+    '''
+    
+    def __init__(self, root):
+
+        '''
+        @brief Baut die grafische Oberfläche des Programms auf.
+        @details
+        In dieser Methode wird das komplette Fenster vorbereitet.
+
+        Was an dieser Stelle passiert:
+        - Das Hauptfenster bekommt Titel, Größe und Verhalten.
+        - Danach werden nacheinander alle sichtbaren GUI-Elemente erzeugt:
+          Eingabefeld, Buttons, API-Key-Feld, Ausgabefeld und Statuszeile.
+        - Die Widgets werden direkt mit ihren Funktionen verbunden,
+          zum Beispiel der Button *Prüfen* mit der Methode *on_pruefen()*.
+
+        Wie das Programm das grob handhabt:
+        - Die GUI wird einmal beim Programmstart aufgebaut.
+        - Danach wartet sie auf Benutzereingaben.
+        - Erst wenn ein Button gedrückt wird, beginnt die eigentliche Arbeit
+          mit Datenbankzugriff und Auswertung.
+
+        Warum das gebraucht wird:
+        - Diese Methode schafft die Arbeitsoberfläche, über die der Anwender
+          das gesamte Prüfprogramm bedient.
+
+        @param root Hauptfenster der Tkinter-Anwendung.
+        '''
+
+        self.root = root
+        self.root.title("CoolChain - Transportprüfung")
+        self.root.geometry("900x620")
+        self.root.resizable(True, True)
+
+        tk.Label(root, text="CoolChain Transportprüfung", font=("Arial", 14, "bold")).pack(pady=(10, 5))
+
+        frame_top = tk.Frame(root)
+        frame_top.pack(fill="x", padx=12)
+
+        tk.Label(frame_top, text="Transport-ID:").pack(side="left")
+        self.entry = tk.Entry(frame_top, width=36)
+        self.entry.pack(side="left", padx=(6, 8))
+
+        self.check_btn = tk.Button(frame_top, text="Prüfen", command=self.on_pruefen)
+        self.check_btn.pack(side="left")
+
+        self.clear_btn = tk.Button(frame_top, text="Löschen", command=self.on_clear)
+        self.clear_btn.pack(side="left", padx=6)
+
+        self.all_btn = tk.Button(frame_top, text="Alle prüfen", command=self.on_alle_pruefen)
+        self.all_btn.pack(side="left", padx=6)
+
+        frame_api = tk.Frame(root)
+        frame_api.pack(fill="x", padx=12, pady=(8, 0))
+
+        tk.Label(frame_api, text="Visual-Crossing-API-Key:").pack(side="left")
+        self.api_entry = tk.Entry(frame_api, width=55, show="*")
+        self.api_entry.pack(side="left", padx=(6, 8), fill="x", expand=True)
+        self.api_entry.insert(0, DEFAULT_VISUAL_CROSSING_API_KEY)
+
+        tk.Label(root, text="Meldungen:").pack(anchor="w", padx=12, pady=(10, 0))
+        self.output = scrolledtext.ScrolledText(root, wrap="word", height=24)
+        self.output.pack(fill="both", expand=True, padx=12, pady=(0, 12))
+
+        self.status = tk.StringVar()
+        self.status.set("Bereit")
+        tk.Label(root, textvariable=self.status, anchor="w").pack(fill="x", padx=12, pady=(0, 6))
+
+    def on_pruefen(self):
+
+        '''
+        @brief Prüft genau einen Transport anhand der eingegebenen Transport-ID.
+        @details
+        Diese Methode ist der zentrale Ablauf für die Einzelprüfung.
+
+        Was an dieser Stelle passiert:
+        - Zuerst wird die Eingabe aus dem Feld gelesen und von Leerzeichen bereinigt.
+        - Zusätzlich wird der API-Key aus dem zweiten Eingabefeld gelesen.
+        - Wenn keine Transport-ID eingegeben wurde, bricht die Methode sofort
+          mit einer Fehlermeldung ab.
+        - Danach lädt das Programm nacheinander:
+          1. die Bewegungsdaten,
+          2. die Temperaturdaten,
+          3. die Firmendaten,
+          4. die Stationsdaten.
+        - Diese Daten werden anschließend an *verarbeite_transport()* übergeben.
+        - Die Rückgabemeldungen werden dann Zeile für Zeile im Ausgabefeld angezeigt.
+
+        Wie das Programm das grob handhabt:
+        - Das Hauptprogramm selbst prüft die Kühlkette nicht fachlich.
+        - Es sammelt nur alle benötigten Daten ein und reicht sie an die
+          Verarbeitungsfunktion weiter.
+        - Danach übernimmt es wieder die Ausgabe an den Benutzer.
+
+        Warum das gebraucht wird:
+        - Diese Methode bildet die normale Alltagsnutzung des Programms ab:
+          Benutzer gibt eine ID ein, Programm wertet sie aus, Ergebnis wird angezeigt.
+
+        @return Kein Rückgabewert. Die Ergebnisse werden direkt in der GUI angezeigt.
+        '''
+
+        transportid = self.entry.get().strip()
+        api_key = self.api_entry.get().strip()
+
+        if not transportid:
+            messagebox.showerror("Fehler", "Bitte eine Transport-ID eingeben!")
+            return
+
+        try:
+            self.status.set("Prüfe Transport-ID...")
+            self.root.update_idletasks()
+
+            transport_daten, _ = get_transport_daten(transportid, verbindungs_i)
+            temperatur_daten, _ = get_temperatur_daten(transport_daten, verbindungs_i)
+            company_daten, _ = get_company_daten(transport_daten, verbindungs_i)
+            transportstation_daten, _ = get_transportstation_daten(transport_daten, verbindungs_i)
+
+            meldungen = verarbeite_transport(
+                transport_daten,
+                temperatur_daten,
+                company_daten,
+                transportstation_daten,
+                api_key,
+            )
+
+            self.output.delete("1.0", tk.END)
+            self.output.insert(tk.END, f"Transport-ID: {transportid}\n")
+            self.output.insert(tk.END, "--------------------------------------------------\n")
+            for m in meldungen:
+                self.output.insert(tk.END, f" -> {m}\n")
+
+            self.status.set("Prüfung abgeschlossen")
+
+        except Exception as e:
+            messagebox.showerror("Fehler", f"Ein Fehler ist aufgetreten:\n{e}")
+
+    def on_alle_pruefen(self):
+
+        '''
+        @brief Führt dieselbe Prüfung nacheinander für alle vorhandenen Transport-IDs durch.
+        @details
+        Diese Methode ist die Sammelprüfung des Programms.
+
+        Was an dieser Stelle passiert:
+        - Zuerst wird der API-Key gelesen.
+        - Danach holt das Programm mit *get_alle_transport_ids()* eine Liste
+          aller bekannten Transporte aus der Datenbank.
+        - Anschließend läuft eine for-Schleife über jede einzelne ID.
+        - Für jede ID werden wieder alle benötigten Daten geladen und an
+          *verarbeite_transport()* übergeben.
+        - Die gefundenen Meldungen werden gesammelt und am Ende sortiert ausgegeben.
+
+        Wie das Programm das grob handhabt:
+        - Die Methode benutzt für alle Transporte denselben Prüfablauf wie bei
+          der Einzelprüfung.
+        - Der Unterschied ist nur, dass dieser Ablauf automatisiert in einer Schleife
+          für jede Transport-ID wiederholt wird.
+        - Dadurch eignet sich die Funktion gut für einen Gesamtüberblick
+          über alle Datensätze in der Datenbank.
+
+        Warum das gebraucht wird:
+        - Der Anwender soll nicht jede Transport-ID einzeln per Hand prüfen müssen.
+        - Diese Methode ermöglicht eine vollständige Gesamtprüfung der Datenbank.
+
+        @return Kein Rückgabewert. Die Ergebnisse werden gesammelt in der GUI ausgegeben.
+        '''
+
+        api_key = self.api_entry.get().strip()
+
+        try:
+            self.status.set("Bitte warten, alle Transporte werden geprüft ...")
+            self.root.update_idletasks()
+
+            alle_ids = get_alle_transport_ids(verbindungs_i)
+            ergebnisse = []
+
+            for tid in alle_ids:
+                transport_daten, _ = get_transport_daten(tid, verbindungs_i)
+                temperatur_daten, _ = get_temperatur_daten(transport_daten, verbindungs_i)
+                company_daten, _ = get_company_daten(transport_daten, verbindungs_i)
+                transportstation_daten, _ = get_transportstation_daten(transport_daten, verbindungs_i)
+
+                meldungen = verarbeite_transport(
+                    transport_daten,
+                    temperatur_daten,
+                    company_daten,
+                    transportstation_daten,
+                    api_key,
+                )
+
+                for m in meldungen:
+                    ergebnisse.append((tid, m))
+
+            ergebnisse.sort(key=lambda x: (x[1], x[0]))
+
+            self.output.delete("1.0", tk.END)
+            self.output.insert(tk.END, "Alle Transport-IDs - Prüfungen\n")
+            self.output.insert(tk.END, "==================================================\n")
+
+            for tid, m in ergebnisse:
+                self.output.insert(tk.END, f"{tid} -> {m}\n")
+
+            self.status.set(f"{len(alle_ids)} Transporte geprüft")
+
+        except Exception as e:
+            messagebox.showerror("Fehler", f"Ein Fehler ist aufgetreten:\n{e}")
+
+    def on_clear(self):
+        
+        '''
+        @brief Setzt die Benutzereingabe und die Anzeige wieder auf den Ausgangszustand zurück.
+        @details
+        Diese Methode ist die Reset-Funktion der Oberfläche.
+
+        Was an dieser Stelle passiert:
+        - Das Eingabefeld für die Transport-ID wird geleert.
+        - Das Ausgabefeld mit den bisherigen Meldungen wird gelöscht.
+        - Die Statuszeile wird wieder auf *Bereit* gesetzt.
+
+        Warum das gebraucht wird:
+        - Der Anwender kann damit schnell einen neuen Prüfvorgang starten,
+          ohne alte Inhalte manuell entfernen zu müssen.
+
+        @return Kein Rückgabewert. Die GUI wird direkt zurückgesetzt.
+        '''
+
+        self.entry.delete(0, tk.END)
+        self.output.delete("1.0", tk.END)
+        self.status.set("Bereit")
+
+if __name__ == "__main__":
+    root = tk.Tk()
+    app = TransportGUI(root)
+    root.mainloop()
