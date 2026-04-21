@@ -41,13 +41,13 @@ Die Ergebnisse werden für einzelne Transport-IDs oder gesammelt für alle vorha
 Phase 2 ergänzt das Grundprogramm um drei weitere Funktionen:
 
 1. Temperaturüberwachung der Kühlstationen
-Das Programm wertet zusätzlich Temperaturmessungen aus der Tabelle `tempdata` aus. Dabei wird geprüft, ob die Kühltemperatur jeder beteiligten Station im erlaubten Bereich zwischen **+2 °C und +4 °C** liegt. :contentReference[oaicite:8]{index=8}
+Das Programm wertet zusätzlich Temperaturmessungen aus der Tabelle `tempdata` aus. Dabei wird geprüft, ob die Kühltemperatur jeder beteiligten Station im erlaubten Bereich zwischen **+2 °C und +4 °C** liegt.
 
 2. Verarbeitung verschlüsselter Lieferdaten
-Die Stammdaten der Firmen und Transportstationen liegen in Phase 2 verschlüsselt in den Tabellen `company_crypt` und `transportstation_crypt`. Das Programm entschlüsselt diese Daten per **AES-CBC**, damit Stationsnamen, Kategorien und Postleitzahlen weiterhin verarbeitet werden können. :contentReference[oaicite:9]{index=9}
+Die Stammdaten der Firmen und Transportstationen liegen in Phase 2 verschlüsselt in den Tabellen `company_crypt` und `transportstation_crypt`. Das Programm entschlüsselt diese Daten per **AES-CBC**, damit Stationsnamen, Kategorien und Postleitzahlen weiterhin verarbeitet werden können.
 
 3. Wetterdatenabfrage an den Auslagerorten
-Wenn ein Zeitraum ohne Kühlung erkannt wird, ergänzt das Programm die Meldung um die Außentemperatur am Auslagerungsort zur Auslagerungszeit. Dafür wird die Postleitzahl der Station und eine Wetter-API verwendet. :contentReference[oaicite:10]{index=10}
+Wenn ein Zeitraum ohne Kühlung erkannt wird, ergänzt das Programm die Meldung um die Außentemperatur am Auslagerungsort zur Auslagerungszeit. Dafür wird die Postleitzahl der Station und eine Wetter-API verwendet.
 
 ---
 
