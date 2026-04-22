@@ -140,6 +140,11 @@ class TransportGUI:
         self.output = scrolledtext.ScrolledText(root, wrap="word", height=24)
         self.output.pack(fill="both", expand=True, padx=12, pady=(0, 12))
 
+        # Farben für Ausgaben definieren
+        self.output.tag_config("gruen", foreground="green")
+        self.output.tag_config("rot", foreground="red")
+        self.output.tag_config("standard", foreground="black")
+
         self.status = tk.StringVar()
         self.status.set("Bereit")
         tk.Label(root, textvariable=self.status, anchor="w").pack(fill="x", padx=12, pady=(0, 6))
@@ -200,6 +205,30 @@ class TransportGUI:
             return DEFAULT_VISUAL_CROSSING_API_KEY
         return self.api_entry.get().strip()
 
+    def ausgabe_meldung_einfuegen(self, text):
+
+        '''
+        @brief Fügt eine Meldung farblich formatiert in das Ausgabefeld ein.
+        @details
+        - Nur das Wort "korrekt" wird grün dargestellt.
+        - Bei Fehlermeldungen bleiben Transport-ID, Pfeil und andere Bestandteile schwarz.
+        - Nur der eigentliche Meldungstext hinter dem Pfeil wird rot dargestellt.
+        '''
+
+        if " -> " in text:
+            prefix, meldung = text.split(" -> ", 1)
+            self.output.insert(tk.END, prefix + " -> ", "standard")
+
+            if meldung.strip().lower() == "korrekt":
+                self.output.insert(tk.END, meldung, "gruen")
+            else:
+                self.output.insert(tk.END, meldung, "rot")
+        else:
+            if text.strip().lower() == "korrekt":
+                self.output.insert(tk.END, text, "gruen")
+            else:
+                self.output.insert(tk.END, text, "standard")
+
     def on_pruefen(self):
 
         '''
@@ -258,10 +287,11 @@ class TransportGUI:
             )
 
             self.output.delete("1.0", tk.END)
-            self.output.insert(tk.END, f"Transport-ID: {transportid}\n")
-            self.output.insert(tk.END, "--------------------------------------------------\n")
+            self.output.insert(tk.END, f"Transport-ID: {transportid}\n", "standard")
+            self.output.insert(tk.END, "--------------------------------------------------\n", "standard")
+
             for m in meldungen:
-                self.output.insert(tk.END, f" -> {m}\n")
+                self.ausgabe_meldung_einfuegen(f" -> {m}\n")
 
             self.status.set("Prüfung abgeschlossen")
 
@@ -328,11 +358,11 @@ class TransportGUI:
             ergebnisse.sort(key=lambda x: (x[1], x[0]))
 
             self.output.delete("1.0", tk.END)
-            self.output.insert(tk.END, "Alle Transport-IDs - Prüfungen\n")
-            self.output.insert(tk.END, "==================================================\n")
+            self.output.insert(tk.END, "Alle Transport-IDs - Prüfungen\n", "standard")
+            self.output.insert(tk.END, "==================================================\n", "standard")
 
             for tid, m in ergebnisse:
-                self.output.insert(tk.END, f"{tid} -> {m}\n")
+                self.ausgabe_meldung_einfuegen(f"{tid} -> {m}\n")
 
             self.status.set(f"{len(alle_ids)} Transporte geprüft")
 
