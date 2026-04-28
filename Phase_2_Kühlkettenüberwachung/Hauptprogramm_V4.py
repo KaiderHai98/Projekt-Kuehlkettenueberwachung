@@ -41,7 +41,7 @@ verbindungs_i = (
     f"Connection Timeout=30;"
 )
 
-DEFAULT_VISUAL_CROSSING_API_KEY = ""
+DEFAULT_VISUAL_CROSSING_API_KEY = "6S444QCZ2WRAWJHLAUR7SX3WE"
 
 class TransportGUI:
 
@@ -75,7 +75,8 @@ class TransportGUI:
         Was an dieser Stelle passiert:
         - Das Hauptfenster bekommt Titel, Größe und Verhalten.
         - Danach werden nacheinander alle sichtbaren GUI-Elemente erzeugt:
-          Eingabefeld, Buttons, API-Key-Feld, Ausgabefeld und Statuszeile.
+          Eingabefeld, Buttons, API-Key-Feld, Haken für Standard-API-Key,
+          Ausgabefeld und Statuszeile.
         - Die Widgets werden direkt mit ihren Funktionen verbunden,
           zum Beispiel der Button *Prüfen* mit der Methode *on_pruefen()*.
 
@@ -119,17 +120,114 @@ class TransportGUI:
         frame_api.pack(fill="x", padx=12, pady=(8, 0))
 
         tk.Label(frame_api, text="Visual-Crossing-API-Key:").pack(side="left")
-        self.api_entry = tk.Entry(frame_api, width=55, show="*")
+
+        self.api_entry = tk.Entry(frame_api, width=40, show="*")
         self.api_entry.pack(side="left", padx=(6, 8), fill="x", expand=True)
         self.api_entry.insert(0, DEFAULT_VISUAL_CROSSING_API_KEY)
+
+        self.use_default_api_key = tk.BooleanVar()
+        self.use_default_api_key.set(True)
+
+        self.default_api_check = tk.Checkbutton(
+            frame_api,
+            text="Standard API-Key verwenden",
+            variable=self.use_default_api_key,
+            command=self.on_toggle_api_key_mode
+        )
+        self.default_api_check.pack(side="left", padx=(4, 0))
 
         tk.Label(root, text="Meldungen:").pack(anchor="w", padx=12, pady=(10, 0))
         self.output = scrolledtext.ScrolledText(root, wrap="word", height=24)
         self.output.pack(fill="both", expand=True, padx=12, pady=(0, 12))
 
+        # Farben für Ausgaben definieren
+        self.output.tag_config("gruen", foreground="green")
+        self.output.tag_config("rot", foreground="red")
+        self.output.tag_config("standard", foreground="black")
+
         self.status = tk.StringVar()
         self.status.set("Bereit")
         tk.Label(root, textvariable=self.status, anchor="w").pack(fill="x", padx=12, pady=(0, 6))
+
+        self.on_toggle_api_key_mode()
+
+    def on_toggle_api_key_mode(self):
+
+        '''
+        @brief Schaltet zwischen Standard-API-Key und manuell eingegebenem API-Key um.
+        @details
+        Diese Methode reagiert auf den Haken in der Oberfläche.
+
+        Was an dieser Stelle passiert:
+        - Ist der Haken gesetzt, wird automatisch der Standard-API-Key verwendet.
+        - Gleichzeitig wird das Eingabefeld für den API-Key gesperrt,
+          damit klar ist, dass der Standardwert aktiv ist.
+        - Ist der Haken nicht gesetzt, wird das Eingabefeld wieder freigegeben,
+          damit der Benutzer einen eigenen API-Key eintragen kann.
+
+        Warum das gebraucht wird:
+        - Der Anwender soll schnell mit einem vordefinierten API-Key arbeiten können.
+        - Gleichzeitig bleibt die Möglichkeit erhalten, bei Bedarf einen
+          individuellen API-Key einzutragen.
+        '''
+
+        if self.use_default_api_key.get():
+            self.api_entry.config(state="normal")
+            self.api_entry.delete(0, tk.END)
+            self.api_entry.insert(0, DEFAULT_VISUAL_CROSSING_API_KEY)
+            self.api_entry.config(state="disabled")
+        else:
+            self.api_entry.config(state="normal")
+            self.api_entry.delete(0, tk.END)
+
+    def get_aktuellen_api_key(self):
+
+        '''
+        @brief Liefert den aktuell zu verwendenden API-Key zurück.
+        @details
+        Diese Methode entscheidet zentral, welcher API-Key tatsächlich an die
+        Verarbeitungslogik übergeben wird.
+
+        Was an dieser Stelle passiert:
+        - Wenn der Haken gesetzt ist, wird immer der Standard-API-Key zurückgegeben.
+        - Wenn der Haken nicht gesetzt ist, wird der Text aus dem Eingabefeld gelesen.
+
+        Warum das gebraucht wird:
+        - Dadurch muss die Unterscheidung zwischen Standardwert und Benutzereingabe
+          nicht mehrfach im Programm wiederholt werden.
+        - Die Methoden *on_pruefen()* und *on_alle_pruefen()* können einfach
+          denselben Helfer benutzen.
+
+        @return API-Key als String.
+        '''
+
+        if self.use_default_api_key.get():
+            return DEFAULT_VISUAL_CROSSING_API_KEY
+        return self.api_entry.get().strip()
+
+    def ausgabe_meldung_einfuegen(self, text):
+
+        '''
+        @brief Fügt eine Meldung farblich formatiert in das Ausgabefeld ein.
+        @details
+        - Nur das Wort "korrekt" wird grün dargestellt.
+        - Bei Fehlermeldungen bleiben Transport-ID, Pfeil und andere Bestandteile schwarz.
+        - Nur der eigentliche Meldungstext hinter dem Pfeil wird rot dargestellt.
+        '''
+
+        if " -> " in text:
+            prefix, meldung = text.split(" -> ", 1)
+            self.output.insert(tk.END, prefix + " -> ", "standard")
+
+            if meldung.strip().lower() == "korrekt":
+                self.output.insert(tk.END, meldung, "gruen")
+            else:
+                self.output.insert(tk.END, meldung, "rot")
+        else:
+            if text.strip().lower() == "korrekt":
+                self.output.insert(tk.END, text, "gruen")
+            else:
+                self.output.insert(tk.END, text, "standard")
 
     def on_pruefen(self):
 
@@ -140,7 +238,7 @@ class TransportGUI:
 
         Was an dieser Stelle passiert:
         - Zuerst wird die Eingabe aus dem Feld gelesen und von Leerzeichen bereinigt.
-        - Zusätzlich wird der API-Key aus dem zweiten Eingabefeld gelesen.
+        - Zusätzlich wird der aktuell gültige API-Key ermittelt.
         - Wenn keine Transport-ID eingegeben wurde, bricht die Methode sofort
           mit einer Fehlermeldung ab.
         - Danach lädt das Programm nacheinander:
@@ -165,7 +263,7 @@ class TransportGUI:
         '''
 
         transportid = self.entry.get().strip()
-        api_key = self.api_entry.get().strip()
+        api_key = self.get_aktuellen_api_key()
 
         if not transportid:
             messagebox.showerror("Fehler", "Bitte eine Transport-ID eingeben!")
@@ -189,10 +287,11 @@ class TransportGUI:
             )
 
             self.output.delete("1.0", tk.END)
-            self.output.insert(tk.END, f"Transport-ID: {transportid}\n")
-            self.output.insert(tk.END, "--------------------------------------------------\n")
+            self.output.insert(tk.END, f"Transport-ID: {transportid}\n", "standard")
+            self.output.insert(tk.END, "--------------------------------------------------\n", "standard")
+
             for m in meldungen:
-                self.output.insert(tk.END, f" -> {m}\n")
+                self.ausgabe_meldung_einfuegen(f" -> {m}\n")
 
             self.status.set("Prüfung abgeschlossen")
 
@@ -207,7 +306,7 @@ class TransportGUI:
         Diese Methode ist die Sammelprüfung des Programms.
 
         Was an dieser Stelle passiert:
-        - Zuerst wird der API-Key gelesen.
+        - Zuerst wird der aktuell gültige API-Key gelesen.
         - Danach holt das Programm mit *get_alle_transport_ids()* eine Liste
           aller bekannten Transporte aus der Datenbank.
         - Anschließend läuft eine for-Schleife über jede einzelne ID.
@@ -230,7 +329,7 @@ class TransportGUI:
         @return Kein Rückgabewert. Die Ergebnisse werden gesammelt in der GUI ausgegeben.
         '''
 
-        api_key = self.api_entry.get().strip()
+        api_key = self.get_aktuellen_api_key()
 
         try:
             self.status.set("Bitte warten, alle Transporte werden geprüft ...")
@@ -259,11 +358,11 @@ class TransportGUI:
             ergebnisse.sort(key=lambda x: (x[1], x[0]))
 
             self.output.delete("1.0", tk.END)
-            self.output.insert(tk.END, "Alle Transport-IDs - Prüfungen\n")
-            self.output.insert(tk.END, "==================================================\n")
+            self.output.insert(tk.END, "Alle Transport-IDs - Prüfungen\n", "standard")
+            self.output.insert(tk.END, "==================================================\n", "standard")
 
             for tid, m in ergebnisse:
-                self.output.insert(tk.END, f"{tid} -> {m}\n")
+                self.ausgabe_meldung_einfuegen(f"{tid} -> {m}\n")
 
             self.status.set(f"{len(alle_ids)} Transporte geprüft")
 
@@ -280,6 +379,8 @@ class TransportGUI:
         Was an dieser Stelle passiert:
         - Das Eingabefeld für die Transport-ID wird geleert.
         - Das Ausgabefeld mit den bisherigen Meldungen wird gelöscht.
+        - Der Haken für den Standard-API-Key wird wieder gesetzt.
+        - Das API-Feld wird wieder mit dem Standardwert belegt und gesperrt.
         - Die Statuszeile wird wieder auf *Bereit* gesetzt.
 
         Warum das gebraucht wird:
@@ -291,6 +392,8 @@ class TransportGUI:
 
         self.entry.delete(0, tk.END)
         self.output.delete("1.0", tk.END)
+        self.use_default_api_key.set(True)
+        self.on_toggle_api_key_mode()
         self.status.set("Bereit")
 
 if __name__ == "__main__":
