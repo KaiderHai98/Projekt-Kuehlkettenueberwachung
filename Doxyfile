@@ -1,11 +1,11 @@
 # ===========================================================================
-#  Doxyfile für Projekt-Kuehlkettenueberwachung
-#  --> Dokumentiert den Ordner "Abgabe-Ordner"
+# Doxyfile für Projekt-Kuehlkettenueberwachung
+# Dokumentiert Phase 1 und Phase 2 gemeinsam
 # ===========================================================================
 
 # --- Projekt-Infos ---
-PROJECT_NAME           = "Projekt-Kuehlkettenüberwachung"
-PROJECT_BRIEF          = "Dokumentation der Transport- und Temperaturdatenverarbeitung"
+PROJECT_NAME           = "Projekt-Kühlkettenüberwachung"
+PROJECT_BRIEF          = "Dokumentation der Kühlkettenüberwachung aus Phase 1 und Phase 2"
 OUTPUT_LANGUAGE        = German
 OUTPUT_DIRECTORY       = docs
 
@@ -17,11 +17,11 @@ HTML_TIMESTAMP         = NO
 OUTPUT_TEXT_DIRECTION  = LTR
 
 # --- Eingaben ---
-INPUT                  = Abgabe-Ordner
+INPUT                  = .
 RECURSIVE              = YES
 FILE_PATTERNS          = *.py *.md
 EXCLUDE_PATTERNS       = */__pycache__/* */Tests/* */.venv/* */.env/*
-USE_MDFILE_AS_MAINPAGE = README.md
+USE_MDFILE_AS_MAINPAGE = README
 MARKDOWN_SUPPORT       = YES
 
 # --- Python-Unterstützung ---
@@ -30,8 +30,7 @@ OPTIMIZE_OUTPUT_JAVA   = YES
 JAVADOC_AUTOBRIEF      = YES
 MULTILINE_CPP_IS_BRIEF = YES
 
-# ---- doxypypy-Filter ----
-#  Nutze den vollständigen Pfad zu der Installation "doxypypy.exe":
+# --- doxypypy-Filter ---
 FILTER_PATTERNS        = *.py="C:/Users/hanne/AppData/Local/Packages/PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0/LocalCache/local-packages/Python313/Scripts/doxypypy.exe -a -c"
 
 # --- Extraktion ---
@@ -54,7 +53,7 @@ WARN_NO_PARAMDOC       = YES
 QUIET                  = NO
 WARN_LOGFILE           = docs/doxygen_warnings.txt
 
-# --- Diagramme (optional; Graphviz deaktiviert) ---
+# --- Diagramme ---
 HAVE_DOT               = NO
 CALL_GRAPH             = NO
 CALLER_GRAPH           = NO

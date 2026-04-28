@@ -1,0 +1,192 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="de">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.14.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Projekt-Kühlkettenüberwachung: IoT-Kühlkettenüberwachung</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectalign">
+   <div id="projectname">Projekt-Kühlkettenüberwachung
+   </div>
+   <div id="projectbrief">Dokumentation der Kühlkettenüberwachung aus Phase 1 und Phase 2</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Erzeugt von Doxygen 1.14.0 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Suchen',true);
+  $(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('md__r_e_a_d_m_e.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Lade ...</div>
+<div class="SRStatus" id="Searching">Suche ...</div>
+<div class="SRStatus" id="NoMatches">Keine Treffer</div>
+</div>
+</div>
+</div>
+</div>
+
+<div><div class="header">
+  <div class="headertitle"><div class="title">IoT-Kühlkettenüberwachung </div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><p><a class="anchor" id="autotoc_md47"></a></p>
+<p>Python-Projekt zur automatischen Prüfung von Transportdaten einer digitalen Kühlkette.</p>
+<p>Das Programm wurde im Rahmen des ETS-Supplychain-Projekts entwickelt und dient der betriebsinternen Qualitätssicherung. Ziel ist es, Transportabläufe aus einer SQL-Datenbank auszulesen, fachlich zu prüfen und mögliche Verstöße gegen die Kühlkette übersichtlich auszugeben. Grundlage sind die Projektanforderungen aus Phase 1 und Phase 2.</p>
+<hr  />
+<h1 class="doxsection"><a class="anchor" id="autotoc_md49"></a>
+Projektüberblick</h1>
+<p>Bei der Kühlkettenüberwachung wird geprüft, ob ein Produkt während seines gesamten Transports korrekt behandelt wurde. Dazu wertet das Programm Ein- und Auscheckvorgänge, Aufenthaltszeiten, Temperaturdaten und ergänzende Informationen aus. Die Daten stammen aus einer Microsoft-SQL-Server-Datenbank. Phase 2 baut dabei auf dem Grundsystem aus Phase 1 auf und erweitert es um zusätzliche Qualitäts- und Sicherheitsfunktionen.</p>
+<hr  />
+<h1 class="doxsection"><a class="anchor" id="autotoc_md51"></a>
+Phase 1 – Grundprüfung der Kühlkette</h1>
+<p>In Phase 1 wird überprüft, ob die grundlegenden Bedingungen der Kühlkette eingehalten wurden. Dabei werden folgende Punkte kontrolliert:</p>
+<ul>
+<li><b>Stimmigkeit der Kühlketteninformationen</b> <br  />
+ Es wird geprüft, ob Ein- und Auscheckvorgänge logisch und zeitlich sinnvoll aufgebaut sind.</li>
+<li><b>Zeiträume ohne Kühlung</b> <br  />
+ Die Zeit zwischen dem Auschecken an einer Station und dem Einchecken an der nächsten Station darf <b>10 Minuten</b> nicht überschreiten.</li>
+<li><b>Transportdauer</b> <br  />
+ Die gesamte Transportdauer eines Produkts darf <b>48 Stunden</b> nicht überschreiten. Zusätzlich erkennt das Programm unter anderem folgende Auffälligkeiten:</li>
+<li>fehlende Auscheck-Zeitpunkte</li>
+<li>doppelte Auscheck-Vorgänge</li>
+<li>falsche Reihenfolge zwischen Kühltransporter und Kühllager</li>
+<li>erneutes Einchecken im gleichen Kühllager</li>
+<li>komplett fehlende Einträge</li>
+</ul>
+<p>Die Ergebnisse werden für einzelne Transport-IDs oder gesammelt für alle vorhandenen Transporte ausgegeben.</p>
+<hr  />
+<h1 class="doxsection"><a class="anchor" id="autotoc_md53"></a>
+Phase 2 – Erweiterte Kühlkettenüberwachung</h1>
+<p>Phase 2 ergänzt das Grundprogramm um drei weitere Funktionen:</p>
+<ol type="1">
+<li>Temperaturüberwachung der Kühlstationen Das Programm wertet zusätzlich Temperaturmessungen aus der Tabelle <span class="tt">tempdata</span> aus. Dabei wird geprüft, ob die Kühltemperatur jeder beteiligten Station im erlaubten Bereich zwischen <b>+2 °C und +4 °C</b> liegt.</li>
+<li>Verarbeitung verschlüsselter Lieferdaten Die Stammdaten der Firmen und Transportstationen liegen in Phase 2 verschlüsselt in den Tabellen <span class="tt">company_crypt</span> und <span class="tt">transportstation_crypt</span>. Das Programm entschlüsselt diese Daten per <b>AES-CBC</b>, damit Stationsnamen, Kategorien und Postleitzahlen weiterhin verarbeitet werden können.</li>
+<li>Wetterdatenabfrage an den Auslagerorten Wenn ein Zeitraum ohne Kühlung erkannt wird, ergänzt das Programm die Meldung um die Außentemperatur am Auslagerungsort zur Auslagerungszeit. Dafür wird die Postleitzahl der Station und eine Wetter-API verwendet.</li>
+</ol>
+<hr  />
+<h1 class="doxsection"><a class="anchor" id="autotoc_md55"></a>
+Funktionen des Programms</h1>
+<p>Das Projekt bietet unter anderem folgende Funktionen:</p>
+<ul>
+<li>Prüfung einer einzelnen Transport-ID</li>
+<li>Prüfung aller vorhandenen Transporte</li>
+<li>Ausgabe verständlicher Fehlermeldungen</li>
+<li>grafische Benutzeroberfläche zur einfachen Nutzung</li>
+<li>Auswertung von Transportdaten, Temperaturdaten und Wetterdaten</li>
+<li>Verarbeitung verschlüsselter Stammdaten aus Phase 2</li>
+</ul>
+<hr  />
+<h1 class="doxsection"><a class="anchor" id="autotoc_md57"></a>
+Projektstruktur</h1>
+<p>Beispielhafter Aufbau des Projekts:</p>
+<ul>
+<li><span class="tt">Hauptprogramm_V4.py</span> <br  />
+ Startet das Programm und enthält die grafische Benutzeroberfläche.</li>
+<li><span class="tt"><a class="el" href="_d_b___zugriff___libary___v4_8py.html">DB_Zugriff_Libary_V4.py</a></span> <br  />
+ Liest Transport-, Temperatur-, Firmen- und Stationsdaten aus der Datenbank.</li>
+<li><span class="tt"><a class="el" href="_verarbeitung___libary___v4_8py.html">Verarbeitung_Libary_V4.py</a></span> <br  />
+ Enthält die eigentliche Prüflogik für die Kühlkette.</li>
+<li><span class="tt">Doxyfile</span> <br  />
+ Konfigurationsdatei für die automatische Programmdokumentation mit Doxygen.</li>
+</ul>
+<hr  />
+<h1 class="doxsection"><a class="anchor" id="autotoc_md59"></a>
+Verwendete Technologien</h1>
+<ul>
+<li><b>Python</b></li>
+<li><b>Tkinter</b> für die grafische Benutzeroberfläche</li>
+<li><b>pyodbc</b> für den Zugriff auf den Microsoft SQL Server</li>
+<li><b>pycryptodome</b> für die Entschlüsselung der verschlüsselten Daten</li>
+<li><b>requests</b> für die Wetterdatenabfrage</li>
+<li><b>Doxygen</b> für die Programmdokumentation</li>
+</ul>
+<hr  />
+<h1 class="doxsection"><a class="anchor" id="autotoc_md61"></a>
+Ziel des Projekts</h1>
+<p>Das Ziel des Projekts ist die automatische und nachvollziehbare Prüfung einer digitalen Kühlkette. Das Programm soll Verstöße zuverlässig erkennen, verständlich darstellen und dem Anwender eine einfache Bewertung des Transportverlaufs ermöglichen.</p>
+<hr  />
+<h1 class="doxsection"><a class="anchor" id="autotoc_md63"></a>
+Hinweis</h1>
+<p>Dieses Repository dokumentiert die Entwicklung des Projekts über mehrere Projektphasen hinweg. Phase 1 bildet die fachliche Grundprüfung der Kühlkette ab, während Phase 2 das System um Temperaturüberwachung, Verschlüsselung und Wetterdaten erweitert. </p>
+</div></div><!-- contents -->
+</div><!-- PageDoc -->
+</div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
+</div><!-- container -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Erzeugt von <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.14.0 </li>
+  </ul>
+</div>
+</body>
+</html>

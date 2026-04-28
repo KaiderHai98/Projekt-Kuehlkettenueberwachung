@@ -1,0 +1,6 @@
+var searchData=
+[
+  ['kühlkette_0',['Phase 1 – Grundprüfung der Kühlkette',['../md__r_e_a_d_m_e.html#autotoc_md51',1,'']]],
+  ['kühlkettenüberwachung_1',['Kühlkettenüberwachung',['../C:/Users/hanne/OneDrive/Desktop/Projekt-Kuehlkettenueberwachung/Phase_1_Kühlkettenüberwachung/README.md#autotoc_md3',1,'Eine betriebsinterne Qualitätssicherung zur automatischen Kühlkettenüberwachung'],['../md__r_e_a_d_m_e.html',1,'IoT-Kühlkettenüberwachung'],['../md__r_e_a_d_m_e.html#autotoc_md53',1,'Phase 2 – Erweiterte Kühlkettenüberwachung'],['../C:/Users/hanne/OneDrive/Desktop/Projekt-Kuehlkettenueberwachung/Phase_2_Kühlkettenüberwachung/README.md#autotoc_md11',1,'Phase 2 – IoT-Kühlkettenüberwachung'],['../C:/Users/hanne/OneDrive/Desktop/Projekt-Kuehlkettenueberwachung/Phase_1_Kühlkettenüberwachung/README.md#autotoc_md1',1,'Projekt-Kühlkettenüberwachung']]],
+  ['kühlstationen_2',['1. Temperaturüberwachung der Kühlstationen',['../C:/Users/hanne/OneDrive/Desktop/Projekt-Kuehlkettenueberwachung/Phase_2_Kühlkettenüberwachung/README.md#autotoc_md14',1,'']]]
+];
