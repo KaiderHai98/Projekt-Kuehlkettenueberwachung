@@ -25,7 +25,29 @@
 var menudata={children:[
 {text:"Hauptseite",url:"index.html"},
 {text:"Zusätzliche Informationen",url:"pages.html"},
-{text:"Pakete",url:"namespaces.html",children:[
-{text:"Paket-Liste",url:"namespaces.html"}]},
+{text:"Namensbereiche",url:"namespaces.html",children:[
+{text:"Liste aller Namensbereiche",url:"namespaces.html"},
+{text:"Elemente eines Namensbereiches",url:"namespacemembers.html",children:[
+{text:"Alle",url:"namespacemembers.html",children:[
+{text:"_",url:"namespacemembers.html#index__5F"},
+{text:"a",url:"namespacemembers.html#index_a"},
+{text:"d",url:"namespacemembers.html#index_d"},
+{text:"g",url:"namespacemembers.html#index_g"},
+{text:"i",url:"namespacemembers.html#index_i"},
+{text:"k",url:"namespacemembers.html#index_k"},
+{text:"p",url:"namespacemembers.html#index_p"},
+{text:"r",url:"namespacemembers.html#index_r"},
+{text:"s",url:"namespacemembers.html#index_s"},
+{text:"u",url:"namespacemembers.html#index_u"},
+{text:"v",url:"namespacemembers.html#index_v"}]},
+{text:"Funktionen",url:"namespacemembers_func.html"},
+{text:"Variablen",url:"namespacemembers_vars.html"}]}]},
+{text:"Klassen",url:"annotated.html",children:[
+{text:"Auflistung der Klassen",url:"annotated.html"},
+{text:"Klassen-Verzeichnis",url:"classes.html"},
+{text:"Klassen-Elemente",url:"functions.html",children:[
+{text:"Alle",url:"functions.html"},
+{text:"Funktionen",url:"functions_func.html"},
+{text:"Variablen",url:"functions_vars.html"}]}]},
 {text:"Dateien",url:"files.html",children:[
 {text:"Auflistung der Dateien",url:"files.html"}]}]}

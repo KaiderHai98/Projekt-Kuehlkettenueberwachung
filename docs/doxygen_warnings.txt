@@ -1,3 +1,3 @@
 warning: Specified markdown mainpage 'README' does not exist
-C:/Users/hanne/OneDrive/Desktop/Projekt-Kuehlkettenueberwachung/Phase_1_Kühlkettenüberwachung/README.md:11: warning: Found unknown command '\docs'
-C:/Users/hanne/OneDrive/Desktop/Projekt-Kuehlkettenueberwachung/Phase_1_Kühlkettenüberwachung/README.md:11: warning: Found unknown command '\html'
+C:/Users/hanne/OneDrive/Desktop/Projekt-Kuehlkettenueberwachung/Phase_1_Kuehlkettenueberwachung/README.md:11: warning: Found unknown command '\docs'
+C:/Users/hanne/OneDrive/Desktop/Projekt-Kuehlkettenueberwachung/Phase_1_Kuehlkettenueberwachung/README.md:11: warning: Found unknown command '\html'

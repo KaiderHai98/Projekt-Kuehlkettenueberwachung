@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.14.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Projekt-Kühlkettenüberwachung: DB_Zugriff_Libary_V4-Namensbereichsreferenz</title>
+<title>Projekt-Kuehlkettenueberwachung: DB_Zugriff_Libary_V4-Namensbereichsreferenz</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -26,9 +26,9 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Projekt-Kühlkettenüberwachung
+   <div id="projectname">Projekt-Kuehlkettenueberwachung
    </div>
-   <div id="projectbrief">Dokumentation der Kühlkettenüberwachung aus Phase 1 und Phase 2</div>
+   <div id="projectbrief">Dokumentation der Kuehlkettenueberwachung aus Phase 1 und Phase 2</div>
   </td>
  </tr>
  </tbody>
@@ -92,6 +92,937 @@ $(function(){initNavTree('namespace_d_b___zugriff___libary___v4.html','',''); })
   <div class="headertitle"><div class="title">DB_Zugriff_Libary_V4-Namensbereichsreferenz</div></div>
 </div><!--header-->
 <div class="contents">
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
+Funktionen</h2></td></tr>
+<tr class="memitem:adb5cf6ee7406a75d27b1a614d6c69f0e" id="r_adb5cf6ee7406a75d27b1a614d6c69f0e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#adb5cf6ee7406a75d27b1a614d6c69f0e">decrypt_value</a> (encrypted_data)</td></tr>
+<tr class="memdesc:adb5cf6ee7406a75d27b1a614d6c69f0e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Hilfsfunktionen #################################################.  <br /></td></tr>
+<tr class="memitem:a80f349323b7028b12509a4725f6bcb72" id="r_a80f349323b7028b12509a4725f6bcb72"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a80f349323b7028b12509a4725f6bcb72">get_transport_daten</a> (transportid, verbindungs_i)</td></tr>
+<tr class="memdesc:a80f349323b7028b12509a4725f6bcb72"><td class="mdescLeft">&#160;</td><td class="mdescRight">Datenbank Zugriff - Transportdaten ##############################.  <br /></td></tr>
+<tr class="memitem:aa49f28a16e01a3989dcb9901917f4471" id="r_aa49f28a16e01a3989dcb9901917f4471"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa49f28a16e01a3989dcb9901917f4471">get_temperatur_daten</a> (transport_daten, verbindungs_i)</td></tr>
+<tr class="memdesc:aa49f28a16e01a3989dcb9901917f4471"><td class="mdescLeft">&#160;</td><td class="mdescRight">Datenbank Zugriff - Temperaturdaten #############################.  <br /></td></tr>
+<tr class="memitem:aaa7a233988e1e9d600f15ed0c18b6864" id="r_aaa7a233988e1e9d600f15ed0c18b6864"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aaa7a233988e1e9d600f15ed0c18b6864">get_company_daten</a> (transport_daten, verbindungs_i)</td></tr>
+<tr class="memdesc:aaa7a233988e1e9d600f15ed0c18b6864"><td class="mdescLeft">&#160;</td><td class="mdescRight">Datenbank Zugriff - Company-Daten ###############################.  <br /></td></tr>
+<tr class="memitem:a258da69a7ad8c6d77ff49bcf6a8bd65a" id="r_a258da69a7ad8c6d77ff49bcf6a8bd65a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a258da69a7ad8c6d77ff49bcf6a8bd65a">get_transportstation_daten</a> (transport_daten, verbindungs_i)</td></tr>
+<tr class="memdesc:a258da69a7ad8c6d77ff49bcf6a8bd65a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Datenbank Zugriff - Transportstations-Daten #####################.  <br /></td></tr>
+<tr class="memitem:a0a7c35f6ce819e63f152025e2253f6bc" id="r_a0a7c35f6ce819e63f152025e2253f6bc"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0a7c35f6ce819e63f152025e2253f6bc">get_alle_transport_ids</a> (verbindungs_i)</td></tr>
+<tr class="memdesc:a0a7c35f6ce819e63f152025e2253f6bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Datenbank Zugriff - Alle Transport-IDs ##########################.  <br /></td></tr>
+<tr class="memitem:a555325fa5dcd53afb2e6a70d671a5727" id="r_a555325fa5dcd53afb2e6a70d671a5727"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a555325fa5dcd53afb2e6a70d671a5727">get_wetter_temperatur</a> (plz, datetime_obj, api_key)</td></tr>
+<tr class="memdesc:a555325fa5dcd53afb2e6a70d671a5727"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wetterdatenabfrage ##############################################.  <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-var-members" class="groupheader"><a id="var-members" name="var-members"></a>
+Variablen</h2></td></tr>
+<tr class="memitem:aac6662a1663ed266ea30a2fcfa06ab07" id="r_aac6662a1663ed266ea30a2fcfa06ab07"><td class="memItemLeft" align="right" valign="top">str&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aac6662a1663ed266ea30a2fcfa06ab07">key</a> = b'mysecretpassword'</td></tr>
+<tr class="memdesc:aac6662a1663ed266ea30a2fcfa06ab07"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialisierung #################################################.  <br /></td></tr>
+<tr class="memitem:a603ebfd809ded53995e24cba57b2a14a" id="r_a603ebfd809ded53995e24cba57b2a14a"><td class="memItemLeft" align="right" valign="top">str&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a603ebfd809ded53995e24cba57b2a14a">iv</a> = b'passwort-salzen!'</td></tr>
+</table>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Dokumentation der Funktionen</h2>
+<a id="adb5cf6ee7406a75d27b1a614d6c69f0e" name="adb5cf6ee7406a75d27b1a614d6c69f0e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adb5cf6ee7406a75d27b1a614d6c69f0e">&#9670;&#160;</a></span>decrypt_value()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">DB_Zugriff_Libary_V4.decrypt_value </td>
+          <td>(</td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>encrypted_data</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Hilfsfunktionen #################################################. </p>
+<pre class="fragment">@brief Entschlüsselt einen einzelnen Datenbankwert aus den verschlüsselten Tabellen.
+@details
+Diese Funktion wird immer dann benutzt, wenn Stammdaten nicht im Klartext,
+sondern als verschlüsselte Bytefolge aus der Datenbank gelesen werden.
+
+Was an dieser Stelle passiert:
+- Zuerst wird geprüft, ob überhaupt ein Wert vorhanden ist.
+- Danach wird ein AES-Cipher-Objekt mit dem vorgegebenen Passwort und
+  dem vorgegebenen Initialisierungsvektor aufgebaut.
+- Anschließend wird der Binärwert entschlüsselt.
+- Zum Schluss wird das Padding entfernt und der Klartext als normaler String
+  zurückgegeben.
+
+Warum das gebraucht wird:
+- Die Tabellen company_crypt und transportstation_crypt enthalten die Inhalte
+  nicht direkt lesbar.
+- Die restliche Programmlogik benötigt aber lesbare Firmennamen, Stationsnamen,
+  Kategorien und Postleitzahlen.
+- Ohne diese Entschlüsselung könnte das Hauptprogramm zwar Datensätze laden,
+  aber nicht sinnvoll weiterverarbeiten oder verständlich ausgeben.
+
+@param encrypted_data Verschlüsselter Datenbankwert als Binärwert.
+@return Entschlüsselter Klartext als String.
+</pre> 
+<p class="definition">Definiert in Zeile <a class="el" href="_d_b___zugriff___libary___v4_8py_source.html#l00031">31</a> der Datei <a class="el" href="_d_b___zugriff___libary___v4_8py_source.html">DB_Zugriff_Libary_V4.py</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   31</span><span class="keyword">def </span>decrypt_value(encrypted_data):</div>
+<div class="line"><span class="lineno">   32</span> </div>
+<div class="line"><span class="lineno">   33</span>    <span class="stringliteral">&#39;&#39;&#39;</span></div>
+<div class="line"><span class="lineno">   34</span><span class="stringliteral">    @brief Entschlüsselt einen einzelnen Datenbankwert aus den verschlüsselten Tabellen.</span></div>
+<div class="line"><span class="lineno">   35</span><span class="stringliteral">    @details</span></div>
+<div class="line"><span class="lineno">   36</span><span class="stringliteral">    Diese Funktion wird immer dann benutzt, wenn Stammdaten nicht im Klartext,</span></div>
+<div class="line"><span class="lineno">   37</span><span class="stringliteral">    sondern als verschlüsselte Bytefolge aus der Datenbank gelesen werden.</span></div>
+<div class="line"><span class="lineno">   38</span><span class="stringliteral"></span> </div>
+<div class="line"><span class="lineno">   39</span><span class="stringliteral">    Was an dieser Stelle passiert:</span></div>
+<div class="line"><span class="lineno">   40</span><span class="stringliteral">    - Zuerst wird geprüft, ob überhaupt ein Wert vorhanden ist.</span></div>
+<div class="line"><span class="lineno">   41</span><span class="stringliteral">    - Danach wird ein AES-Cipher-Objekt mit dem vorgegebenen Passwort und</span></div>
+<div class="line"><span class="lineno">   42</span><span class="stringliteral">      dem vorgegebenen Initialisierungsvektor aufgebaut.</span></div>
+<div class="line"><span class="lineno">   43</span><span class="stringliteral">    - Anschließend wird der Binärwert entschlüsselt.</span></div>
+<div class="line"><span class="lineno">   44</span><span class="stringliteral">    - Zum Schluss wird das Padding entfernt und der Klartext als normaler String</span></div>
+<div class="line"><span class="lineno">   45</span><span class="stringliteral">      zurückgegeben.</span></div>
+<div class="line"><span class="lineno">   46</span><span class="stringliteral"></span> </div>
+<div class="line"><span class="lineno">   47</span><span class="stringliteral">    Warum das gebraucht wird:</span></div>
+<div class="line"><span class="lineno">   48</span><span class="stringliteral">    - Die Tabellen company_crypt und transportstation_crypt enthalten die Inhalte</span></div>
+<div class="line"><span class="lineno">   49</span><span class="stringliteral">      nicht direkt lesbar.</span></div>
+<div class="line"><span class="lineno">   50</span><span class="stringliteral">    - Die restliche Programmlogik benötigt aber lesbare Firmennamen, Stationsnamen,</span></div>
+<div class="line"><span class="lineno">   51</span><span class="stringliteral">      Kategorien und Postleitzahlen.</span></div>
+<div class="line"><span class="lineno">   52</span><span class="stringliteral">    - Ohne diese Entschlüsselung könnte das Hauptprogramm zwar Datensätze laden,</span></div>
+<div class="line"><span class="lineno">   53</span><span class="stringliteral">      aber nicht sinnvoll weiterverarbeiten oder verständlich ausgeben.</span></div>
+<div class="line"><span class="lineno">   54</span><span class="stringliteral"></span> </div>
+<div class="line"><span class="lineno">   55</span><span class="stringliteral">    @param encrypted_data Verschlüsselter Datenbankwert als Binärwert.</span></div>
+<div class="line"><span class="lineno">   56</span><span class="stringliteral">    @return Entschlüsselter Klartext als String.</span></div>
+<div class="line"><span class="lineno">   57</span><span class="stringliteral">    &#39;&#39;&#39;</span></div>
+<div class="line"><span class="lineno">   58</span> </div>
+<div class="line"><span class="lineno">   59</span>    <span class="keywordflow">if</span> encrypted_data <span class="keywordflow">is</span> <span class="keywordtype">None</span>:</div>
+<div class="line"><span class="lineno">   60</span>        <span class="keywordflow">return</span> <span class="stringliteral">&quot;&quot;</span></div>
+<div class="line"><span class="lineno">   61</span> </div>
+<div class="line"><span class="lineno">   62</span>    cipher = AES.new(key, AES.MODE_CBC, iv)  <span class="comment"># Verschlüsselung initialisieren</span></div>
+<div class="line"><span class="lineno">   63</span>    <span class="keywordflow">return</span> unpad(cipher.decrypt(encrypted_data), AES.block_size).decode()</div>
+<div class="line"><span class="lineno">   64</span> </div>
+</div><!-- fragment -->
+<p class="reference">Wird benutzt von <a class="el" href="_d_b___zugriff___libary___v4_8py_source.html#l00246">get_company_daten()</a> und <a class="el" href="_d_b___zugriff___libary___v4_8py_source.html#l00333">get_transportstation_daten()</a>.</p>
+
+</div>
+</div>
+<a id="a0a7c35f6ce819e63f152025e2253f6bc" name="a0a7c35f6ce819e63f152025e2253f6bc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0a7c35f6ce819e63f152025e2253f6bc">&#9670;&#160;</a></span>get_alle_transport_ids()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">DB_Zugriff_Libary_V4.get_alle_transport_ids </td>
+          <td>(</td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>verbindungs_i</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Datenbank Zugriff - Alle Transport-IDs ##########################. </p>
+<pre class="fragment">@brief Liest alle vorhandenen Transport-IDs aus der Tabelle *coolchain*.
+@details
+Diese Funktion wird für die Schaltfläche *Alle prüfen* gebraucht.
+Dabei soll das Programm nicht nur einen einzelnen Transport,
+sondern alle bekannten Transporte nacheinander untersuchen.
+
+Was an dieser Stelle passiert:
+- Es wird eine Datenbankverbindung geöffnet.
+- Danach wird mit einem SELECT DISTINCT jede Transport-ID nur einmal geladen.
+- Die Ergebnismenge wird sortiert zurückgegeben.
+
+Wie das Programm das grob handhabt:
+- Es entsteht eine einfache Liste aller IDs.
+- Über diese Liste kann das Hauptprogramm später mit einer for-Schleife laufen
+  und für jede ID dieselbe Prüfung ausführen.
+
+Warum das gebraucht wird:
+- Ohne diese Funktion könnte das Programm nur Einzelprüfungen durchführen.
+- Für eine vollständige Datenbankübersicht braucht das Hauptprogramm aber eine
+  Startliste, mit der alle Transporte abgearbeitet werden können.
+
+@param verbindungs_i SQL-Verbindungsstring für pyodbc.
+@return Liste aller vorhandenen Transport-IDs.
+</pre> 
+<p class="definition">Definiert in Zeile <a class="el" href="_d_b___zugriff___libary___v4_8py_source.html#l00416">416</a> der Datei <a class="el" href="_d_b___zugriff___libary___v4_8py_source.html">DB_Zugriff_Libary_V4.py</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  416</span><span class="keyword">def </span>get_alle_transport_ids(verbindungs_i):</div>
+<div class="line"><span class="lineno">  417</span> </div>
+<div class="line"><span class="lineno">  418</span>    <span class="stringliteral">&#39;&#39;&#39;</span></div>
+<div class="line"><span class="lineno">  419</span><span class="stringliteral">    @brief Liest alle vorhandenen Transport-IDs aus der Tabelle *coolchain*.</span></div>
+<div class="line"><span class="lineno">  420</span><span class="stringliteral">    @details</span></div>
+<div class="line"><span class="lineno">  421</span><span class="stringliteral">    Diese Funktion wird für die Schaltfläche *Alle prüfen* gebraucht.</span></div>
+<div class="line"><span class="lineno">  422</span><span class="stringliteral">    Dabei soll das Programm nicht nur einen einzelnen Transport,</span></div>
+<div class="line"><span class="lineno">  423</span><span class="stringliteral">    sondern alle bekannten Transporte nacheinander untersuchen.</span></div>
+<div class="line"><span class="lineno">  424</span><span class="stringliteral"></span> </div>
+<div class="line"><span class="lineno">  425</span><span class="stringliteral">    Was an dieser Stelle passiert:</span></div>
+<div class="line"><span class="lineno">  426</span><span class="stringliteral">    - Es wird eine Datenbankverbindung geöffnet.</span></div>
+<div class="line"><span class="lineno">  427</span><span class="stringliteral">    - Danach wird mit einem SELECT DISTINCT jede Transport-ID nur einmal geladen.</span></div>
+<div class="line"><span class="lineno">  428</span><span class="stringliteral">    - Die Ergebnismenge wird sortiert zurückgegeben.</span></div>
+<div class="line"><span class="lineno">  429</span><span class="stringliteral"></span> </div>
+<div class="line"><span class="lineno">  430</span><span class="stringliteral">    Wie das Programm das grob handhabt:</span></div>
+<div class="line"><span class="lineno">  431</span><span class="stringliteral">    - Es entsteht eine einfache Liste aller IDs.</span></div>
+<div class="line"><span class="lineno">  432</span><span class="stringliteral">    - Über diese Liste kann das Hauptprogramm später mit einer for-Schleife laufen</span></div>
+<div class="line"><span class="lineno">  433</span><span class="stringliteral">      und für jede ID dieselbe Prüfung ausführen.</span></div>
+<div class="line"><span class="lineno">  434</span><span class="stringliteral"></span> </div>
+<div class="line"><span class="lineno">  435</span><span class="stringliteral">    Warum das gebraucht wird:</span></div>
+<div class="line"><span class="lineno">  436</span><span class="stringliteral">    - Ohne diese Funktion könnte das Programm nur Einzelprüfungen durchführen.</span></div>
+<div class="line"><span class="lineno">  437</span><span class="stringliteral">    - Für eine vollständige Datenbankübersicht braucht das Hauptprogramm aber eine</span></div>
+<div class="line"><span class="lineno">  438</span><span class="stringliteral">      Startliste, mit der alle Transporte abgearbeitet werden können.</span></div>
+<div class="line"><span class="lineno">  439</span><span class="stringliteral"></span> </div>
+<div class="line"><span class="lineno">  440</span><span class="stringliteral">    @param verbindungs_i SQL-Verbindungsstring für pyodbc.</span></div>
+<div class="line"><span class="lineno">  441</span><span class="stringliteral">    @return Liste aller vorhandenen Transport-IDs.</span></div>
+<div class="line"><span class="lineno">  442</span><span class="stringliteral">    &#39;&#39;&#39;</span></div>
+<div class="line"><span class="lineno">  443</span> </div>
+<div class="line"><span class="lineno">  444</span>    alle_ids = []</div>
+<div class="line"><span class="lineno">  445</span> </div>
+<div class="line"><span class="lineno">  446</span>    <span class="keywordflow">try</span>:</div>
+<div class="line"><span class="lineno">  447</span>        conn = pyodbc.connect(verbindungs_i)</div>
+<div class="line"><span class="lineno">  448</span>        cursor = conn.cursor()</div>
+<div class="line"><span class="lineno">  449</span> </div>
+<div class="line"><span class="lineno">  450</span>        cursor.execute(<span class="stringliteral">&quot;SELECT DISTINCT transportID FROM dbo.coolchain ORDER BY transportID&quot;</span>)</div>
+<div class="line"><span class="lineno">  451</span>        alle_ids = [row[0] <span class="keywordflow">for</span> row <span class="keywordflow">in</span> cursor.fetchall()]</div>
+<div class="line"><span class="lineno">  452</span>        <span class="keywordflow">return</span> alle_ids</div>
+<div class="line"><span class="lineno">  453</span> </div>
+<div class="line"><span class="lineno">  454</span>    <span class="keywordflow">except</span> Exception <span class="keyword">as</span> e:</div>
+<div class="line"><span class="lineno">  455</span>        print(<span class="stringliteral">&quot;Fehler beim Datenbankzugriff - Alle Transport-IDs:&quot;</span>, e)</div>
+<div class="line"><span class="lineno">  456</span>        <span class="keywordflow">return</span> []</div>
+<div class="line"><span class="lineno">  457</span> </div>
+<div class="line"><span class="lineno">  458</span>    <span class="keywordflow">finally</span>:</div>
+<div class="line"><span class="lineno">  459</span>        <span class="keywordflow">if</span> <span class="stringliteral">&#39;cursor&#39;</span> <span class="keywordflow">in</span> locals():</div>
+<div class="line"><span class="lineno">  460</span>            cursor.close()</div>
+<div class="line"><span class="lineno">  461</span>        <span class="keywordflow">if</span> <span class="stringliteral">&#39;conn&#39;</span> <span class="keywordflow">in</span> locals():</div>
+<div class="line"><span class="lineno">  462</span>            conn.close()</div>
+<div class="line"><span class="lineno">  463</span> </div>
+<div class="line"><span class="lineno">  464</span>        print(alle_ids)</div>
+<div class="line"><span class="lineno">  465</span> </div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="aaa7a233988e1e9d600f15ed0c18b6864" name="aaa7a233988e1e9d600f15ed0c18b6864"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaa7a233988e1e9d600f15ed0c18b6864">&#9670;&#160;</a></span>get_company_daten()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">DB_Zugriff_Libary_V4.get_company_daten </td>
+          <td>(</td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>transport_daten</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>verbindungs_i</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Datenbank Zugriff - Company-Daten ###############################. </p>
+<pre class="fragment">@brief Liest die verschlüsselten Firmendaten aus *company_crypt* und entschlüsselt sie sofort.
+@details
+Diese Funktion kümmert sich um die Stammdaten der Firma, die zum Transport gehört.
+Die Tabelle enthält die Werte verschlüsselt. Deshalb reicht ein normales Auslesen
+allein nicht aus.
+
+Was an dieser Stelle passiert:
+- Aus den Transportdaten werden zuerst alle benötigten Company-IDs gesammelt.
+- Danach läuft eine for-Schleife über diese IDs.
+- Für jede ID wird der passende Datensatz aus *company_crypt* geladen.
+- Die einzelnen Felder wie Firmenname, Straße, Ort und PLZ werden anschließend
+  nacheinander mit *decrypt_value()* entschlüsselt.
+- Die lesbaren Werte werden danach in einem Dictionary gespeichert.
+
+Wie das Programm das grob handhabt:
+- Die Funktion trennt also die technische Aufgabe „Daten holen“ von der
+  fachlichen Aufgabe „Daten lesbar machen“ nicht vollständig,
+  sondern erledigt beides direkt hintereinander.
+- Dadurch bekommt der restliche Programmablauf sofort Klartextdaten
+  und muss sich später nicht mehr mit Bytewerten oder Entschlüsselung befassen.
+
+Warum das gebraucht wird:
+- Die Phase 2 verlangt, dass die verschlüsselten Stammdaten verarbeitet werden können.
+- Diese Funktion stellt sicher, dass spätere Programmteile mit normalen,
+  verständlichen Firmendaten weiterarbeiten können.
+
+@param transport_daten Bereits geladene Bewegungsdaten des Transports.
+@param verbindungs_i SQL-Verbindungsstring für pyodbc.
+@return Tuple aus Dictionary mit entschlüsselten Firmendaten und Anzahl der Datensätze.
+</pre> 
+<p class="definition">Definiert in Zeile <a class="el" href="_d_b___zugriff___libary___v4_8py_source.html#l00246">246</a> der Datei <a class="el" href="_d_b___zugriff___libary___v4_8py_source.html">DB_Zugriff_Libary_V4.py</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  246</span><span class="keyword">def </span>get_company_daten(transport_daten, verbindungs_i):</div>
+<div class="line"><span class="lineno">  247</span> </div>
+<div class="line"><span class="lineno">  248</span>    <span class="stringliteral">&#39;&#39;&#39;</span></div>
+<div class="line"><span class="lineno">  249</span><span class="stringliteral">    @brief Liest die verschlüsselten Firmendaten aus *company_crypt* und entschlüsselt sie sofort.</span></div>
+<div class="line"><span class="lineno">  250</span><span class="stringliteral">    @details</span></div>
+<div class="line"><span class="lineno">  251</span><span class="stringliteral">    Diese Funktion kümmert sich um die Stammdaten der Firma, die zum Transport gehört.</span></div>
+<div class="line"><span class="lineno">  252</span><span class="stringliteral">    Die Tabelle enthält die Werte verschlüsselt. Deshalb reicht ein normales Auslesen</span></div>
+<div class="line"><span class="lineno">  253</span><span class="stringliteral">    allein nicht aus.</span></div>
+<div class="line"><span class="lineno">  254</span><span class="stringliteral"></span> </div>
+<div class="line"><span class="lineno">  255</span><span class="stringliteral">    Was an dieser Stelle passiert:</span></div>
+<div class="line"><span class="lineno">  256</span><span class="stringliteral">    - Aus den Transportdaten werden zuerst alle benötigten Company-IDs gesammelt.</span></div>
+<div class="line"><span class="lineno">  257</span><span class="stringliteral">    - Danach läuft eine for-Schleife über diese IDs.</span></div>
+<div class="line"><span class="lineno">  258</span><span class="stringliteral">    - Für jede ID wird der passende Datensatz aus *company_crypt* geladen.</span></div>
+<div class="line"><span class="lineno">  259</span><span class="stringliteral">    - Die einzelnen Felder wie Firmenname, Straße, Ort und PLZ werden anschließend</span></div>
+<div class="line"><span class="lineno">  260</span><span class="stringliteral">      nacheinander mit *decrypt_value()* entschlüsselt.</span></div>
+<div class="line"><span class="lineno">  261</span><span class="stringliteral">    - Die lesbaren Werte werden danach in einem Dictionary gespeichert.</span></div>
+<div class="line"><span class="lineno">  262</span><span class="stringliteral"></span> </div>
+<div class="line"><span class="lineno">  263</span><span class="stringliteral">    Wie das Programm das grob handhabt:</span></div>
+<div class="line"><span class="lineno">  264</span><span class="stringliteral">    - Die Funktion trennt also die technische Aufgabe „Daten holen“ von der</span></div>
+<div class="line"><span class="lineno">  265</span><span class="stringliteral">      fachlichen Aufgabe „Daten lesbar machen“ nicht vollständig,</span></div>
+<div class="line"><span class="lineno">  266</span><span class="stringliteral">      sondern erledigt beides direkt hintereinander.</span></div>
+<div class="line"><span class="lineno">  267</span><span class="stringliteral">    - Dadurch bekommt der restliche Programmablauf sofort Klartextdaten</span></div>
+<div class="line"><span class="lineno">  268</span><span class="stringliteral">      und muss sich später nicht mehr mit Bytewerten oder Entschlüsselung befassen.</span></div>
+<div class="line"><span class="lineno">  269</span><span class="stringliteral"></span> </div>
+<div class="line"><span class="lineno">  270</span><span class="stringliteral">    Warum das gebraucht wird:</span></div>
+<div class="line"><span class="lineno">  271</span><span class="stringliteral">    - Die Phase 2 verlangt, dass die verschlüsselten Stammdaten verarbeitet werden können.</span></div>
+<div class="line"><span class="lineno">  272</span><span class="stringliteral">    - Diese Funktion stellt sicher, dass spätere Programmteile mit normalen,</span></div>
+<div class="line"><span class="lineno">  273</span><span class="stringliteral">      verständlichen Firmendaten weiterarbeiten können.</span></div>
+<div class="line"><span class="lineno">  274</span><span class="stringliteral"></span> </div>
+<div class="line"><span class="lineno">  275</span><span class="stringliteral">    @param transport_daten Bereits geladene Bewegungsdaten des Transports.</span></div>
+<div class="line"><span class="lineno">  276</span><span class="stringliteral">    @param verbindungs_i SQL-Verbindungsstring für pyodbc.</span></div>
+<div class="line"><span class="lineno">  277</span><span class="stringliteral">    @return Tuple aus Dictionary mit entschlüsselten Firmendaten und Anzahl der Datensätze.</span></div>
+<div class="line"><span class="lineno">  278</span><span class="stringliteral">    &#39;&#39;&#39;</span></div>
+<div class="line"><span class="lineno">  279</span> </div>
+<div class="line"><span class="lineno">  280</span>    company_daten = {}</div>
+<div class="line"><span class="lineno">  281</span> </div>
+<div class="line"><span class="lineno">  282</span>    <span class="keywordflow">try</span>:</div>
+<div class="line"><span class="lineno">  283</span>        conn = pyodbc.connect(verbindungs_i)</div>
+<div class="line"><span class="lineno">  284</span>        cursor = conn.cursor()</div>
+<div class="line"><span class="lineno">  285</span> </div>
+<div class="line"><span class="lineno">  286</span>        sql = <span class="stringliteral">&quot;&quot;&quot;</span></div>
+<div class="line"><span class="lineno">  287</span><span class="stringliteral">            SELECT companyID, company, strasse, ort, plz</span></div>
+<div class="line"><span class="lineno">  288</span><span class="stringliteral">            FROM dbo.company_crypt</span></div>
+<div class="line"><span class="lineno">  289</span><span class="stringliteral">            WHERE companyID = ?</span></div>
+<div class="line"><span class="lineno">  290</span><span class="stringliteral">        &quot;&quot;&quot;</span></div>
+<div class="line"><span class="lineno">  291</span> </div>
+<div class="line"><span class="lineno">  292</span>        company_ids = {eintrag[1] <span class="keywordflow">for</span> eintrag <span class="keywordflow">in</span> transport_daten.values()}</div>
+<div class="line"><span class="lineno">  293</span> </div>
+<div class="line"><span class="lineno">  294</span>        idx = 1</div>
+<div class="line"><span class="lineno">  295</span>        <span class="keywordflow">for</span> companyID <span class="keywordflow">in</span> company_ids:</div>
+<div class="line"><span class="lineno">  296</span>            cursor.execute(sql, companyID)</div>
+<div class="line"><span class="lineno">  297</span>            zeilen = cursor.fetchall()</div>
+<div class="line"><span class="lineno">  298</span>            <span class="keywordflow">for</span> zeile <span class="keywordflow">in</span> zeilen:</div>
+<div class="line"><span class="lineno">  299</span>                companyID, encrypted_company, encrypted_strasse, encrypted_ort, encrypted_plz = zeile</div>
+<div class="line"><span class="lineno">  300</span> </div>
+<div class="line"><span class="lineno">  301</span>                decrypted_company = decrypt_value(encrypted_company)</div>
+<div class="line"><span class="lineno">  302</span>                decrypted_strasse = decrypt_value(encrypted_strasse)</div>
+<div class="line"><span class="lineno">  303</span>                decrypted_ort = decrypt_value(encrypted_ort)</div>
+<div class="line"><span class="lineno">  304</span>                decrypted_plz = decrypt_value(encrypted_plz)</div>
+<div class="line"><span class="lineno">  305</span> </div>
+<div class="line"><span class="lineno">  306</span>                company_daten[idx] = [</div>
+<div class="line"><span class="lineno">  307</span>                    companyID,</div>
+<div class="line"><span class="lineno">  308</span>                    decrypted_company,</div>
+<div class="line"><span class="lineno">  309</span>                    decrypted_strasse,</div>
+<div class="line"><span class="lineno">  310</span>                    decrypted_ort,</div>
+<div class="line"><span class="lineno">  311</span>                    decrypted_plz,</div>
+<div class="line"><span class="lineno">  312</span>                ]</div>
+<div class="line"><span class="lineno">  313</span>                idx += 1</div>
+<div class="line"><span class="lineno">  314</span> </div>
+<div class="line"><span class="lineno">  315</span>        company_daten_len = len(company_daten)</div>
+<div class="line"><span class="lineno">  316</span>        <span class="keywordflow">return</span> company_daten, company_daten_len</div>
+<div class="line"><span class="lineno">  317</span> </div>
+<div class="line"><span class="lineno">  318</span>    <span class="keywordflow">except</span> Exception <span class="keyword">as</span> e:</div>
+<div class="line"><span class="lineno">  319</span>        print(<span class="stringliteral">&quot;Fehler beim Datenbankzugriff - Company Daten:&quot;</span>, e)</div>
+<div class="line"><span class="lineno">  320</span>        <span class="keywordflow">return</span> {}, 0</div>
+<div class="line"><span class="lineno">  321</span> </div>
+<div class="line"><span class="lineno">  322</span>    <span class="keywordflow">finally</span>:</div>
+<div class="line"><span class="lineno">  323</span>        <span class="keywordflow">if</span> <span class="stringliteral">&#39;cursor&#39;</span> <span class="keywordflow">in</span> locals():</div>
+<div class="line"><span class="lineno">  324</span>            cursor.close()</div>
+<div class="line"><span class="lineno">  325</span>        <span class="keywordflow">if</span> <span class="stringliteral">&#39;conn&#39;</span> <span class="keywordflow">in</span> locals():</div>
+<div class="line"><span class="lineno">  326</span>            conn.close()</div>
+<div class="line"><span class="lineno">  327</span>        print(company_daten)</div>
+<div class="line"><span class="lineno">  328</span> </div>
+</div><!-- fragment -->
+<p class="reference">Benutzt <a class="el" href="_d_b___zugriff___libary___v4_8py_source.html#l00031">decrypt_value()</a>.</p>
+
+</div>
+</div>
+<a id="aa49f28a16e01a3989dcb9901917f4471" name="aa49f28a16e01a3989dcb9901917f4471"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa49f28a16e01a3989dcb9901917f4471">&#9670;&#160;</a></span>get_temperatur_daten()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">DB_Zugriff_Libary_V4.get_temperatur_daten </td>
+          <td>(</td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>transport_daten</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>verbindungs_i</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Datenbank Zugriff - Temperaturdaten #############################. </p>
+<pre class="fragment">@brief Liest die Temperaturmessungen der im Transport verwendeten Stationen aus *tempdata*.
+@details
+Diese Funktion ermittelt nicht einfach alle Temperaturwerte einer Station,
+sondern gezielt nur die Messwerte aus dem Zeitraum, in dem sich die Ware
+tatsächlich an der jeweiligen Station befand.
+
+Was an dieser Stelle passiert:
+- Zuerst werden die schon geladenen Transportdaten zeitlich sortiert.
+- Danach läuft eine for-Schleife über alle Bewegungsereignisse.
+- Für jeden Eintrag mit Status *in* beginnt ein möglicher Aufenthaltszeitraum.
+- Anschließend sucht eine weitere Schleife den dazugehörigen nächsten *out*-Eintrag
+  derselben Station.
+- Ist ein passendes *out* vorhanden, werden nur die Temperaturwerte zwischen
+  Einchecken und Auschecken geladen.
+- Gibt es kein *out*, werden alle Werte ab dem Eincheck-Zeitpunkt geladen.
+
+Wie das Programm das grob handhabt:
+- Es werden also nur die Temperaturdaten mitgenommen, die wirklich zu dem
+  konkreten Aufenthalt des Produkts passen.
+- Die Ergebnisse landen wieder gesammelt in einem Dictionary, damit die
+  spätere Verarbeitung einfach über alle Temperaturmessungen laufen kann.
+
+Warum das gebraucht wird:
+- Die Temperaturprüfung soll nicht die gesamte Station bewerten,
+  sondern den Abschnitt, in dem der geprüfte Transport dort gelagert war.
+- Genau diese Daten werden später benötigt, um festzustellen,
+  ob die Temperaturgrenzen von +2 °C bis +4 °C eingehalten wurden.
+
+@param transport_daten Bereits geladene Bewegungsdaten des Transports.
+@param verbindungs_i SQL-Verbindungsstring für pyodbc.
+@return Tuple aus Dictionary mit Temperaturdaten und Anzahl der Datensätze.
+</pre> 
+<p class="definition">Definiert in Zeile <a class="el" href="_d_b___zugriff___libary___v4_8py_source.html#l00140">140</a> der Datei <a class="el" href="_d_b___zugriff___libary___v4_8py_source.html">DB_Zugriff_Libary_V4.py</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  140</span><span class="keyword">def </span>get_temperatur_daten(transport_daten, verbindungs_i):</div>
+<div class="line"><span class="lineno">  141</span> </div>
+<div class="line"><span class="lineno">  142</span>    <span class="stringliteral">&#39;&#39;&#39;</span></div>
+<div class="line"><span class="lineno">  143</span><span class="stringliteral">    @brief Liest die Temperaturmessungen der im Transport verwendeten Stationen aus *tempdata*.</span></div>
+<div class="line"><span class="lineno">  144</span><span class="stringliteral">    @details</span></div>
+<div class="line"><span class="lineno">  145</span><span class="stringliteral">    Diese Funktion ermittelt nicht einfach alle Temperaturwerte einer Station,</span></div>
+<div class="line"><span class="lineno">  146</span><span class="stringliteral">    sondern gezielt nur die Messwerte aus dem Zeitraum, in dem sich die Ware</span></div>
+<div class="line"><span class="lineno">  147</span><span class="stringliteral">    tatsächlich an der jeweiligen Station befand.</span></div>
+<div class="line"><span class="lineno">  148</span><span class="stringliteral"></span> </div>
+<div class="line"><span class="lineno">  149</span><span class="stringliteral">    Was an dieser Stelle passiert:</span></div>
+<div class="line"><span class="lineno">  150</span><span class="stringliteral">    - Zuerst werden die schon geladenen Transportdaten zeitlich sortiert.</span></div>
+<div class="line"><span class="lineno">  151</span><span class="stringliteral">    - Danach läuft eine for-Schleife über alle Bewegungsereignisse.</span></div>
+<div class="line"><span class="lineno">  152</span><span class="stringliteral">    - Für jeden Eintrag mit Status *in* beginnt ein möglicher Aufenthaltszeitraum.</span></div>
+<div class="line"><span class="lineno">  153</span><span class="stringliteral">    - Anschließend sucht eine weitere Schleife den dazugehörigen nächsten *out*-Eintrag</span></div>
+<div class="line"><span class="lineno">  154</span><span class="stringliteral">      derselben Station.</span></div>
+<div class="line"><span class="lineno">  155</span><span class="stringliteral">    - Ist ein passendes *out* vorhanden, werden nur die Temperaturwerte zwischen</span></div>
+<div class="line"><span class="lineno">  156</span><span class="stringliteral">      Einchecken und Auschecken geladen.</span></div>
+<div class="line"><span class="lineno">  157</span><span class="stringliteral">    - Gibt es kein *out*, werden alle Werte ab dem Eincheck-Zeitpunkt geladen.</span></div>
+<div class="line"><span class="lineno">  158</span><span class="stringliteral"></span> </div>
+<div class="line"><span class="lineno">  159</span><span class="stringliteral">    Wie das Programm das grob handhabt:</span></div>
+<div class="line"><span class="lineno">  160</span><span class="stringliteral">    - Es werden also nur die Temperaturdaten mitgenommen, die wirklich zu dem</span></div>
+<div class="line"><span class="lineno">  161</span><span class="stringliteral">      konkreten Aufenthalt des Produkts passen.</span></div>
+<div class="line"><span class="lineno">  162</span><span class="stringliteral">    - Die Ergebnisse landen wieder gesammelt in einem Dictionary, damit die</span></div>
+<div class="line"><span class="lineno">  163</span><span class="stringliteral">      spätere Verarbeitung einfach über alle Temperaturmessungen laufen kann.</span></div>
+<div class="line"><span class="lineno">  164</span><span class="stringliteral"></span> </div>
+<div class="line"><span class="lineno">  165</span><span class="stringliteral">    Warum das gebraucht wird:</span></div>
+<div class="line"><span class="lineno">  166</span><span class="stringliteral">    - Die Temperaturprüfung soll nicht die gesamte Station bewerten,</span></div>
+<div class="line"><span class="lineno">  167</span><span class="stringliteral">      sondern den Abschnitt, in dem der geprüfte Transport dort gelagert war.</span></div>
+<div class="line"><span class="lineno">  168</span><span class="stringliteral">    - Genau diese Daten werden später benötigt, um festzustellen,</span></div>
+<div class="line"><span class="lineno">  169</span><span class="stringliteral">      ob die Temperaturgrenzen von +2 °C bis +4 °C eingehalten wurden.</span></div>
+<div class="line"><span class="lineno">  170</span><span class="stringliteral"></span> </div>
+<div class="line"><span class="lineno">  171</span><span class="stringliteral">    @param transport_daten Bereits geladene Bewegungsdaten des Transports.</span></div>
+<div class="line"><span class="lineno">  172</span><span class="stringliteral">    @param verbindungs_i SQL-Verbindungsstring für pyodbc.</span></div>
+<div class="line"><span class="lineno">  173</span><span class="stringliteral">    @return Tuple aus Dictionary mit Temperaturdaten und Anzahl der Datensätze.</span></div>
+<div class="line"><span class="lineno">  174</span><span class="stringliteral">    &#39;&#39;&#39;</span></div>
+<div class="line"><span class="lineno">  175</span> </div>
+<div class="line"><span class="lineno">  176</span>    temperatur_daten = {}</div>
+<div class="line"><span class="lineno">  177</span> </div>
+<div class="line"><span class="lineno">  178</span>    <span class="keywordflow">try</span>:</div>
+<div class="line"><span class="lineno">  179</span>        conn = pyodbc.connect(verbindungs_i)</div>
+<div class="line"><span class="lineno">  180</span>        cursor = conn.cursor()</div>
+<div class="line"><span class="lineno">  181</span> </div>
+<div class="line"><span class="lineno">  182</span>        sql_ohne_end = <span class="stringliteral">&quot;&quot;&quot;</span></div>
+<div class="line"><span class="lineno">  183</span><span class="stringliteral">            SELECT *</span></div>
+<div class="line"><span class="lineno">  184</span><span class="stringliteral">            FROM dbo.tempdata</span></div>
+<div class="line"><span class="lineno">  185</span><span class="stringliteral">            WHERE transportstationID = ?</span></div>
+<div class="line"><span class="lineno">  186</span><span class="stringliteral">              AND datetime &gt;= ?</span></div>
+<div class="line"><span class="lineno">  187</span><span class="stringliteral">            ORDER BY datetime</span></div>
+<div class="line"><span class="lineno">  188</span><span class="stringliteral">        &quot;&quot;&quot;</span></div>
+<div class="line"><span class="lineno">  189</span>        sql_mit_end = <span class="stringliteral">&quot;&quot;&quot;</span></div>
+<div class="line"><span class="lineno">  190</span><span class="stringliteral">            SELECT *</span></div>
+<div class="line"><span class="lineno">  191</span><span class="stringliteral">            FROM dbo.tempdata</span></div>
+<div class="line"><span class="lineno">  192</span><span class="stringliteral">            WHERE transportstationID = ?</span></div>
+<div class="line"><span class="lineno">  193</span><span class="stringliteral">              AND datetime &gt;= ?</span></div>
+<div class="line"><span class="lineno">  194</span><span class="stringliteral">              AND datetime &lt; ?</span></div>
+<div class="line"><span class="lineno">  195</span><span class="stringliteral">            ORDER BY datetime</span></div>
+<div class="line"><span class="lineno">  196</span><span class="stringliteral">        &quot;&quot;&quot;</span></div>
+<div class="line"><span class="lineno">  197</span> </div>
+<div class="line"><span class="lineno">  198</span>        items = sorted(transport_daten.items(), key=<span class="keyword">lambda</span> kv: kv[1][5])</div>
+<div class="line"><span class="lineno">  199</span> </div>
+<div class="line"><span class="lineno">  200</span>        idx = 1</div>
+<div class="line"><span class="lineno">  201</span>        <span class="keywordflow">for</span> pos, (_, eintrag) <span class="keywordflow">in</span> enumerate(items):</div>
+<div class="line"><span class="lineno">  202</span>            station_id = eintrag[3]</div>
+<div class="line"><span class="lineno">  203</span>            status = str(eintrag[4]).strip().strip(<span class="stringliteral">&quot;&#39;&quot;</span>).lower()</div>
+<div class="line"><span class="lineno">  204</span>            start_dt = eintrag[5]</div>
+<div class="line"><span class="lineno">  205</span> </div>
+<div class="line"><span class="lineno">  206</span>            <span class="keywordflow">if</span> status != <span class="stringliteral">&quot;in&quot;</span>:</div>
+<div class="line"><span class="lineno">  207</span>                <span class="keywordflow">continue</span></div>
+<div class="line"><span class="lineno">  208</span> </div>
+<div class="line"><span class="lineno">  209</span>            end_dt = <span class="keywordtype">None</span></div>
+<div class="line"><span class="lineno">  210</span>            <span class="keywordflow">for</span> _, next_entry <span class="keywordflow">in</span> items[pos + 1:]:</div>
+<div class="line"><span class="lineno">  211</span>                <span class="keywordflow">if</span> next_entry[3] == station_id:</div>
+<div class="line"><span class="lineno">  212</span>                    next_status = str(next_entry[4]).strip().strip(<span class="stringliteral">&quot;&#39;&quot;</span>).lower()</div>
+<div class="line"><span class="lineno">  213</span>                    <span class="keywordflow">if</span> next_status == <span class="stringliteral">&quot;out&quot;</span>:</div>
+<div class="line"><span class="lineno">  214</span>                        end_dt = next_entry[5]</div>
+<div class="line"><span class="lineno">  215</span>                        <span class="keywordflow">break</span></div>
+<div class="line"><span class="lineno">  216</span> </div>
+<div class="line"><span class="lineno">  217</span>            <span class="keywordflow">if</span> end_dt <span class="keywordflow">is</span> <span class="keywordtype">None</span>:</div>
+<div class="line"><span class="lineno">  218</span>                cursor.execute(sql_ohne_end, station_id, start_dt)</div>
+<div class="line"><span class="lineno">  219</span>            <span class="keywordflow">else</span>:</div>
+<div class="line"><span class="lineno">  220</span>                cursor.execute(sql_mit_end, station_id, start_dt, end_dt)</div>
+<div class="line"><span class="lineno">  221</span> </div>
+<div class="line"><span class="lineno">  222</span>            zeilen = cursor.fetchall()</div>
+<div class="line"><span class="lineno">  223</span>            <span class="keywordflow">for</span> zeile <span class="keywordflow">in</span> zeilen:</div>
+<div class="line"><span class="lineno">  224</span>                temperatur_daten[idx] = list(zeile)</div>
+<div class="line"><span class="lineno">  225</span>                idx += 1</div>
+<div class="line"><span class="lineno">  226</span> </div>
+<div class="line"><span class="lineno">  227</span>        temperatur_daten_len = len(temperatur_daten)</div>
+<div class="line"><span class="lineno">  228</span>        <span class="keywordflow">return</span> temperatur_daten, temperatur_daten_len</div>
+<div class="line"><span class="lineno">  229</span> </div>
+<div class="line"><span class="lineno">  230</span>    <span class="keywordflow">except</span> Exception <span class="keyword">as</span> e:</div>
+<div class="line"><span class="lineno">  231</span>        print(<span class="stringliteral">&quot;Fehler beim Datenbankzugriff - Temperaturdaten:&quot;</span>, e)</div>
+<div class="line"><span class="lineno">  232</span>        <span class="keywordflow">return</span> {}, 0</div>
+<div class="line"><span class="lineno">  233</span> </div>
+<div class="line"><span class="lineno">  234</span>    <span class="keywordflow">finally</span>:</div>
+<div class="line"><span class="lineno">  235</span>        <span class="keywordflow">if</span> <span class="stringliteral">&#39;cursor&#39;</span> <span class="keywordflow">in</span> locals():</div>
+<div class="line"><span class="lineno">  236</span>            cursor.close()</div>
+<div class="line"><span class="lineno">  237</span>        <span class="keywordflow">if</span> <span class="stringliteral">&#39;conn&#39;</span> <span class="keywordflow">in</span> locals():</div>
+<div class="line"><span class="lineno">  238</span>            conn.close()</div>
+<div class="line"><span class="lineno">  239</span> </div>
+<div class="line"><span class="lineno">  240</span>        print(temperatur_daten)</div>
+<div class="line"><span class="lineno">  241</span> </div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a80f349323b7028b12509a4725f6bcb72" name="a80f349323b7028b12509a4725f6bcb72"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a80f349323b7028b12509a4725f6bcb72">&#9670;&#160;</a></span>get_transport_daten()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">DB_Zugriff_Libary_V4.get_transport_daten </td>
+          <td>(</td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>transportid</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>verbindungs_i</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Datenbank Zugriff - Transportdaten ##############################. </p>
+<pre class="fragment">@brief Liest alle Bewegungsdaten eines Transports aus der Tabelle *coolchain*.
+@details
+Diese Funktion holt die eigentlichen Ablaufdaten eines Transports aus der Datenbank.
+Gemeint sind die Ein- und Auscheck-Vorgänge der Ware an den verschiedenen Stationen.
+
+Was an dieser Stelle passiert:
+- Es wird eine Verbindung zur SQL-Datenbank aufgebaut.
+- Danach wird mit einem SELECT-Befehl nach genau der Transport-ID gesucht,
+  die der Benutzer eingegeben hat.
+- Die Datensätze werden zeitlich nach *datetime* sortiert geladen.
+- Anschließend läuft eine for-Schleife über alle gefundenen Zeilen.
+  Jede Zeile wird in eine Liste umgewandelt und in einem Dictionary gespeichert.
+
+Wie das Programm das grob handhabt:
+- Das Dictionary bekommt fortlaufende Schlüssel 1, 2, 3, ...
+- Dadurch kann die Verarbeitung später einfach über alle Bewegungen iterieren.
+- Die zeitliche Sortierung ist sehr wichtig, weil die Prüfungen nur dann sinnvoll
+  funktionieren, wenn die Ereignisse in der tatsächlichen Reihenfolge vorliegen.
+
+Warum das gebraucht wird:
+- Diese Daten sind die Grundlage fast aller Prüfungen im Projekt:
+  Übergabezeit, Transportdauer, Reihenfolgefehler, fehlende Auscheck-Vorgänge
+  und ähnliche Auffälligkeiten.
+- Ohne diese Funktion gäbe es keine Transporthistorie, die geprüft werden könnte.
+
+@param transportid Zu prüfende Transport-ID.
+@param verbindungs_i SQL-Verbindungsstring für pyodbc.
+@return Tuple aus Dictionary mit Transportdaten und Anzahl der Datensätze.
+</pre> 
+<p class="definition">Definiert in Zeile <a class="el" href="_d_b___zugriff___libary___v4_8py_source.html#l00069">69</a> der Datei <a class="el" href="_d_b___zugriff___libary___v4_8py_source.html">DB_Zugriff_Libary_V4.py</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   69</span><span class="keyword">def </span>get_transport_daten(transportid, verbindungs_i):</div>
+<div class="line"><span class="lineno">   70</span> </div>
+<div class="line"><span class="lineno">   71</span>    <span class="stringliteral">&#39;&#39;&#39;</span></div>
+<div class="line"><span class="lineno">   72</span><span class="stringliteral">    @brief Liest alle Bewegungsdaten eines Transports aus der Tabelle *coolchain*.</span></div>
+<div class="line"><span class="lineno">   73</span><span class="stringliteral">    @details</span></div>
+<div class="line"><span class="lineno">   74</span><span class="stringliteral">    Diese Funktion holt die eigentlichen Ablaufdaten eines Transports aus der Datenbank.</span></div>
+<div class="line"><span class="lineno">   75</span><span class="stringliteral">    Gemeint sind die Ein- und Auscheck-Vorgänge der Ware an den verschiedenen Stationen.</span></div>
+<div class="line"><span class="lineno">   76</span><span class="stringliteral"></span> </div>
+<div class="line"><span class="lineno">   77</span><span class="stringliteral">    Was an dieser Stelle passiert:</span></div>
+<div class="line"><span class="lineno">   78</span><span class="stringliteral">    - Es wird eine Verbindung zur SQL-Datenbank aufgebaut.</span></div>
+<div class="line"><span class="lineno">   79</span><span class="stringliteral">    - Danach wird mit einem SELECT-Befehl nach genau der Transport-ID gesucht,</span></div>
+<div class="line"><span class="lineno">   80</span><span class="stringliteral">      die der Benutzer eingegeben hat.</span></div>
+<div class="line"><span class="lineno">   81</span><span class="stringliteral">    - Die Datensätze werden zeitlich nach *datetime* sortiert geladen.</span></div>
+<div class="line"><span class="lineno">   82</span><span class="stringliteral">    - Anschließend läuft eine for-Schleife über alle gefundenen Zeilen.</span></div>
+<div class="line"><span class="lineno">   83</span><span class="stringliteral">      Jede Zeile wird in eine Liste umgewandelt und in einem Dictionary gespeichert.</span></div>
+<div class="line"><span class="lineno">   84</span><span class="stringliteral"></span> </div>
+<div class="line"><span class="lineno">   85</span><span class="stringliteral">    Wie das Programm das grob handhabt:</span></div>
+<div class="line"><span class="lineno">   86</span><span class="stringliteral">    - Das Dictionary bekommt fortlaufende Schlüssel 1, 2, 3, ...</span></div>
+<div class="line"><span class="lineno">   87</span><span class="stringliteral">    - Dadurch kann die Verarbeitung später einfach über alle Bewegungen iterieren.</span></div>
+<div class="line"><span class="lineno">   88</span><span class="stringliteral">    - Die zeitliche Sortierung ist sehr wichtig, weil die Prüfungen nur dann sinnvoll</span></div>
+<div class="line"><span class="lineno">   89</span><span class="stringliteral">      funktionieren, wenn die Ereignisse in der tatsächlichen Reihenfolge vorliegen.</span></div>
+<div class="line"><span class="lineno">   90</span><span class="stringliteral"></span> </div>
+<div class="line"><span class="lineno">   91</span><span class="stringliteral">    Warum das gebraucht wird:</span></div>
+<div class="line"><span class="lineno">   92</span><span class="stringliteral">    - Diese Daten sind die Grundlage fast aller Prüfungen im Projekt:</span></div>
+<div class="line"><span class="lineno">   93</span><span class="stringliteral">      Übergabezeit, Transportdauer, Reihenfolgefehler, fehlende Auscheck-Vorgänge</span></div>
+<div class="line"><span class="lineno">   94</span><span class="stringliteral">      und ähnliche Auffälligkeiten.</span></div>
+<div class="line"><span class="lineno">   95</span><span class="stringliteral">    - Ohne diese Funktion gäbe es keine Transporthistorie, die geprüft werden könnte.</span></div>
+<div class="line"><span class="lineno">   96</span><span class="stringliteral"></span> </div>
+<div class="line"><span class="lineno">   97</span><span class="stringliteral">    @param transportid Zu prüfende Transport-ID.</span></div>
+<div class="line"><span class="lineno">   98</span><span class="stringliteral">    @param verbindungs_i SQL-Verbindungsstring für pyodbc.</span></div>
+<div class="line"><span class="lineno">   99</span><span class="stringliteral">    @return Tuple aus Dictionary mit Transportdaten und Anzahl der Datensätze.</span></div>
+<div class="line"><span class="lineno">  100</span><span class="stringliteral">    &#39;&#39;&#39;</span></div>
+<div class="line"><span class="lineno">  101</span> </div>
+<div class="line"><span class="lineno">  102</span>    transport_daten = {}</div>
+<div class="line"><span class="lineno">  103</span> </div>
+<div class="line"><span class="lineno">  104</span>    <span class="keywordflow">try</span>:</div>
+<div class="line"><span class="lineno">  105</span>        conn = pyodbc.connect(verbindungs_i)</div>
+<div class="line"><span class="lineno">  106</span>        cursor = conn.cursor()</div>
+<div class="line"><span class="lineno">  107</span> </div>
+<div class="line"><span class="lineno">  108</span>        abfrage = <span class="stringliteral">&quot;&quot;&quot;</span></div>
+<div class="line"><span class="lineno">  109</span><span class="stringliteral">            SELECT *</span></div>
+<div class="line"><span class="lineno">  110</span><span class="stringliteral">            FROM dbo.coolchain</span></div>
+<div class="line"><span class="lineno">  111</span><span class="stringliteral">            WHERE transportID = ?</span></div>
+<div class="line"><span class="lineno">  112</span><span class="stringliteral">            ORDER BY datetime</span></div>
+<div class="line"><span class="lineno">  113</span><span class="stringliteral">        &quot;&quot;&quot;</span></div>
+<div class="line"><span class="lineno">  114</span>        cursor.execute(abfrage, transportid)</div>
+<div class="line"><span class="lineno">  115</span> </div>
+<div class="line"><span class="lineno">  116</span>        zeilen = cursor.fetchall()</div>
+<div class="line"><span class="lineno">  117</span> </div>
+<div class="line"><span class="lineno">  118</span>        <span class="keywordflow">for</span> idx, zeile <span class="keywordflow">in</span> enumerate(zeilen, start=1):</div>
+<div class="line"><span class="lineno">  119</span>            transport_daten[idx] = list(zeile)</div>
+<div class="line"><span class="lineno">  120</span> </div>
+<div class="line"><span class="lineno">  121</span>        transport_daten_len = len(transport_daten)</div>
+<div class="line"><span class="lineno">  122</span>        <span class="keywordflow">return</span> transport_daten, transport_daten_len</div>
+<div class="line"><span class="lineno">  123</span> </div>
+<div class="line"><span class="lineno">  124</span>    <span class="keywordflow">except</span> Exception <span class="keyword">as</span> e:</div>
+<div class="line"><span class="lineno">  125</span>        print(<span class="stringliteral">&quot;Fehler beim Datenbankzugriff - Transportdaten:&quot;</span>, e)</div>
+<div class="line"><span class="lineno">  126</span>        <span class="keywordflow">return</span> {}, 0</div>
+<div class="line"><span class="lineno">  127</span> </div>
+<div class="line"><span class="lineno">  128</span>    <span class="keywordflow">finally</span>:</div>
+<div class="line"><span class="lineno">  129</span>        <span class="keywordflow">if</span> <span class="stringliteral">&#39;cursor&#39;</span> <span class="keywordflow">in</span> locals():</div>
+<div class="line"><span class="lineno">  130</span>            cursor.close()</div>
+<div class="line"><span class="lineno">  131</span>        <span class="keywordflow">if</span> <span class="stringliteral">&#39;conn&#39;</span> <span class="keywordflow">in</span> locals():</div>
+<div class="line"><span class="lineno">  132</span>            conn.close()</div>
+<div class="line"><span class="lineno">  133</span> </div>
+<div class="line"><span class="lineno">  134</span>        print(transport_daten)</div>
+<div class="line"><span class="lineno">  135</span> </div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a258da69a7ad8c6d77ff49bcf6a8bd65a" name="a258da69a7ad8c6d77ff49bcf6a8bd65a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a258da69a7ad8c6d77ff49bcf6a8bd65a">&#9670;&#160;</a></span>get_transportstation_daten()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">DB_Zugriff_Libary_V4.get_transportstation_daten </td>
+          <td>(</td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>transport_daten</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>verbindungs_i</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Datenbank Zugriff - Transportstations-Daten #####################. </p>
+<pre class="fragment">@brief Liest die verschlüsselten Stationsdaten aus *transportstation_crypt* und entschlüsselt sie.
+@details
+Diese Funktion beschafft die Stammdaten der Kühlstationen, die im Transport vorkommen.
+Dazu gehören vor allem Stationsname, Stationsart und Postleitzahl.
+
+Was an dieser Stelle passiert:
+- Aus den Bewegungsdaten werden zuerst alle benötigten Stations-IDs gesammelt.
+- Danach läuft eine for-Schleife über diese IDs.
+- Für jede Station wird der Datensatz aus *transportstation_crypt* geladen.
+- Anschließend werden Stationsname, Kategorie und PLZ entschlüsselt.
+- Die lesbaren Informationen werden wieder in einem Dictionary abgelegt.
+
+Wie das Programm das grob handhabt:
+- Die Funktion wandelt verschlüsselte Daten frühzeitig in Klartext um.
+- Dadurch können spätere Prüfschritte ganz normal mit Stationsnamen,
+  Kategorien wie *GVZ* oder *KT* und Postleitzahlen arbeiten.
+
+Warum das gebraucht wird:
+- Die Verarbeitungslogik benötigt die Stationsart, um z. B. Reihenfolgefehler
+  zwischen Kühltransporter und Kühllager zu erkennen.
+- Die Postleitzahl wird später für die Wetterabfrage gebraucht.
+- Der Stationsname wird benötigt, damit Fehlermeldungen für den Benutzer verständlich sind.
+
+@param transport_daten Bereits geladene Bewegungsdaten des Transports.
+@param verbindungs_i SQL-Verbindungsstring für pyodbc.
+@return Tuple aus Dictionary mit entschlüsselten Stationsdaten und Anzahl der Datensätze.
+</pre> 
+<p class="definition">Definiert in Zeile <a class="el" href="_d_b___zugriff___libary___v4_8py_source.html#l00333">333</a> der Datei <a class="el" href="_d_b___zugriff___libary___v4_8py_source.html">DB_Zugriff_Libary_V4.py</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  333</span><span class="keyword">def </span>get_transportstation_daten(transport_daten, verbindungs_i):</div>
+<div class="line"><span class="lineno">  334</span> </div>
+<div class="line"><span class="lineno">  335</span>    <span class="stringliteral">&#39;&#39;&#39;</span></div>
+<div class="line"><span class="lineno">  336</span><span class="stringliteral">    @brief Liest die verschlüsselten Stationsdaten aus *transportstation_crypt* und entschlüsselt sie.</span></div>
+<div class="line"><span class="lineno">  337</span><span class="stringliteral">    @details</span></div>
+<div class="line"><span class="lineno">  338</span><span class="stringliteral">    Diese Funktion beschafft die Stammdaten der Kühlstationen, die im Transport vorkommen.</span></div>
+<div class="line"><span class="lineno">  339</span><span class="stringliteral">    Dazu gehören vor allem Stationsname, Stationsart und Postleitzahl.</span></div>
+<div class="line"><span class="lineno">  340</span><span class="stringliteral"></span> </div>
+<div class="line"><span class="lineno">  341</span><span class="stringliteral">    Was an dieser Stelle passiert:</span></div>
+<div class="line"><span class="lineno">  342</span><span class="stringliteral">    - Aus den Bewegungsdaten werden zuerst alle benötigten Stations-IDs gesammelt.</span></div>
+<div class="line"><span class="lineno">  343</span><span class="stringliteral">    - Danach läuft eine for-Schleife über diese IDs.</span></div>
+<div class="line"><span class="lineno">  344</span><span class="stringliteral">    - Für jede Station wird der Datensatz aus *transportstation_crypt* geladen.</span></div>
+<div class="line"><span class="lineno">  345</span><span class="stringliteral">    - Anschließend werden Stationsname, Kategorie und PLZ entschlüsselt.</span></div>
+<div class="line"><span class="lineno">  346</span><span class="stringliteral">    - Die lesbaren Informationen werden wieder in einem Dictionary abgelegt.</span></div>
+<div class="line"><span class="lineno">  347</span><span class="stringliteral"></span> </div>
+<div class="line"><span class="lineno">  348</span><span class="stringliteral">    Wie das Programm das grob handhabt:</span></div>
+<div class="line"><span class="lineno">  349</span><span class="stringliteral">    - Die Funktion wandelt verschlüsselte Daten frühzeitig in Klartext um.</span></div>
+<div class="line"><span class="lineno">  350</span><span class="stringliteral">    - Dadurch können spätere Prüfschritte ganz normal mit Stationsnamen,</span></div>
+<div class="line"><span class="lineno">  351</span><span class="stringliteral">      Kategorien wie *GVZ* oder *KT* und Postleitzahlen arbeiten.</span></div>
+<div class="line"><span class="lineno">  352</span><span class="stringliteral"></span> </div>
+<div class="line"><span class="lineno">  353</span><span class="stringliteral">    Warum das gebraucht wird:</span></div>
+<div class="line"><span class="lineno">  354</span><span class="stringliteral">    - Die Verarbeitungslogik benötigt die Stationsart, um z. B. Reihenfolgefehler</span></div>
+<div class="line"><span class="lineno">  355</span><span class="stringliteral">      zwischen Kühltransporter und Kühllager zu erkennen.</span></div>
+<div class="line"><span class="lineno">  356</span><span class="stringliteral">    - Die Postleitzahl wird später für die Wetterabfrage gebraucht.</span></div>
+<div class="line"><span class="lineno">  357</span><span class="stringliteral">    - Der Stationsname wird benötigt, damit Fehlermeldungen für den Benutzer verständlich sind.</span></div>
+<div class="line"><span class="lineno">  358</span><span class="stringliteral"></span> </div>
+<div class="line"><span class="lineno">  359</span><span class="stringliteral">    @param transport_daten Bereits geladene Bewegungsdaten des Transports.</span></div>
+<div class="line"><span class="lineno">  360</span><span class="stringliteral">    @param verbindungs_i SQL-Verbindungsstring für pyodbc.</span></div>
+<div class="line"><span class="lineno">  361</span><span class="stringliteral">    @return Tuple aus Dictionary mit entschlüsselten Stationsdaten und Anzahl der Datensätze.</span></div>
+<div class="line"><span class="lineno">  362</span><span class="stringliteral">    &#39;&#39;&#39;</span></div>
+<div class="line"><span class="lineno">  363</span> </div>
+<div class="line"><span class="lineno">  364</span>    transportstation_daten = {}</div>
+<div class="line"><span class="lineno">  365</span> </div>
+<div class="line"><span class="lineno">  366</span>    <span class="keywordflow">try</span>:</div>
+<div class="line"><span class="lineno">  367</span>        conn = pyodbc.connect(verbindungs_i)</div>
+<div class="line"><span class="lineno">  368</span>        cursor = conn.cursor()</div>
+<div class="line"><span class="lineno">  369</span> </div>
+<div class="line"><span class="lineno">  370</span>        sql = <span class="stringliteral">&quot;&quot;&quot;</span></div>
+<div class="line"><span class="lineno">  371</span><span class="stringliteral">            SELECT transportstationID, transportstation, category, plz</span></div>
+<div class="line"><span class="lineno">  372</span><span class="stringliteral">            FROM dbo.transportstation_crypt</span></div>
+<div class="line"><span class="lineno">  373</span><span class="stringliteral">            WHERE transportstationID = ?</span></div>
+<div class="line"><span class="lineno">  374</span><span class="stringliteral">        &quot;&quot;&quot;</span></div>
+<div class="line"><span class="lineno">  375</span> </div>
+<div class="line"><span class="lineno">  376</span>        station_ids = {eintrag[3] <span class="keywordflow">for</span> eintrag <span class="keywordflow">in</span> transport_daten.values()}</div>
+<div class="line"><span class="lineno">  377</span> </div>
+<div class="line"><span class="lineno">  378</span>        idx = 1</div>
+<div class="line"><span class="lineno">  379</span>        <span class="keywordflow">for</span> transportstationID <span class="keywordflow">in</span> station_ids:</div>
+<div class="line"><span class="lineno">  380</span>            cursor.execute(sql, transportstationID)</div>
+<div class="line"><span class="lineno">  381</span>            zeilen = cursor.fetchall()</div>
+<div class="line"><span class="lineno">  382</span>            <span class="keywordflow">for</span> zeile <span class="keywordflow">in</span> zeilen:</div>
+<div class="line"><span class="lineno">  383</span>                transportstationID, encrypted_transportstation, encrypted_category, encrypted_plz = zeile</div>
+<div class="line"><span class="lineno">  384</span> </div>
+<div class="line"><span class="lineno">  385</span>                decrypted_transportstation = decrypt_value(encrypted_transportstation)</div>
+<div class="line"><span class="lineno">  386</span>                decrypted_category = decrypt_value(encrypted_category)</div>
+<div class="line"><span class="lineno">  387</span>                decrypted_plz = decrypt_value(encrypted_plz)</div>
+<div class="line"><span class="lineno">  388</span> </div>
+<div class="line"><span class="lineno">  389</span>                transportstation_daten[idx] = [</div>
+<div class="line"><span class="lineno">  390</span>                    transportstationID,</div>
+<div class="line"><span class="lineno">  391</span>                    decrypted_transportstation,</div>
+<div class="line"><span class="lineno">  392</span>                    decrypted_category,</div>
+<div class="line"><span class="lineno">  393</span>                    decrypted_plz,</div>
+<div class="line"><span class="lineno">  394</span>                ]</div>
+<div class="line"><span class="lineno">  395</span>                idx += 1</div>
+<div class="line"><span class="lineno">  396</span> </div>
+<div class="line"><span class="lineno">  397</span>        transportstation_daten_len = len(transportstation_daten)</div>
+<div class="line"><span class="lineno">  398</span>        <span class="keywordflow">return</span> transportstation_daten, transportstation_daten_len</div>
+<div class="line"><span class="lineno">  399</span> </div>
+<div class="line"><span class="lineno">  400</span>    <span class="keywordflow">except</span> Exception <span class="keyword">as</span> e:</div>
+<div class="line"><span class="lineno">  401</span>        print(<span class="stringliteral">&quot;Fehler beim Datenbankzugriff - transportstation Daten:&quot;</span>, e)</div>
+<div class="line"><span class="lineno">  402</span>        <span class="keywordflow">return</span> {}, 0</div>
+<div class="line"><span class="lineno">  403</span> </div>
+<div class="line"><span class="lineno">  404</span>    <span class="keywordflow">finally</span>:</div>
+<div class="line"><span class="lineno">  405</span>        <span class="keywordflow">if</span> <span class="stringliteral">&#39;cursor&#39;</span> <span class="keywordflow">in</span> locals():</div>
+<div class="line"><span class="lineno">  406</span>            cursor.close()</div>
+<div class="line"><span class="lineno">  407</span>        <span class="keywordflow">if</span> <span class="stringliteral">&#39;conn&#39;</span> <span class="keywordflow">in</span> locals():</div>
+<div class="line"><span class="lineno">  408</span>            conn.close()</div>
+<div class="line"><span class="lineno">  409</span> </div>
+<div class="line"><span class="lineno">  410</span>        print(transportstation_daten)</div>
+<div class="line"><span class="lineno">  411</span> </div>
+</div><!-- fragment -->
+<p class="reference">Benutzt <a class="el" href="_d_b___zugriff___libary___v4_8py_source.html#l00031">decrypt_value()</a>.</p>
+
+</div>
+</div>
+<a id="a555325fa5dcd53afb2e6a70d671a5727" name="a555325fa5dcd53afb2e6a70d671a5727"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a555325fa5dcd53afb2e6a70d671a5727">&#9670;&#160;</a></span>get_wetter_temperatur()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">DB_Zugriff_Libary_V4.get_wetter_temperatur </td>
+          <td>(</td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>plz</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>datetime_obj</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>api_key</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Wetterdatenabfrage ##############################################. </p>
+<pre class="fragment">@brief Ruft die Außentemperatur zu einem Ort und Zeitpunkt über die Visual-Crossing-API ab.
+@details
+Diese Funktion ergänzt einen gefundenen Kühlkettenverstoß um eine zusätzliche
+Umweltinformation: Wie warm war es außen am Auslagerungsort, als die Ware dort
+ohne Kühlung übergeben wurde?
+
+Was an dieser Stelle passiert:
+- Zuerst wird geprüft, ob überhaupt ein API-Key vorhanden ist.
+- Danach wird *requests* erst innerhalb der Funktion importiert.
+  Dadurch startet das Gesamtprogramm auch dann noch, wenn die Bibliothek auf
+  dem System fehlt und die Wetterfunktion gerade nicht benutzt wird.
+- Anschließend wird geprüft, ob eine sinnvolle PLZ vorhanden ist.
+  Für Transportwagen mit PLZ 0 gibt es keine ortsbezogene Wetterabfrage.
+- Die Uhrzeit wird auf die nächste volle Stunde gerundet, weil die API mit
+  stündlichen Wetterwerten arbeitet.
+- Danach wird die Anfrage-URL gebaut und an die Wetter-API gesendet.
+- Wenn Daten vorhanden sind, wird daraus die Temperatur gelesen und zurückgegeben.
+
+Wie das Programm das grob handhabt:
+- Die Funktion liefert nicht nur Temperaturwerte zurück,
+  sondern im Fehlerfall auch eine verständliche Textmeldung.
+- Dadurch kann die Verarbeitung später entscheiden,
+  ob eine Temperatur angezeigt oder stattdessen eine Hinweiszeile ausgegeben wird.
+
+Warum das gebraucht wird:
+- In Phase 2 soll bei einer zu langen Übergabezeit zusätzlich die Temperatur
+  am Auslagerungsort ausgegeben werden.
+- Genau diese Information liefert diese Funktion an die Verarbeitungslogik.
+
+@param plz Postleitzahl der Auslagerungsstation.
+@param datetime_obj Zeitpunkt der Auslagerung als datetime-Objekt.
+@param api_key API-Schlüssel für Visual Crossing.
+@return Tuple aus Temperaturwert oder None und Status-/Fehlermeldung.
+</pre> 
+<p class="definition">Definiert in Zeile <a class="el" href="_d_b___zugriff___libary___v4_8py_source.html#l00470">470</a> der Datei <a class="el" href="_d_b___zugriff___libary___v4_8py_source.html">DB_Zugriff_Libary_V4.py</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  470</span><span class="keyword">def </span>get_wetter_temperatur(plz, datetime_obj, api_key):</div>
+<div class="line"><span class="lineno">  471</span>    </div>
+<div class="line"><span class="lineno">  472</span>    <span class="stringliteral">&#39;&#39;&#39;</span></div>
+<div class="line"><span class="lineno">  473</span><span class="stringliteral">    @brief Ruft die Außentemperatur zu einem Ort und Zeitpunkt über die Visual-Crossing-API ab.</span></div>
+<div class="line"><span class="lineno">  474</span><span class="stringliteral">    @details</span></div>
+<div class="line"><span class="lineno">  475</span><span class="stringliteral">    Diese Funktion ergänzt einen gefundenen Kühlkettenverstoß um eine zusätzliche</span></div>
+<div class="line"><span class="lineno">  476</span><span class="stringliteral">    Umweltinformation: Wie warm war es außen am Auslagerungsort, als die Ware dort</span></div>
+<div class="line"><span class="lineno">  477</span><span class="stringliteral">    ohne Kühlung übergeben wurde?</span></div>
+<div class="line"><span class="lineno">  478</span><span class="stringliteral"></span> </div>
+<div class="line"><span class="lineno">  479</span><span class="stringliteral">    Was an dieser Stelle passiert:</span></div>
+<div class="line"><span class="lineno">  480</span><span class="stringliteral">    - Zuerst wird geprüft, ob überhaupt ein API-Key vorhanden ist.</span></div>
+<div class="line"><span class="lineno">  481</span><span class="stringliteral">    - Danach wird *requests* erst innerhalb der Funktion importiert.</span></div>
+<div class="line"><span class="lineno">  482</span><span class="stringliteral">      Dadurch startet das Gesamtprogramm auch dann noch, wenn die Bibliothek auf</span></div>
+<div class="line"><span class="lineno">  483</span><span class="stringliteral">      dem System fehlt und die Wetterfunktion gerade nicht benutzt wird.</span></div>
+<div class="line"><span class="lineno">  484</span><span class="stringliteral">    - Anschließend wird geprüft, ob eine sinnvolle PLZ vorhanden ist.</span></div>
+<div class="line"><span class="lineno">  485</span><span class="stringliteral">      Für Transportwagen mit PLZ 0 gibt es keine ortsbezogene Wetterabfrage.</span></div>
+<div class="line"><span class="lineno">  486</span><span class="stringliteral">    - Die Uhrzeit wird auf die nächste volle Stunde gerundet, weil die API mit</span></div>
+<div class="line"><span class="lineno">  487</span><span class="stringliteral">      stündlichen Wetterwerten arbeitet.</span></div>
+<div class="line"><span class="lineno">  488</span><span class="stringliteral">    - Danach wird die Anfrage-URL gebaut und an die Wetter-API gesendet.</span></div>
+<div class="line"><span class="lineno">  489</span><span class="stringliteral">    - Wenn Daten vorhanden sind, wird daraus die Temperatur gelesen und zurückgegeben.</span></div>
+<div class="line"><span class="lineno">  490</span><span class="stringliteral"></span> </div>
+<div class="line"><span class="lineno">  491</span><span class="stringliteral">    Wie das Programm das grob handhabt:</span></div>
+<div class="line"><span class="lineno">  492</span><span class="stringliteral">    - Die Funktion liefert nicht nur Temperaturwerte zurück,</span></div>
+<div class="line"><span class="lineno">  493</span><span class="stringliteral">      sondern im Fehlerfall auch eine verständliche Textmeldung.</span></div>
+<div class="line"><span class="lineno">  494</span><span class="stringliteral">    - Dadurch kann die Verarbeitung später entscheiden,</span></div>
+<div class="line"><span class="lineno">  495</span><span class="stringliteral">      ob eine Temperatur angezeigt oder stattdessen eine Hinweiszeile ausgegeben wird.</span></div>
+<div class="line"><span class="lineno">  496</span><span class="stringliteral"></span> </div>
+<div class="line"><span class="lineno">  497</span><span class="stringliteral">    Warum das gebraucht wird:</span></div>
+<div class="line"><span class="lineno">  498</span><span class="stringliteral">    - In Phase 2 soll bei einer zu langen Übergabezeit zusätzlich die Temperatur</span></div>
+<div class="line"><span class="lineno">  499</span><span class="stringliteral">      am Auslagerungsort ausgegeben werden.</span></div>
+<div class="line"><span class="lineno">  500</span><span class="stringliteral">    - Genau diese Information liefert diese Funktion an die Verarbeitungslogik.</span></div>
+<div class="line"><span class="lineno">  501</span><span class="stringliteral"></span> </div>
+<div class="line"><span class="lineno">  502</span><span class="stringliteral">    @param plz Postleitzahl der Auslagerungsstation.</span></div>
+<div class="line"><span class="lineno">  503</span><span class="stringliteral">    @param datetime_obj Zeitpunkt der Auslagerung als datetime-Objekt.</span></div>
+<div class="line"><span class="lineno">  504</span><span class="stringliteral">    @param api_key API-Schlüssel für Visual Crossing.</span></div>
+<div class="line"><span class="lineno">  505</span><span class="stringliteral">    @return Tuple aus Temperaturwert oder None und Status-/Fehlermeldung.</span></div>
+<div class="line"><span class="lineno">  506</span><span class="stringliteral">    &#39;&#39;&#39;</span></div>
+<div class="line"><span class="lineno">  507</span> </div>
+<div class="line"><span class="lineno">  508</span>    <span class="keywordflow">if</span> api_key <span class="keywordflow">is</span> <span class="keywordtype">None</span> <span class="keywordflow">or</span> str(api_key).strip() == <span class="stringliteral">&quot;&quot;</span>:</div>
+<div class="line"><span class="lineno">  509</span>        <span class="keywordflow">return</span> <span class="keywordtype">None</span>, <span class="stringliteral">&quot;Wetterdaten konnten nicht abgefragt werden (API-Key fehlt)&quot;</span></div>
+<div class="line"><span class="lineno">  510</span> </div>
+<div class="line"><span class="lineno">  511</span>    <span class="keywordflow">try</span>:</div>
+<div class="line"><span class="lineno">  512</span>        <span class="keyword">import</span> requests</div>
+<div class="line"><span class="lineno">  513</span>    <span class="keywordflow">except</span> ImportError:</div>
+<div class="line"><span class="lineno">  514</span>        <span class="keywordflow">return</span> <span class="keywordtype">None</span>, <span class="stringliteral">&quot;Wetterdaten konnten nicht abgefragt werden (Bibliothek requests fehlt)&quot;</span></div>
+<div class="line"><span class="lineno">  515</span> </div>
+<div class="line"><span class="lineno">  516</span>    plz_text = str(plz).strip()</div>
+<div class="line"><span class="lineno">  517</span>    <span class="keywordflow">if</span> plz_text == <span class="stringliteral">&quot;&quot;</span> <span class="keywordflow">or</span> plz_text == <span class="stringliteral">&quot;0&quot;</span>:</div>
+<div class="line"><span class="lineno">  518</span>        <span class="keywordflow">return</span> <span class="keywordtype">None</span>, <span class="stringliteral">&quot;Wetterdaten nicht verfügbar (keine PLZ für Transportwagen)&quot;</span></div>
+<div class="line"><span class="lineno">  519</span> </div>
+<div class="line"><span class="lineno">  520</span>    datetime_gerundet = datetime_obj.replace(minute=0, second=0, microsecond=0)</div>
+<div class="line"><span class="lineno">  521</span>    <span class="keywordflow">if</span> datetime_obj.minute &gt;= 30:</div>
+<div class="line"><span class="lineno">  522</span>        datetime_gerundet = datetime_gerundet + timedelta(hours=1)</div>
+<div class="line"><span class="lineno">  523</span> </div>
+<div class="line"><span class="lineno">  524</span>    timestamp = datetime_gerundet.strftime(<span class="stringliteral">&#39;%Y-%m-%dT%H:%M:%S&#39;</span>)</div>
+<div class="line"><span class="lineno">  525</span>    location = f<span class="stringliteral">&quot;{plz_text},DE&quot;</span></div>
+<div class="line"><span class="lineno">  526</span> </div>
+<div class="line"><span class="lineno">  527</span>    url = (</div>
+<div class="line"><span class="lineno">  528</span>        <span class="stringliteral">&quot;https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/&quot;</span></div>
+<div class="line"><span class="lineno">  529</span>        f<span class="stringliteral">&quot;{location}/{timestamp}&quot;</span></div>
+<div class="line"><span class="lineno">  530</span>    )</div>
+<div class="line"><span class="lineno">  531</span> </div>
+<div class="line"><span class="lineno">  532</span>    <span class="keywordflow">try</span>:</div>
+<div class="line"><span class="lineno">  533</span>        response = requests.get(</div>
+<div class="line"><span class="lineno">  534</span>            url,</div>
+<div class="line"><span class="lineno">  535</span>            params={<span class="stringliteral">&#39;unitGroup&#39;</span>: <span class="stringliteral">&#39;metric&#39;</span>, <span class="stringliteral">&#39;key&#39;</span>: api_key, <span class="stringliteral">&#39;include&#39;</span>: <span class="stringliteral">&#39;hours&#39;</span>},</div>
+<div class="line"><span class="lineno">  536</span>            timeout=15,</div>
+<div class="line"><span class="lineno">  537</span>        )</div>
+<div class="line"><span class="lineno">  538</span>        response.raise_for_status()</div>
+<div class="line"><span class="lineno">  539</span>        data = response.json()</div>
+<div class="line"><span class="lineno">  540</span> </div>
+<div class="line"><span class="lineno">  541</span>        temperatur = <span class="keywordtype">None</span></div>
+<div class="line"><span class="lineno">  542</span>        <span class="keywordflow">if</span> <span class="stringliteral">&quot;days&quot;</span> <span class="keywordflow">in</span> data <span class="keywordflow">and</span> len(data[<span class="stringliteral">&quot;days&quot;</span>]) &gt; 0:</div>
+<div class="line"><span class="lineno">  543</span>            <span class="keywordflow">if</span> <span class="stringliteral">&quot;hours&quot;</span> <span class="keywordflow">in</span> data[<span class="stringliteral">&quot;days&quot;</span>][0] <span class="keywordflow">and</span> len(data[<span class="stringliteral">&quot;days&quot;</span>][0][<span class="stringliteral">&quot;hours&quot;</span>]) &gt; 0:</div>
+<div class="line"><span class="lineno">  544</span>                temperatur = data[<span class="stringliteral">&quot;days&quot;</span>][0][<span class="stringliteral">&quot;hours&quot;</span>][0].get(<span class="stringliteral">&quot;temp&quot;</span>)</div>
+<div class="line"><span class="lineno">  545</span>            <span class="keywordflow">if</span> temperatur <span class="keywordflow">is</span> <span class="keywordtype">None</span>:</div>
+<div class="line"><span class="lineno">  546</span>                temperatur = data[<span class="stringliteral">&quot;days&quot;</span>][0].get(<span class="stringliteral">&quot;temp&quot;</span>)</div>
+<div class="line"><span class="lineno">  547</span> </div>
+<div class="line"><span class="lineno">  548</span>        <span class="keywordflow">if</span> temperatur <span class="keywordflow">is</span> <span class="keywordtype">None</span>:</div>
+<div class="line"><span class="lineno">  549</span>            <span class="keywordflow">return</span> <span class="keywordtype">None</span>, <span class="stringliteral">&quot;Wetterdaten konnten nicht ausgewertet werden&quot;</span></div>
+<div class="line"><span class="lineno">  550</span> </div>
+<div class="line"><span class="lineno">  551</span>        <span class="keywordflow">return</span> temperatur, <span class="stringliteral">&quot;ok&quot;</span></div>
+<div class="line"><span class="lineno">  552</span> </div>
+<div class="line"><span class="lineno">  553</span>    <span class="keywordflow">except</span> Exception <span class="keyword">as</span> e:</div>
+<div class="line"><span class="lineno">  554</span>        <span class="keywordflow">return</span> <span class="keywordtype">None</span>, <span class="stringliteral">&quot;Wetterdaten konnten nicht abgefragt werden (&quot;</span> + str(e) + <span class="stringliteral">&quot;)&quot;</span></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a name="doc-var-members" id="doc-var-members"></a><h2 id="header-doc-var-members" class="groupheader">Variablen-Dokumentation</h2>
+<a id="a603ebfd809ded53995e24cba57b2a14a" name="a603ebfd809ded53995e24cba57b2a14a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a603ebfd809ded53995e24cba57b2a14a">&#9670;&#160;</a></span>iv</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">str DB_Zugriff_Libary_V4.iv = b'passwort-salzen!'</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definiert in Zeile <a class="el" href="_d_b___zugriff___libary___v4_8py_source.html#l00025">25</a> der Datei <a class="el" href="_d_b___zugriff___libary___v4_8py_source.html">DB_Zugriff_Libary_V4.py</a>.</p>
+
+</div>
+</div>
+<a id="aac6662a1663ed266ea30a2fcfa06ab07" name="aac6662a1663ed266ea30a2fcfa06ab07"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aac6662a1663ed266ea30a2fcfa06ab07">&#9670;&#160;</a></span>key</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">str DB_Zugriff_Libary_V4.key = b'mysecretpassword'</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Initialisierung #################################################. </p>
+
+<p class="definition">Definiert in Zeile <a class="el" href="_d_b___zugriff___libary___v4_8py_source.html#l00024">24</a> der Datei <a class="el" href="_d_b___zugriff___libary___v4_8py_source.html">DB_Zugriff_Libary_V4.py</a>.</p>
+
+</div>
+</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <div id="page-nav" class="page-nav-panel">

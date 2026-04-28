@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['–_20erweiterte_20kühlkettenüberwachung_0',['Phase 2 – Erweiterte Kühlkettenüberwachung',['../md__r_e_a_d_m_e.html#autotoc_md53',1,'']]],
-  ['–_20grundprüfung_20der_20kühlkette_1',['Phase 1 – Grundprüfung der Kühlkette',['../md__r_e_a_d_m_e.html#autotoc_md51',1,'']]],
-  ['–_20iot_20kühlkettenüberwachung_2',['Phase 2 – IoT-Kühlkettenüberwachung',['../C:/Users/hanne/OneDrive/Desktop/Projekt-Kuehlkettenueberwachung/Phase_2_Kühlkettenüberwachung/README.md#autotoc_md11',1,'']]]
+  ['ziel_20des_20projekts_0',['Ziel des Projekts',['../md__r_e_a_d_m_e.html#autotoc_md61',1,'']]],
+  ['ziel_20dieser_20projektphase_1',['Ziel dieser Projektphase',['../C:/Users/hanne/OneDrive/Desktop/Projekt-Kuehlkettenueberwachung/Phase_2_Kuehlkettenueberwachung/README.md#autotoc_md46',1,'']]],
+  ['zur_20automatischen_20kühlkettenüberwachung_2',['Eine betriebsinterne Qualitätssicherung zur automatischen Kühlkettenüberwachung',['../C:/Users/hanne/OneDrive/Desktop/Projekt-Kuehlkettenueberwachung/Phase_1_Kuehlkettenueberwachung/README.md#autotoc_md3',1,'']]]
 ];

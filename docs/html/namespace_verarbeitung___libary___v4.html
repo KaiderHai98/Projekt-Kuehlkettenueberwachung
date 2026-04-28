@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.14.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Projekt-Kühlkettenüberwachung: Verarbeitung_Libary_V4-Namensbereichsreferenz</title>
+<title>Projekt-Kuehlkettenueberwachung: Verarbeitung_Libary_V4-Namensbereichsreferenz</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -26,9 +26,9 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Projekt-Kühlkettenüberwachung
+   <div id="projectname">Projekt-Kuehlkettenueberwachung
    </div>
-   <div id="projectbrief">Dokumentation der Kühlkettenüberwachung aus Phase 1 und Phase 2</div>
+   <div id="projectbrief">Dokumentation der Kuehlkettenueberwachung aus Phase 1 und Phase 2</div>
   </td>
  </tr>
  </tbody>
@@ -92,6 +92,513 @@ $(function(){initNavTree('namespace_verarbeitung___libary___v4.html','',''); });
   <div class="headertitle"><div class="title">Verarbeitung_Libary_V4-Namensbereichsreferenz</div></div>
 </div><!--header-->
 <div class="contents">
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
+Funktionen</h2></td></tr>
+<tr class="memitem:a0ee6fa9173ca14d492646a0da4d44819" id="r_a0ee6fa9173ca14d492646a0da4d44819"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0ee6fa9173ca14d492646a0da4d44819">_get_status</a> (eintrag)</td></tr>
+<tr class="memitem:a0d100b2682ee63a172329dca9d3994aa" id="r_a0d100b2682ee63a172329dca9d3994aa"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0d100b2682ee63a172329dca9d3994aa">_get_station_name</a> (station_id, transportstation_daten)</td></tr>
+<tr class="memitem:a73ea7236a26e1bdc1d2cfd7c5e1beee1" id="r_a73ea7236a26e1bdc1d2cfd7c5e1beee1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a73ea7236a26e1bdc1d2cfd7c5e1beee1">_get_art</a> (station_id, transportstation_daten)</td></tr>
+<tr class="memitem:a10bc27ba6e296e4af69602b30f8132fe" id="r_a10bc27ba6e296e4af69602b30f8132fe"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a10bc27ba6e296e4af69602b30f8132fe">_get_plz</a> (station_id, transportstation_daten)</td></tr>
+<tr class="memitem:aaa806107718c9a566283940a113b099f" id="r_aaa806107718c9a566283940a113b099f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aaa806107718c9a566283940a113b099f">verarbeite_transport</a> (transport_daten, temperatur_daten, company_daten, transportstation_daten, api_key=&quot;&quot;)</td></tr>
+</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Ausführliche Beschreibung</h2>
+<div class="textblock"><pre class="fragment">@brief Verarbeitungsbibliothek zur fachlichen Prüfung eines Transports.
+@details
+
+Diese Datei enthält die eigentliche Prüflogik des Projekts.
+Hier wird entschieden, ob ein Transport korrekt ist oder ob Verstöße gegen
+die Kühlkette vorliegen.
+
+Die Datei arbeitet nicht direkt mit SQL-Befehlen oder der GUI,
+sondern mit bereits geladenen Datenstrukturen.
+
+Grob gesagt passiert hier Folgendes:
+- Hilfsfunktionen lesen aus den Dictionaries einzelne Eigenschaften heraus,
+  zum Beispiel Status, Stationsname, Kategorie oder Postleitzahl.
+- Die Hauptfunktion *verarbeite_transport()* läuft Schritt für Schritt über
+  die geladenen Transport- und Temperaturdaten.
+- In mehreren Prüfblöcken wird untersucht, ob die Kühlkette fachlich stimmig ist.
+- Jeder gefundene Fehler wird als verständliche Meldung gespeichert.
+- Am Ende wird entweder eine Liste mit Fehlern oder die Meldung *korrekt* zurückgegeben.
+</pre> </div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Dokumentation der Funktionen</h2>
+<a id="a73ea7236a26e1bdc1d2cfd7c5e1beee1" name="a73ea7236a26e1bdc1d2cfd7c5e1beee1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a73ea7236a26e1bdc1d2cfd7c5e1beee1">&#9670;&#160;</a></span>_get_art()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Verarbeitung_Libary_V4._get_art </td>
+          <td>(</td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>station_id</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>transportstation_daten</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel protected">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<pre class="fragment">@brief Sucht zu einer Stations-ID die Stationsart, also z. B. *GVZ* oder *KT*.
+@details
+Die Funktion durchläuft die Stationsdaten so lange, bis zur gesuchten ID
+die Kategorie gefunden wurde.
+</pre> 
+<p class="definition">Definiert in Zeile <a class="el" href="_verarbeitung___libary___v4_8py_source.html#l00078">78</a> der Datei <a class="el" href="_verarbeitung___libary___v4_8py_source.html">Verarbeitung_Libary_V4.py</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   78</span><span class="keyword">def </span>_get_art(station_id, transportstation_daten):</div>
+<div class="line"><span class="lineno">   79</span> </div>
+<div class="line"><span class="lineno">   80</span>    <span class="stringliteral">&#39;&#39;&#39;</span></div>
+<div class="line"><span class="lineno">   81</span><span class="stringliteral">    @brief Sucht zu einer Stations-ID die Stationsart, also z. B. *GVZ* oder *KT*.</span></div>
+<div class="line"><span class="lineno">   82</span><span class="stringliteral">    @details</span></div>
+<div class="line"><span class="lineno">   83</span><span class="stringliteral">    Die Funktion durchläuft die Stationsdaten so lange, bis zur gesuchten ID</span></div>
+<div class="line"><span class="lineno">   84</span><span class="stringliteral">    die Kategorie gefunden wurde.</span></div>
+<div class="line"><span class="lineno">   85</span><span class="stringliteral">    &#39;&#39;&#39;</span></div>
+<div class="line"><span class="lineno">   86</span>        </div>
+<div class="line"><span class="lineno">   87</span>    <span class="keywordflow">for</span> key <span class="keywordflow">in</span> transportstation_daten:</div>
+<div class="line"><span class="lineno">   88</span>        <span class="keywordflow">if</span> transportstation_daten[key][0] == station_id:</div>
+<div class="line"><span class="lineno">   89</span>            <span class="keywordflow">return</span> str(transportstation_daten[key][2]).replace(<span class="stringliteral">&quot;&#39;&quot;</span>, <span class="stringliteral">&quot;&quot;</span>).upper()</div>
+<div class="line"><span class="lineno">   90</span>    <span class="keywordflow">return</span> <span class="stringliteral">&quot;&quot;</span></div>
+<div class="line"><span class="lineno">   91</span> </div>
+</div><!-- fragment -->
+<p class="reference">Wird benutzt von <a class="el" href="_verarbeitung___libary___v4_8py_source.html#l00106">verarbeite_transport()</a>.</p>
+
+</div>
+</div>
+<a id="a10bc27ba6e296e4af69602b30f8132fe" name="a10bc27ba6e296e4af69602b30f8132fe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a10bc27ba6e296e4af69602b30f8132fe">&#9670;&#160;</a></span>_get_plz()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Verarbeitung_Libary_V4._get_plz </td>
+          <td>(</td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>station_id</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>transportstation_daten</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel protected">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<pre class="fragment">@brief Sucht zu einer Stations-ID die Postleitzahl.
+@details
+Die Funktion läuft über die geladenen Stationsdaten und gibt die PLZ der
+passenden Station zurück.
+</pre> 
+<p class="definition">Definiert in Zeile <a class="el" href="_verarbeitung___libary___v4_8py_source.html#l00092">92</a> der Datei <a class="el" href="_verarbeitung___libary___v4_8py_source.html">Verarbeitung_Libary_V4.py</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   92</span><span class="keyword">def </span>_get_plz(station_id, transportstation_daten):</div>
+<div class="line"><span class="lineno">   93</span> </div>
+<div class="line"><span class="lineno">   94</span>    <span class="stringliteral">&#39;&#39;&#39;</span></div>
+<div class="line"><span class="lineno">   95</span><span class="stringliteral">    @brief Sucht zu einer Stations-ID die Postleitzahl.</span></div>
+<div class="line"><span class="lineno">   96</span><span class="stringliteral">    @details</span></div>
+<div class="line"><span class="lineno">   97</span><span class="stringliteral">    Die Funktion läuft über die geladenen Stationsdaten und gibt die PLZ der</span></div>
+<div class="line"><span class="lineno">   98</span><span class="stringliteral">    passenden Station zurück.</span></div>
+<div class="line"><span class="lineno">   99</span><span class="stringliteral">    &#39;&#39;&#39;</span></div>
+<div class="line"><span class="lineno">  100</span>        </div>
+<div class="line"><span class="lineno">  101</span>    <span class="keywordflow">for</span> key <span class="keywordflow">in</span> transportstation_daten:</div>
+<div class="line"><span class="lineno">  102</span>        <span class="keywordflow">if</span> transportstation_daten[key][0] == station_id:</div>
+<div class="line"><span class="lineno">  103</span>            <span class="keywordflow">return</span> str(transportstation_daten[key][3]).replace(<span class="stringliteral">&quot;&#39;&quot;</span>, <span class="stringliteral">&quot;&quot;</span>)</div>
+<div class="line"><span class="lineno">  104</span>    <span class="keywordflow">return</span> <span class="stringliteral">&quot;&quot;</span></div>
+<div class="line"><span class="lineno">  105</span> </div>
+</div><!-- fragment -->
+<p class="reference">Wird benutzt von <a class="el" href="_verarbeitung___libary___v4_8py_source.html#l00106">verarbeite_transport()</a>.</p>
+
+</div>
+</div>
+<a id="a0d100b2682ee63a172329dca9d3994aa" name="a0d100b2682ee63a172329dca9d3994aa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0d100b2682ee63a172329dca9d3994aa">&#9670;&#160;</a></span>_get_station_name()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Verarbeitung_Libary_V4._get_station_name </td>
+          <td>(</td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>station_id</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>transportstation_daten</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel protected">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<pre class="fragment">@brief Sucht zu einer Stations-ID den lesbaren Stationsnamen.
+@details
+Die Funktion läuft mit einer for-Schleife durch alle geladenen Stationsdaten,
+bis die passende ID gefunden wird.
+</pre> 
+<p class="definition">Definiert in Zeile <a class="el" href="_verarbeitung___libary___v4_8py_source.html#l00064">64</a> der Datei <a class="el" href="_verarbeitung___libary___v4_8py_source.html">Verarbeitung_Libary_V4.py</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   64</span><span class="keyword">def </span>_get_station_name(station_id, transportstation_daten):</div>
+<div class="line"><span class="lineno">   65</span> </div>
+<div class="line"><span class="lineno">   66</span>    <span class="stringliteral">&#39;&#39;&#39;</span></div>
+<div class="line"><span class="lineno">   67</span><span class="stringliteral">    @brief Sucht zu einer Stations-ID den lesbaren Stationsnamen.</span></div>
+<div class="line"><span class="lineno">   68</span><span class="stringliteral">    @details</span></div>
+<div class="line"><span class="lineno">   69</span><span class="stringliteral">    Die Funktion läuft mit einer for-Schleife durch alle geladenen Stationsdaten,</span></div>
+<div class="line"><span class="lineno">   70</span><span class="stringliteral">    bis die passende ID gefunden wird.</span></div>
+<div class="line"><span class="lineno">   71</span><span class="stringliteral">    &#39;&#39;&#39;</span></div>
+<div class="line"><span class="lineno">   72</span>        </div>
+<div class="line"><span class="lineno">   73</span>    <span class="keywordflow">for</span> key <span class="keywordflow">in</span> transportstation_daten:</div>
+<div class="line"><span class="lineno">   74</span>        <span class="keywordflow">if</span> transportstation_daten[key][0] == station_id:</div>
+<div class="line"><span class="lineno">   75</span>            <span class="keywordflow">return</span> str(transportstation_daten[key][1]).replace(<span class="stringliteral">&quot;&#39;&quot;</span>, <span class="stringliteral">&quot;&quot;</span>)</div>
+<div class="line"><span class="lineno">   76</span>    <span class="keywordflow">return</span> <span class="stringliteral">&quot;&quot;</span></div>
+<div class="line"><span class="lineno">   77</span> </div>
+</div><!-- fragment -->
+<p class="reference">Wird benutzt von <a class="el" href="_verarbeitung___libary___v4_8py_source.html#l00106">verarbeite_transport()</a>.</p>
+
+</div>
+</div>
+<a id="a0ee6fa9173ca14d492646a0da4d44819" name="a0ee6fa9173ca14d492646a0da4d44819"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0ee6fa9173ca14d492646a0da4d44819">&#9670;&#160;</a></span>_get_status()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Verarbeitung_Libary_V4._get_status </td>
+          <td>(</td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>eintrag</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel protected">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<pre class="fragment">@brief Liefert den Bewegungsstatus eines Datensatzes als sauberen String zurück.
+@details
+Diese Hilfsfunktion liest aus einem Transporteintrag den Status *in* oder *out* heraus.
+
+Was an dieser Stelle passiert:
+- Der Statuswert wird aus dem übergebenen Datensatz gelesen.
+- Eventuelle Hochkommas werden entfernt.
+- Der Text wird in Kleinbuchstaben umgewandelt.
+
+Warum das gebraucht wird:
+- Die spätere Prüflogik vergleicht sehr oft mit *in* und *out*.
+- Durch die Bereinigung wird sichergestellt, dass diese Vergleiche
+  zuverlässig funktionieren.
+
+@param eintrag Einzelner Datensatz aus den Transportdaten.
+@return Bereinigter Statuswert als String.
+</pre> 
+<p class="definition">Definiert in Zeile <a class="el" href="_verarbeitung___libary___v4_8py_source.html#l00041">41</a> der Datei <a class="el" href="_verarbeitung___libary___v4_8py_source.html">Verarbeitung_Libary_V4.py</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   41</span><span class="keyword">def </span>_get_status(eintrag):</div>
+<div class="line"><span class="lineno">   42</span> </div>
+<div class="line"><span class="lineno">   43</span>    <span class="stringliteral">&#39;&#39;&#39;</span></div>
+<div class="line"><span class="lineno">   44</span><span class="stringliteral">    @brief Liefert den Bewegungsstatus eines Datensatzes als sauberen String zurück.</span></div>
+<div class="line"><span class="lineno">   45</span><span class="stringliteral">    @details</span></div>
+<div class="line"><span class="lineno">   46</span><span class="stringliteral">    Diese Hilfsfunktion liest aus einem Transporteintrag den Status *in* oder *out* heraus.</span></div>
+<div class="line"><span class="lineno">   47</span><span class="stringliteral"></span> </div>
+<div class="line"><span class="lineno">   48</span><span class="stringliteral">    Was an dieser Stelle passiert:</span></div>
+<div class="line"><span class="lineno">   49</span><span class="stringliteral">    - Der Statuswert wird aus dem übergebenen Datensatz gelesen.</span></div>
+<div class="line"><span class="lineno">   50</span><span class="stringliteral">    - Eventuelle Hochkommas werden entfernt.</span></div>
+<div class="line"><span class="lineno">   51</span><span class="stringliteral">    - Der Text wird in Kleinbuchstaben umgewandelt.</span></div>
+<div class="line"><span class="lineno">   52</span><span class="stringliteral"></span> </div>
+<div class="line"><span class="lineno">   53</span><span class="stringliteral">    Warum das gebraucht wird:</span></div>
+<div class="line"><span class="lineno">   54</span><span class="stringliteral">    - Die spätere Prüflogik vergleicht sehr oft mit *in* und *out*.</span></div>
+<div class="line"><span class="lineno">   55</span><span class="stringliteral">    - Durch die Bereinigung wird sichergestellt, dass diese Vergleiche</span></div>
+<div class="line"><span class="lineno">   56</span><span class="stringliteral">      zuverlässig funktionieren.</span></div>
+<div class="line"><span class="lineno">   57</span><span class="stringliteral"></span> </div>
+<div class="line"><span class="lineno">   58</span><span class="stringliteral">    @param eintrag Einzelner Datensatz aus den Transportdaten.</span></div>
+<div class="line"><span class="lineno">   59</span><span class="stringliteral">    @return Bereinigter Statuswert als String.</span></div>
+<div class="line"><span class="lineno">   60</span><span class="stringliteral">    &#39;&#39;&#39;</span></div>
+<div class="line"><span class="lineno">   61</span> </div>
+<div class="line"><span class="lineno">   62</span>    <span class="keywordflow">return</span> str(eintrag[4]).replace(<span class="stringliteral">&quot;&#39;&quot;</span>, <span class="stringliteral">&quot;&quot;</span>).lower()</div>
+<div class="line"><span class="lineno">   63</span> </div>
+</div><!-- fragment -->
+<p class="reference">Wird benutzt von <a class="el" href="_verarbeitung___libary___v4_8py_source.html#l00106">verarbeite_transport()</a>.</p>
+
+</div>
+</div>
+<a id="aaa806107718c9a566283940a113b099f" name="aaa806107718c9a566283940a113b099f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaa806107718c9a566283940a113b099f">&#9670;&#160;</a></span>verarbeite_transport()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Verarbeitung_Libary_V4.verarbeite_transport </td>
+          <td>(</td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>transport_daten</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>temperatur_daten</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>company_daten</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>transportstation_daten</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"></td>          <td class="paramname"><span class="paramname"><em>api_key</em></span><span class="paramdefsep"> = </span><span class="paramdefval">&quot;&quot;</span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<pre class="fragment">@brief Prüft einen Transport auf fachliche Fehler in der Kühlkette.
+@details
+Diese Funktion ist das Herzstück des gesamten Projekts.
+Hier wird aus den geladenen Daten ermittelt, ob der Transport regelkonform war.
+
+Was die Funktion grundsätzlich macht:
+- Sie sammelt und sortiert die Bewegungsdaten und Temperaturdaten.
+- Danach arbeitet sie nacheinander mehrere Prüfblöcke ab.
+- Jeder Block untersucht einen bestimmten fachlichen Aspekt,
+  zum Beispiel Übergabezeiten, Transportdauer oder Temperaturgrenzen.
+- Für jeden gefundenen Verstoß wird eine Meldung in die Liste *meldungen* geschrieben.
+- Wenn kein Verstoß gefunden wird, wird am Ende *korrekt* eingetragen.
+</pre> 
+<p class="definition">Definiert in Zeile <a class="el" href="_verarbeitung___libary___v4_8py_source.html#l00106">106</a> der Datei <a class="el" href="_verarbeitung___libary___v4_8py_source.html">Verarbeitung_Libary_V4.py</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  106</span><span class="keyword">def </span>verarbeite_transport(transport_daten, temperatur_daten, company_daten, transportstation_daten, api_key=&quot;&quot;):</div>
+<div class="line"><span class="lineno">  107</span> </div>
+<div class="line"><span class="lineno">  108</span>    <span class="stringliteral">&#39;&#39;&#39;</span></div>
+<div class="line"><span class="lineno">  109</span><span class="stringliteral">    @brief Prüft einen Transport auf fachliche Fehler in der Kühlkette.</span></div>
+<div class="line"><span class="lineno">  110</span><span class="stringliteral">    @details</span></div>
+<div class="line"><span class="lineno">  111</span><span class="stringliteral">    Diese Funktion ist das Herzstück des gesamten Projekts.</span></div>
+<div class="line"><span class="lineno">  112</span><span class="stringliteral">    Hier wird aus den geladenen Daten ermittelt, ob der Transport regelkonform war.</span></div>
+<div class="line"><span class="lineno">  113</span><span class="stringliteral"></span> </div>
+<div class="line"><span class="lineno">  114</span><span class="stringliteral">    Was die Funktion grundsätzlich macht:</span></div>
+<div class="line"><span class="lineno">  115</span><span class="stringliteral">    - Sie sammelt und sortiert die Bewegungsdaten und Temperaturdaten.</span></div>
+<div class="line"><span class="lineno">  116</span><span class="stringliteral">    - Danach arbeitet sie nacheinander mehrere Prüfblöcke ab.</span></div>
+<div class="line"><span class="lineno">  117</span><span class="stringliteral">    - Jeder Block untersucht einen bestimmten fachlichen Aspekt,</span></div>
+<div class="line"><span class="lineno">  118</span><span class="stringliteral">      zum Beispiel Übergabezeiten, Transportdauer oder Temperaturgrenzen.</span></div>
+<div class="line"><span class="lineno">  119</span><span class="stringliteral">    - Für jeden gefundenen Verstoß wird eine Meldung in die Liste *meldungen* geschrieben.</span></div>
+<div class="line"><span class="lineno">  120</span><span class="stringliteral">    - Wenn kein Verstoß gefunden wird, wird am Ende *korrekt* eingetragen.</span></div>
+<div class="line"><span class="lineno">  121</span><span class="stringliteral">    &#39;&#39;&#39;</span></div>
+<div class="line"><span class="lineno">  122</span>    </div>
+<div class="line"><span class="lineno">  123</span>    meldungen = []</div>
+<div class="line"><span class="lineno">  124</span> </div>
+<div class="line"><span class="lineno">  125</span>    <span class="comment"># #########################################</span></div>
+<div class="line"><span class="lineno">  126</span>    <span class="comment"># 1. Kein Transport vorhanden</span></div>
+<div class="line"><span class="lineno">  127</span>    <span class="comment"># #########################################</span></div>
+<div class="line"><span class="lineno">  128</span>    <span class="keywordflow">if</span> len(transport_daten) == 0:</div>
+<div class="line"><span class="lineno">  129</span>        meldungen.append(<span class="stringliteral">&quot;Es gibt gar keinen Eintrag&quot;</span>)</div>
+<div class="line"><span class="lineno">  130</span>        <span class="keywordflow">return</span> meldungen</div>
+<div class="line"><span class="lineno">  131</span> </div>
+<div class="line"><span class="lineno">  132</span>    <span class="comment"># #########################################</span></div>
+<div class="line"><span class="lineno">  133</span>    <span class="comment"># 2. Daten sammeln und sortieren</span></div>
+<div class="line"><span class="lineno">  134</span>    <span class="comment"># #########################################</span></div>
+<div class="line"><span class="lineno">  135</span>    transport_daten_liste = []</div>
+<div class="line"><span class="lineno">  136</span>    temperatur_daten_liste = []</div>
+<div class="line"><span class="lineno">  137</span> </div>
+<div class="line"><span class="lineno">  138</span>    <span class="keywordflow">for</span> key <span class="keywordflow">in</span> transport_daten:</div>
+<div class="line"><span class="lineno">  139</span>        transport_daten_liste.append(transport_daten[key])</div>
+<div class="line"><span class="lineno">  140</span>    transport_daten_liste.sort(key=<span class="keyword">lambda</span> x: x[5])</div>
+<div class="line"><span class="lineno">  141</span> </div>
+<div class="line"><span class="lineno">  142</span>    <span class="keywordflow">for</span> key <span class="keywordflow">in</span> temperatur_daten:</div>
+<div class="line"><span class="lineno">  143</span>        temperatur_daten_liste.append(temperatur_daten[key])</div>
+<div class="line"><span class="lineno">  144</span>    temperatur_daten_liste.sort(key=<span class="keyword">lambda</span> x: x[1])</div>
+<div class="line"><span class="lineno">  145</span> </div>
+<div class="line"><span class="lineno">  146</span>    <span class="comment"># #########################################</span></div>
+<div class="line"><span class="lineno">  147</span>    <span class="comment"># 3. Übergabe &gt; 10 min + Wetterdaten</span></div>
+<div class="line"><span class="lineno">  148</span>    <span class="comment"># #########################################</span></div>
+<div class="line"><span class="lineno">  149</span>    letzte_out = <span class="keywordtype">None</span></div>
+<div class="line"><span class="lineno">  150</span>    letzte_out_station = <span class="keywordtype">None</span></div>
+<div class="line"><span class="lineno">  151</span> </div>
+<div class="line"><span class="lineno">  152</span>    <span class="keywordflow">for</span> bewegung <span class="keywordflow">in</span> transport_daten_liste:</div>
+<div class="line"><span class="lineno">  153</span>        status = _get_status(bewegung)</div>
+<div class="line"><span class="lineno">  154</span>        zeit = bewegung[5]</div>
+<div class="line"><span class="lineno">  155</span> </div>
+<div class="line"><span class="lineno">  156</span>        <span class="keywordflow">if</span> status == <span class="stringliteral">&quot;out&quot;</span>:</div>
+<div class="line"><span class="lineno">  157</span>            letzte_out = zeit</div>
+<div class="line"><span class="lineno">  158</span>            letzte_out_station = bewegung[3]</div>
+<div class="line"><span class="lineno">  159</span> </div>
+<div class="line"><span class="lineno">  160</span>        <span class="keywordflow">if</span> status == <span class="stringliteral">&quot;in&quot;</span> <span class="keywordflow">and</span> letzte_out <span class="keywordflow">is</span> <span class="keywordflow">not</span> <span class="keywordtype">None</span>:</div>
+<div class="line"><span class="lineno">  161</span>            diff = (zeit - letzte_out).total_seconds() / 60</div>
+<div class="line"><span class="lineno">  162</span>            <span class="keywordflow">if</span> diff &gt; 10:</div>
+<div class="line"><span class="lineno">  163</span>                meldung = <span class="stringliteral">&quot;Übergabe &gt; 10 min&quot;</span></div>
+<div class="line"><span class="lineno">  164</span>                plz = _get_plz(letzte_out_station, transportstation_daten)</div>
+<div class="line"><span class="lineno">  165</span>                station_name = _get_station_name(letzte_out_station, transportstation_daten)</div>
+<div class="line"><span class="lineno">  166</span>                temperatur_aussen, wetter_meldung = get_wetter_temperatur(plz, letzte_out, api_key)</div>
+<div class="line"><span class="lineno">  167</span> </div>
+<div class="line"><span class="lineno">  168</span>                <span class="keywordflow">if</span> temperatur_aussen <span class="keywordflow">is</span> <span class="keywordflow">not</span> <span class="keywordtype">None</span>:</div>
+<div class="line"><span class="lineno">  169</span>                    meldung = (</div>
+<div class="line"><span class="lineno">  170</span>                        meldung</div>
+<div class="line"><span class="lineno">  171</span>                        + <span class="stringliteral">&quot; | Auslagerungsort: &quot;</span> + station_name</div>
+<div class="line"><span class="lineno">  172</span>                        + <span class="stringliteral">&quot; | Außentemperatur: &quot;</span> + str(temperatur_aussen) + <span class="stringliteral">&quot; °C&quot;</span></div>
+<div class="line"><span class="lineno">  173</span>                    )</div>
+<div class="line"><span class="lineno">  174</span>                <span class="keywordflow">else</span>:</div>
+<div class="line"><span class="lineno">  175</span>                    meldung = (</div>
+<div class="line"><span class="lineno">  176</span>                        meldung</div>
+<div class="line"><span class="lineno">  177</span>                        + <span class="stringliteral">&quot; | Auslagerungsort: &quot;</span> + station_name</div>
+<div class="line"><span class="lineno">  178</span>                        + <span class="stringliteral">&quot; | &quot;</span> + wetter_meldung</div>
+<div class="line"><span class="lineno">  179</span>                    )</div>
+<div class="line"><span class="lineno">  180</span> </div>
+<div class="line"><span class="lineno">  181</span>                meldungen.append(meldung)</div>
+<div class="line"><span class="lineno">  182</span> </div>
+<div class="line"><span class="lineno">  183</span>            letzte_out = <span class="keywordtype">None</span></div>
+<div class="line"><span class="lineno">  184</span>            letzte_out_station = <span class="keywordtype">None</span></div>
+<div class="line"><span class="lineno">  185</span> </div>
+<div class="line"><span class="lineno">  186</span>    <span class="comment"># ##########################################</span></div>
+<div class="line"><span class="lineno">  187</span>    <span class="comment"># 4. Transportdauer &gt; 48h</span></div>
+<div class="line"><span class="lineno">  188</span>    <span class="comment"># ##########################################</span></div>
+<div class="line"><span class="lineno">  189</span>    erstes_in = <span class="keywordtype">None</span></div>
+<div class="line"><span class="lineno">  190</span>    letztes_out = <span class="keywordtype">None</span></div>
+<div class="line"><span class="lineno">  191</span> </div>
+<div class="line"><span class="lineno">  192</span>    <span class="keywordflow">for</span> bewegung <span class="keywordflow">in</span> transport_daten_liste:</div>
+<div class="line"><span class="lineno">  193</span>        status = _get_status(bewegung)</div>
+<div class="line"><span class="lineno">  194</span>        zeit = bewegung[5]</div>
+<div class="line"><span class="lineno">  195</span>        <span class="keywordflow">if</span> status == <span class="stringliteral">&quot;in&quot;</span> <span class="keywordflow">and</span> erstes_in <span class="keywordflow">is</span> <span class="keywordtype">None</span>:</div>
+<div class="line"><span class="lineno">  196</span>            erstes_in = zeit</div>
+<div class="line"><span class="lineno">  197</span>        <span class="keywordflow">if</span> status == <span class="stringliteral">&quot;out&quot;</span>:</div>
+<div class="line"><span class="lineno">  198</span>            letztes_out = zeit</div>
+<div class="line"><span class="lineno">  199</span> </div>
+<div class="line"><span class="lineno">  200</span>    <span class="keywordflow">if</span> erstes_in <span class="keywordflow">is</span> <span class="keywordflow">not</span> <span class="keywordtype">None</span> <span class="keywordflow">and</span> letztes_out <span class="keywordflow">is</span> <span class="keywordflow">not</span> <span class="keywordtype">None</span>:</div>
+<div class="line"><span class="lineno">  201</span>        stunden = (letztes_out - erstes_in).total_seconds() / 3600</div>
+<div class="line"><span class="lineno">  202</span>        <span class="keywordflow">if</span> stunden &gt; 48:</div>
+<div class="line"><span class="lineno">  203</span>            meldungen.append(<span class="stringliteral">&quot;Transportdauer &gt; 48h&quot;</span>)</div>
+<div class="line"><span class="lineno">  204</span> </div>
+<div class="line"><span class="lineno">  205</span>    <span class="comment"># ##########################################</span></div>
+<div class="line"><span class="lineno">  206</span>    <span class="comment"># 5. Doppelter Auscheck-Zeitpunkt</span></div>
+<div class="line"><span class="lineno">  207</span>    <span class="comment"># ##########################################</span></div>
+<div class="line"><span class="lineno">  208</span>    letzte_aktion = {}</div>
+<div class="line"><span class="lineno">  209</span> </div>
+<div class="line"><span class="lineno">  210</span>    <span class="keywordflow">for</span> bewegung <span class="keywordflow">in</span> transport_daten_liste:</div>
+<div class="line"><span class="lineno">  211</span>        station = bewegung[3]</div>
+<div class="line"><span class="lineno">  212</span>        status = _get_status(bewegung)</div>
+<div class="line"><span class="lineno">  213</span>        zeit = bewegung[5]</div>
+<div class="line"><span class="lineno">  214</span>        <span class="keywordflow">if</span> station <span class="keywordflow">in</span> letzte_aktion:</div>
+<div class="line"><span class="lineno">  215</span>            <span class="keywordflow">if</span> letzte_aktion[station][0] == <span class="stringliteral">&quot;out&quot;</span> <span class="keywordflow">and</span> status == <span class="stringliteral">&quot;out&quot;</span>:</div>
+<div class="line"><span class="lineno">  216</span>                diff = int((zeit - letzte_aktion[station][1]).total_seconds() / 60)</div>
+<div class="line"><span class="lineno">  217</span>                meldungen.append(<span class="stringliteral">&quot;Doppelter Auscheck-Zeitpunkt (Abstand &quot;</span> + str(diff) + <span class="stringliteral">&quot; min)&quot;</span>)</div>
+<div class="line"><span class="lineno">  218</span>        letzte_aktion[station] = [status, zeit]</div>
+<div class="line"><span class="lineno">  219</span> </div>
+<div class="line"><span class="lineno">  220</span>    <span class="comment"># ##########################################</span></div>
+<div class="line"><span class="lineno">  221</span>    <span class="comment"># 6. Fehlende OUTs - Konsitenzprüfung</span></div>
+<div class="line"><span class="lineno">  222</span>    <span class="comment"># ##########################################</span></div>
+<div class="line"><span class="lineno">  223</span>    letzter_status = _get_status(transport_daten_liste[-1])</div>
+<div class="line"><span class="lineno">  224</span>    fehlt_in_mitte = <span class="keyword">False</span></div>
+<div class="line"><span class="lineno">  225</span> </div>
+<div class="line"><span class="lineno">  226</span>    <span class="keywordflow">for</span> station <span class="keywordflow">in</span> letzte_aktion:</div>
+<div class="line"><span class="lineno">  227</span>        <span class="keywordflow">if</span> letzte_aktion[station][0] == <span class="stringliteral">&quot;in&quot;</span>:</div>
+<div class="line"><span class="lineno">  228</span>            <span class="keywordflow">if</span> letzter_status == <span class="stringliteral">&quot;in&quot;</span>:</div>
+<div class="line"><span class="lineno">  229</span>                meldungen.append(<span class="stringliteral">&quot;Auscheck-Zeitpunkt fehlt am Ende (kein Fehler., da nicht abgeschlossen.)&quot;</span>)</div>
+<div class="line"><span class="lineno">  230</span>            <span class="keywordflow">else</span>:</div>
+<div class="line"><span class="lineno">  231</span>                fehlt_in_mitte = <span class="keyword">True</span></div>
+<div class="line"><span class="lineno">  232</span>    <span class="keywordflow">if</span> fehlt_in_mitte:</div>
+<div class="line"><span class="lineno">  233</span>        meldungen.append(<span class="stringliteral">&quot;Auscheck-Zeitpunkt fehlt in der Mitte&quot;</span>)</div>
+<div class="line"><span class="lineno">  234</span> </div>
+<div class="line"><span class="lineno">  235</span>    <span class="comment"># ##########################################</span></div>
+<div class="line"><span class="lineno">  236</span>    <span class="comment"># 7. Aus und wieder Einchecken im gleichen Kühllager - Konsitenzprüfung</span></div>
+<div class="line"><span class="lineno">  237</span>    <span class="comment"># ##########################################</span></div>
+<div class="line"><span class="lineno">  238</span>    zyklus_gesehen = {}</div>
+<div class="line"><span class="lineno">  239</span>    letzter_status_station = {}</div>
+<div class="line"><span class="lineno">  240</span> </div>
+<div class="line"><span class="lineno">  241</span>    <span class="keywordflow">for</span> bewegung <span class="keywordflow">in</span> transport_daten_liste:</div>
+<div class="line"><span class="lineno">  242</span>        station = bewegung[3]</div>
+<div class="line"><span class="lineno">  243</span>        status = _get_status(bewegung)</div>
+<div class="line"><span class="lineno">  244</span>        art = _get_art(station, transportstation_daten)</div>
+<div class="line"><span class="lineno">  245</span> </div>
+<div class="line"><span class="lineno">  246</span>        <span class="keywordflow">if</span> station <span class="keywordflow">not</span> <span class="keywordflow">in</span> zyklus_gesehen:</div>
+<div class="line"><span class="lineno">  247</span>            zyklus_gesehen[station] = <span class="keyword">False</span></div>
+<div class="line"><span class="lineno">  248</span> </div>
+<div class="line"><span class="lineno">  249</span>        <span class="keywordflow">if</span> station <span class="keywordflow">in</span> letzter_status_station:</div>
+<div class="line"><span class="lineno">  250</span>            <span class="keywordflow">if</span> letzter_status_station[station] == <span class="stringliteral">&quot;in&quot;</span> <span class="keywordflow">and</span> status == <span class="stringliteral">&quot;out&quot;</span>:</div>
+<div class="line"><span class="lineno">  251</span>                zyklus_gesehen[station] = <span class="keyword">True</span></div>
+<div class="line"><span class="lineno">  252</span> </div>
+<div class="line"><span class="lineno">  253</span>        <span class="keywordflow">if</span> status == <span class="stringliteral">&quot;in&quot;</span> <span class="keywordflow">and</span> zyklus_gesehen[station] <span class="keywordflow">and</span> art == <span class="stringliteral">&quot;GVZ&quot;</span>:</div>
+<div class="line"><span class="lineno">  254</span>            <span class="keywordflow">if</span> <span class="stringliteral">&quot;Aus und wieder Einchecken im gleichen Kühllager&quot;</span> <span class="keywordflow">not</span> <span class="keywordflow">in</span> meldungen:</div>
+<div class="line"><span class="lineno">  255</span>                meldungen.append(<span class="stringliteral">&quot;Aus und wieder Einchecken im gleichen Kühllager&quot;</span>)</div>
+<div class="line"><span class="lineno">  256</span> </div>
+<div class="line"><span class="lineno">  257</span>        letzter_status_station[station] = status</div>
+<div class="line"><span class="lineno">  258</span> </div>
+<div class="line"><span class="lineno">  259</span>    <span class="comment"># ##########################################</span></div>
+<div class="line"><span class="lineno">  260</span>    <span class="comment"># 8. GVZ vor KT prüfen - Konsitenzprüfung</span></div>
+<div class="line"><span class="lineno">  261</span>    <span class="comment"># ##########################################</span></div>
+<div class="line"><span class="lineno">  262</span>    kt_aktiv = <span class="keyword">False</span></div>
+<div class="line"><span class="lineno">  263</span> </div>
+<div class="line"><span class="lineno">  264</span>    <span class="keywordflow">for</span> bewegung <span class="keywordflow">in</span> transport_daten_liste:</div>
+<div class="line"><span class="lineno">  265</span>        art = _get_art(bewegung[3], transportstation_daten)</div>
+<div class="line"><span class="lineno">  266</span>        status = _get_status(bewegung)</div>
+<div class="line"><span class="lineno">  267</span> </div>
+<div class="line"><span class="lineno">  268</span>        <span class="keywordflow">if</span> art == <span class="stringliteral">&quot;KT&quot;</span>:</div>
+<div class="line"><span class="lineno">  269</span>            <span class="keywordflow">if</span> status == <span class="stringliteral">&quot;in&quot;</span>:</div>
+<div class="line"><span class="lineno">  270</span>                kt_aktiv = <span class="keyword">True</span></div>
+<div class="line"><span class="lineno">  271</span>            <span class="keywordflow">elif</span> status == <span class="stringliteral">&quot;out&quot;</span>:</div>
+<div class="line"><span class="lineno">  272</span>                kt_aktiv = <span class="keyword">False</span></div>
+<div class="line"><span class="lineno">  273</span> </div>
+<div class="line"><span class="lineno">  274</span>        <span class="keywordflow">elif</span> art == <span class="stringliteral">&quot;GVZ&quot;</span> <span class="keywordflow">and</span> status == <span class="stringliteral">&quot;in&quot;</span>:</div>
+<div class="line"><span class="lineno">  275</span>            <span class="keywordflow">if</span> kt_aktiv <span class="keywordflow">and</span> <span class="stringliteral">&quot;Einchecken Kühllager liegt zeitlich vor Auschecken LKW&quot;</span> <span class="keywordflow">not</span> <span class="keywordflow">in</span> meldungen:</div>
+<div class="line"><span class="lineno">  276</span>                meldungen.append(<span class="stringliteral">&quot;Einchecken Kühllager liegt zeitlich vor Auschecken LKW&quot;</span>)</div>
+<div class="line"><span class="lineno">  277</span> </div>
+<div class="line"><span class="lineno">  278</span>    <span class="comment"># ##########################################</span></div>
+<div class="line"><span class="lineno">  279</span>    <span class="comment"># 9. Temperaturüberwachung 2°C bis 4°C</span></div>
+<div class="line"><span class="lineno">  280</span>    <span class="comment"># ##########################################</span></div>
+<div class="line"><span class="lineno">  281</span>    temperatur_fehler = []</div>
+<div class="line"><span class="lineno">  282</span> </div>
+<div class="line"><span class="lineno">  283</span>    <span class="keywordflow">for</span> temp_eintrag <span class="keywordflow">in</span> temperatur_daten_liste:</div>
+<div class="line"><span class="lineno">  284</span>        station_id = temp_eintrag[0]</div>
+<div class="line"><span class="lineno">  285</span>        zeit = temp_eintrag[1]</div>
+<div class="line"><span class="lineno">  286</span>        temperatur = float(temp_eintrag[2])</div>
+<div class="line"><span class="lineno">  287</span>        station_name = _get_station_name(station_id, transportstation_daten)</div>
+<div class="line"><span class="lineno">  288</span> </div>
+<div class="line"><span class="lineno">  289</span>        <span class="keywordflow">if</span> temperatur &lt; 2 <span class="keywordflow">or</span> temperatur &gt; 4:</div>
+<div class="line"><span class="lineno">  290</span>            temperatur_fehler.append(</div>
+<div class="line"><span class="lineno">  291</span>                <span class="stringliteral">&quot;Temperaturfehler in Station &quot;</span></div>
+<div class="line"><span class="lineno">  292</span>                + station_name</div>
+<div class="line"><span class="lineno">  293</span>                + <span class="stringliteral">&quot; am &quot;</span></div>
+<div class="line"><span class="lineno">  294</span>                + zeit.strftime(<span class="stringliteral">&quot;%d.%m.%Y %H:%M:%S&quot;</span>)</div>
+<div class="line"><span class="lineno">  295</span>                + <span class="stringliteral">&quot; -&gt; &quot;</span></div>
+<div class="line"><span class="lineno">  296</span>                + str(temperatur)</div>
+<div class="line"><span class="lineno">  297</span>                + <span class="stringliteral">&quot; °C&quot;</span></div>
+<div class="line"><span class="lineno">  298</span>            )</div>
+<div class="line"><span class="lineno">  299</span> </div>
+<div class="line"><span class="lineno">  300</span>    <span class="keywordflow">for</span> fehler <span class="keywordflow">in</span> temperatur_fehler:</div>
+<div class="line"><span class="lineno">  301</span>        meldungen.append(fehler)</div>
+<div class="line"><span class="lineno">  302</span> </div>
+<div class="line"><span class="lineno">  303</span>    <span class="comment"># ##########################################</span></div>
+<div class="line"><span class="lineno">  304</span>    <span class="comment"># 10. Wenn keine Fehler -&gt; korrekt</span></div>
+<div class="line"><span class="lineno">  305</span>    <span class="comment"># ##########################################</span></div>
+<div class="line"><span class="lineno">  306</span>    <span class="keywordflow">if</span> len(meldungen) == 0:</div>
+<div class="line"><span class="lineno">  307</span>        meldungen.append(<span class="stringliteral">&quot;korrekt&quot;</span>)</div>
+<div class="line"><span class="lineno">  308</span> </div>
+<div class="line"><span class="lineno">  309</span>    <span class="keywordflow">return</span> meldungen</div>
+<div class="line"><span class="lineno">  310</span> </div>
+</div><!-- fragment -->
+<p class="reference">Benutzt <a class="el" href="_verarbeitung___libary___v4_8py_source.html#l00078">_get_art()</a>, <a class="el" href="_verarbeitung___libary___v4_8py_source.html#l00092">_get_plz()</a>, <a class="el" href="_verarbeitung___libary___v4_8py_source.html#l00064">_get_station_name()</a> und <a class="el" href="_verarbeitung___libary___v4_8py_source.html#l00041">_get_status()</a>.</p>
+
+</div>
+</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <div id="page-nav" class="page-nav-panel">

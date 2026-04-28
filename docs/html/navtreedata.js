@@ -24,7 +24,7 @@
 */
 var NAVTREE =
 [
-  [ "Projekt-Kühlkettenüberwachung", "index.html", [
+  [ "Projekt-Kuehlkettenueberwachung", "index.html", [
     [ "IoT-Kühlkettenüberwachung", "md__r_e_a_d_m_e.html", [
       [ "Projektüberblick", "md__r_e_a_d_m_e.html#autotoc_md49", null ],
       [ "Phase 1 – Grundprüfung der Kühlkette", "md__r_e_a_d_m_e.html#autotoc_md51", null ],
@@ -35,8 +35,22 @@ var NAVTREE =
       [ "Ziel des Projekts", "md__r_e_a_d_m_e.html#autotoc_md61", null ],
       [ "Hinweis", "md__r_e_a_d_m_e.html#autotoc_md63", null ]
     ] ],
-    [ "Pakete", "namespaces.html", [
-      [ "Paket-Liste", "namespaces.html", "namespaces_dup" ]
+    [ "Namensbereiche", "namespaces.html", [
+      [ "Liste aller Namensbereiche", "namespaces.html", "namespaces_dup" ],
+      [ "Elemente eines Namensbereiches", "namespacemembers.html", [
+        [ "Alle", "namespacemembers.html", null ],
+        [ "Funktionen", "namespacemembers_func.html", null ],
+        [ "Variablen", "namespacemembers_vars.html", null ]
+      ] ]
+    ] ],
+    [ "Klassen", "annotated.html", [
+      [ "Auflistung der Klassen", "annotated.html", "annotated_dup" ],
+      [ "Klassen-Verzeichnis", "classes.html", null ],
+      [ "Klassen-Elemente", "functions.html", [
+        [ "Alle", "functions.html", null ],
+        [ "Funktionen", "functions_func.html", null ],
+        [ "Variablen", "functions_vars.html", null ]
+      ] ]
     ] ],
     [ "Dateien", "files.html", [
       [ "Auflistung der Dateien", "files.html", "files_dup" ]

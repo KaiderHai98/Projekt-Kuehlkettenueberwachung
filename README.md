@@ -101,3 +101,22 @@ Das Ziel des Projekts ist die automatische und nachvollziehbare Prüfung einer d
 ## Hinweis
 
 Dieses Repository dokumentiert die Entwicklung des Projekts über mehrere Projektphasen hinweg. Phase 1 bildet die fachliche Grundprüfung der Kühlkette ab, während Phase 2 das System um Temperaturüberwachung, Verschlüsselung und Wetterdaten erweitert.
+
+---
+
+## Doxygen-Dokumentation lokal starten
+
+1. Terminal im Projekt-Hauptordner öffnen
+2. Alte Doxygen-Ausgabe löschen
+3. Doxygen mit der vorhandenen `Doxyfile` ausführen
+4. In den erzeugten Ordner `docs/html` wechseln
+5. Dort einen lokalen Python-Webserver starten
+6. Die Dokumentation im Browser unter `http://127.0.0.1:8000` öffnen
+
+### Beispielbefehle unter Windows
+
+```powershell
+rmdir /s /q docs
+doxygen Doxyfile
+cd .\docs\html
+python -m http.server 8000

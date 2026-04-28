@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.14.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Projekt-Kühlkettenüberwachung: Phase_2_Kühlkettenüberwachung/Verarbeitung_Libary_V4.py Quellcode</title>
+<title>Projekt-Kuehlkettenueberwachung: Phase_2_Kuehlkettenueberwachung/Verarbeitung_Libary_V4.py Quellcode</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -26,9 +26,9 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Projekt-Kühlkettenüberwachung
+   <div id="projectname">Projekt-Kuehlkettenueberwachung
    </div>
-   <div id="projectbrief">Dokumentation der Kühlkettenüberwachung aus Phase 1 und Phase 2</div>
+   <div id="projectbrief">Dokumentation der Kuehlkettenueberwachung aus Phase 1 und Phase 2</div>
   </td>
  </tr>
  </tbody>
@@ -132,7 +132,8 @@ $(function(){initNavTree('_verarbeitung___libary___v4_8py_source.html','',''); }
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
 <div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span><span class="keyword">from</span> DB_Zugriff_Libary_V4 <span class="keyword">import</span> get_wetter_temperatur</div>
 <div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span><span class="keyword">def </span>_get_status(eintrag):</div>
+<div class="foldopen" id="foldopen00041" data-start="" data-end="">
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno"><a class="line" href="namespace_verarbeitung___libary___v4.html#a0ee6fa9173ca14d492646a0da4d44819">   41</a></span><span class="keyword">def </span><a class="code hl_function" href="namespace_verarbeitung___libary___v4.html#a0ee6fa9173ca14d492646a0da4d44819">_get_status</a>(eintrag):</div>
 <div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
 <div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    <span class="stringliteral">&#39;&#39;&#39;</span></div>
 <div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="stringliteral">    @brief Liefert den Bewegungsstatus eines Datensatzes als sauberen String zurück.</span></div>
@@ -155,7 +156,9 @@ $(function(){initNavTree('_verarbeitung___libary___v4_8py_source.html','',''); }
 <div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span> </div>
 <div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    <span class="keywordflow">return</span> str(eintrag[4]).replace(<span class="stringliteral">&quot;&#39;&quot;</span>, <span class="stringliteral">&quot;&quot;</span>).lower()</div>
 <div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span> </div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span><span class="keyword">def </span>_get_station_name(station_id, transportstation_daten):</div>
+</div>
+<div class="foldopen" id="foldopen00064" data-start="" data-end="">
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno"><a class="line" href="namespace_verarbeitung___libary___v4.html#a0d100b2682ee63a172329dca9d3994aa">   64</a></span><span class="keyword">def </span><a class="code hl_function" href="namespace_verarbeitung___libary___v4.html#a0d100b2682ee63a172329dca9d3994aa">_get_station_name</a>(station_id, transportstation_daten):</div>
 <div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span> </div>
 <div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    <span class="stringliteral">&#39;&#39;&#39;</span></div>
 <div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span><span class="stringliteral">    @brief Sucht zu einer Stations-ID den lesbaren Stationsnamen.</span></div>
@@ -169,7 +172,9 @@ $(function(){initNavTree('_verarbeitung___libary___v4_8py_source.html','',''); }
 <div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>            <span class="keywordflow">return</span> str(transportstation_daten[key][1]).replace(<span class="stringliteral">&quot;&#39;&quot;</span>, <span class="stringliteral">&quot;&quot;</span>)</div>
 <div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>    <span class="keywordflow">return</span> <span class="stringliteral">&quot;&quot;</span></div>
 <div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span> </div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span><span class="keyword">def </span>_get_art(station_id, transportstation_daten):</div>
+</div>
+<div class="foldopen" id="foldopen00078" data-start="" data-end="">
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno"><a class="line" href="namespace_verarbeitung___libary___v4.html#a73ea7236a26e1bdc1d2cfd7c5e1beee1">   78</a></span><span class="keyword">def </span><a class="code hl_function" href="namespace_verarbeitung___libary___v4.html#a73ea7236a26e1bdc1d2cfd7c5e1beee1">_get_art</a>(station_id, transportstation_daten):</div>
 <div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span> </div>
 <div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>    <span class="stringliteral">&#39;&#39;&#39;</span></div>
 <div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span><span class="stringliteral">    @brief Sucht zu einer Stations-ID die Stationsart, also z. B. *GVZ* oder *KT*.</span></div>
@@ -183,7 +188,9 @@ $(function(){initNavTree('_verarbeitung___libary___v4_8py_source.html','',''); }
 <div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>            <span class="keywordflow">return</span> str(transportstation_daten[key][2]).replace(<span class="stringliteral">&quot;&#39;&quot;</span>, <span class="stringliteral">&quot;&quot;</span>).upper()</div>
 <div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>    <span class="keywordflow">return</span> <span class="stringliteral">&quot;&quot;</span></div>
 <div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span> </div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span><span class="keyword">def </span>_get_plz(station_id, transportstation_daten):</div>
+</div>
+<div class="foldopen" id="foldopen00092" data-start="" data-end="">
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno"><a class="line" href="namespace_verarbeitung___libary___v4.html#a10bc27ba6e296e4af69602b30f8132fe">   92</a></span><span class="keyword">def </span><a class="code hl_function" href="namespace_verarbeitung___libary___v4.html#a10bc27ba6e296e4af69602b30f8132fe">_get_plz</a>(station_id, transportstation_daten):</div>
 <div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span> </div>
 <div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>    <span class="stringliteral">&#39;&#39;&#39;</span></div>
 <div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span><span class="stringliteral">    @brief Sucht zu einer Stations-ID die Postleitzahl.</span></div>
@@ -197,7 +204,9 @@ $(function(){initNavTree('_verarbeitung___libary___v4_8py_source.html','',''); }
 <div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>            <span class="keywordflow">return</span> str(transportstation_daten[key][3]).replace(<span class="stringliteral">&quot;&#39;&quot;</span>, <span class="stringliteral">&quot;&quot;</span>)</div>
 <div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>    <span class="keywordflow">return</span> <span class="stringliteral">&quot;&quot;</span></div>
 <div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span> </div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span><span class="keyword">def </span>verarbeite_transport(transport_daten, temperatur_daten, company_daten, transportstation_daten, api_key=&quot;&quot;):</div>
+</div>
+<div class="foldopen" id="foldopen00106" data-start="" data-end="">
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno"><a class="line" href="namespace_verarbeitung___libary___v4.html#aaa806107718c9a566283940a113b099f">  106</a></span><span class="keyword">def </span><a class="code hl_function" href="namespace_verarbeitung___libary___v4.html#aaa806107718c9a566283940a113b099f">verarbeite_transport</a>(transport_daten, temperatur_daten, company_daten, transportstation_daten, api_key=&quot;&quot;):</div>
 <div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span> </div>
 <div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>    <span class="stringliteral">&#39;&#39;&#39;</span></div>
 <div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span><span class="stringliteral">    @brief Prüft einen Transport auf fachliche Fehler in der Kühlkette.</span></div>
@@ -244,7 +253,7 @@ $(function(){initNavTree('_verarbeitung___libary___v4_8py_source.html','',''); }
 <div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>    letzte_out_station = <span class="keywordtype">None</span></div>
 <div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span> </div>
 <div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>    <span class="keywordflow">for</span> bewegung <span class="keywordflow">in</span> transport_daten_liste:</div>
-<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>        status = _get_status(bewegung)</div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>        status = <a class="code hl_function" href="namespace_verarbeitung___libary___v4.html#a0ee6fa9173ca14d492646a0da4d44819">_get_status</a>(bewegung)</div>
 <div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>        zeit = bewegung[5]</div>
 <div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span> </div>
 <div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>        <span class="keywordflow">if</span> status == <span class="stringliteral">&quot;out&quot;</span>:</div>
@@ -255,8 +264,8 @@ $(function(){initNavTree('_verarbeitung___libary___v4_8py_source.html','',''); }
 <div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>            diff = (zeit - letzte_out).total_seconds() / 60</div>
 <div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>            <span class="keywordflow">if</span> diff &gt; 10:</div>
 <div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>                meldung = <span class="stringliteral">&quot;Übergabe &gt; 10 min&quot;</span></div>
-<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>                plz = _get_plz(letzte_out_station, transportstation_daten)</div>
-<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>                station_name = _get_station_name(letzte_out_station, transportstation_daten)</div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>                plz = <a class="code hl_function" href="namespace_verarbeitung___libary___v4.html#a10bc27ba6e296e4af69602b30f8132fe">_get_plz</a>(letzte_out_station, transportstation_daten)</div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>                station_name = <a class="code hl_function" href="namespace_verarbeitung___libary___v4.html#a0d100b2682ee63a172329dca9d3994aa">_get_station_name</a>(letzte_out_station, transportstation_daten)</div>
 <div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>                temperatur_aussen, wetter_meldung = get_wetter_temperatur(plz, letzte_out, api_key)</div>
 <div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span> </div>
 <div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>                <span class="keywordflow">if</span> temperatur_aussen <span class="keywordflow">is</span> <span class="keywordflow">not</span> <span class="keywordtype">None</span>:</div>
@@ -284,7 +293,7 @@ $(function(){initNavTree('_verarbeitung___libary___v4_8py_source.html','',''); }
 <div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>    letztes_out = <span class="keywordtype">None</span></div>
 <div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span> </div>
 <div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>    <span class="keywordflow">for</span> bewegung <span class="keywordflow">in</span> transport_daten_liste:</div>
-<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>        status = _get_status(bewegung)</div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>        status = <a class="code hl_function" href="namespace_verarbeitung___libary___v4.html#a0ee6fa9173ca14d492646a0da4d44819">_get_status</a>(bewegung)</div>
 <div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>        zeit = bewegung[5]</div>
 <div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>        <span class="keywordflow">if</span> status == <span class="stringliteral">&quot;in&quot;</span> <span class="keywordflow">and</span> erstes_in <span class="keywordflow">is</span> <span class="keywordtype">None</span>:</div>
 <div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>            erstes_in = zeit</div>
@@ -303,7 +312,7 @@ $(function(){initNavTree('_verarbeitung___libary___v4_8py_source.html','',''); }
 <div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span> </div>
 <div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>    <span class="keywordflow">for</span> bewegung <span class="keywordflow">in</span> transport_daten_liste:</div>
 <div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>        station = bewegung[3]</div>
-<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>        status = _get_status(bewegung)</div>
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>        status = <a class="code hl_function" href="namespace_verarbeitung___libary___v4.html#a0ee6fa9173ca14d492646a0da4d44819">_get_status</a>(bewegung)</div>
 <div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>        zeit = bewegung[5]</div>
 <div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>        <span class="keywordflow">if</span> station <span class="keywordflow">in</span> letzte_aktion:</div>
 <div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>            <span class="keywordflow">if</span> letzte_aktion[station][0] == <span class="stringliteral">&quot;out&quot;</span> <span class="keywordflow">and</span> status == <span class="stringliteral">&quot;out&quot;</span>:</div>
@@ -314,7 +323,7 @@ $(function(){initNavTree('_verarbeitung___libary___v4_8py_source.html','',''); }
 <div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>    <span class="comment"># ##########################################</span></div>
 <div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>    <span class="comment"># 6. Fehlende OUTs - Konsitenzprüfung</span></div>
 <div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>    <span class="comment"># ##########################################</span></div>
-<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>    letzter_status = _get_status(transport_daten_liste[-1])</div>
+<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>    letzter_status = <a class="code hl_function" href="namespace_verarbeitung___libary___v4.html#a0ee6fa9173ca14d492646a0da4d44819">_get_status</a>(transport_daten_liste[-1])</div>
 <div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>    fehlt_in_mitte = <span class="keyword">False</span></div>
 <div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span> </div>
 <div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>    <span class="keywordflow">for</span> station <span class="keywordflow">in</span> letzte_aktion:</div>
@@ -334,8 +343,8 @@ $(function(){initNavTree('_verarbeitung___libary___v4_8py_source.html','',''); }
 <div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span> </div>
 <div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span>    <span class="keywordflow">for</span> bewegung <span class="keywordflow">in</span> transport_daten_liste:</div>
 <div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span>        station = bewegung[3]</div>
-<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span>        status = _get_status(bewegung)</div>
-<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span>        art = _get_art(station, transportstation_daten)</div>
+<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span>        status = <a class="code hl_function" href="namespace_verarbeitung___libary___v4.html#a0ee6fa9173ca14d492646a0da4d44819">_get_status</a>(bewegung)</div>
+<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span>        art = <a class="code hl_function" href="namespace_verarbeitung___libary___v4.html#a73ea7236a26e1bdc1d2cfd7c5e1beee1">_get_art</a>(station, transportstation_daten)</div>
 <div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span> </div>
 <div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span>        <span class="keywordflow">if</span> station <span class="keywordflow">not</span> <span class="keywordflow">in</span> zyklus_gesehen:</div>
 <div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span>            zyklus_gesehen[station] = <span class="keyword">False</span></div>
@@ -356,8 +365,8 @@ $(function(){initNavTree('_verarbeitung___libary___v4_8py_source.html','',''); }
 <div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span>    kt_aktiv = <span class="keyword">False</span></div>
 <div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span> </div>
 <div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span>    <span class="keywordflow">for</span> bewegung <span class="keywordflow">in</span> transport_daten_liste:</div>
-<div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span>        art = _get_art(bewegung[3], transportstation_daten)</div>
-<div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span>        status = _get_status(bewegung)</div>
+<div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span>        art = <a class="code hl_function" href="namespace_verarbeitung___libary___v4.html#a73ea7236a26e1bdc1d2cfd7c5e1beee1">_get_art</a>(bewegung[3], transportstation_daten)</div>
+<div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span>        status = <a class="code hl_function" href="namespace_verarbeitung___libary___v4.html#a0ee6fa9173ca14d492646a0da4d44819">_get_status</a>(bewegung)</div>
 <div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span> </div>
 <div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span>        <span class="keywordflow">if</span> art == <span class="stringliteral">&quot;KT&quot;</span>:</div>
 <div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span>            <span class="keywordflow">if</span> status == <span class="stringliteral">&quot;in&quot;</span>:</div>
@@ -378,7 +387,7 @@ $(function(){initNavTree('_verarbeitung___libary___v4_8py_source.html','',''); }
 <div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span>        station_id = temp_eintrag[0]</div>
 <div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span>        zeit = temp_eintrag[1]</div>
 <div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span>        temperatur = float(temp_eintrag[2])</div>
-<div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span>        station_name = _get_station_name(station_id, transportstation_daten)</div>
+<div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span>        station_name = <a class="code hl_function" href="namespace_verarbeitung___libary___v4.html#a0d100b2682ee63a172329dca9d3994aa">_get_station_name</a>(station_id, transportstation_daten)</div>
 <div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span> </div>
 <div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span>        <span class="keywordflow">if</span> temperatur &lt; 2 <span class="keywordflow">or</span> temperatur &gt; 4:</div>
 <div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span>            temperatur_fehler.append(</div>
@@ -402,13 +411,19 @@ $(function(){initNavTree('_verarbeitung___libary___v4_8py_source.html','',''); }
 <div class="line"><a id="l00308" name="l00308"></a><span class="lineno">  308</span> </div>
 <div class="line"><a id="l00309" name="l00309"></a><span class="lineno">  309</span>    <span class="keywordflow">return</span> meldungen</div>
 <div class="line"><a id="l00310" name="l00310"></a><span class="lineno">  310</span> </div>
+</div>
+<div class="ttc" id="anamespace_verarbeitung___libary___v4_html_a0d100b2682ee63a172329dca9d3994aa"><div class="ttname"><a href="namespace_verarbeitung___libary___v4.html#a0d100b2682ee63a172329dca9d3994aa">Verarbeitung_Libary_V4._get_station_name</a></div><div class="ttdeci">_get_station_name(station_id, transportstation_daten)</div><div class="ttdef"><b>Definition</b> <a href="#l00064">Verarbeitung_Libary_V4.py:64</a></div></div>
+<div class="ttc" id="anamespace_verarbeitung___libary___v4_html_a0ee6fa9173ca14d492646a0da4d44819"><div class="ttname"><a href="namespace_verarbeitung___libary___v4.html#a0ee6fa9173ca14d492646a0da4d44819">Verarbeitung_Libary_V4._get_status</a></div><div class="ttdeci">_get_status(eintrag)</div><div class="ttdef"><b>Definition</b> <a href="#l00041">Verarbeitung_Libary_V4.py:41</a></div></div>
+<div class="ttc" id="anamespace_verarbeitung___libary___v4_html_a10bc27ba6e296e4af69602b30f8132fe"><div class="ttname"><a href="namespace_verarbeitung___libary___v4.html#a10bc27ba6e296e4af69602b30f8132fe">Verarbeitung_Libary_V4._get_plz</a></div><div class="ttdeci">_get_plz(station_id, transportstation_daten)</div><div class="ttdef"><b>Definition</b> <a href="#l00092">Verarbeitung_Libary_V4.py:92</a></div></div>
+<div class="ttc" id="anamespace_verarbeitung___libary___v4_html_a73ea7236a26e1bdc1d2cfd7c5e1beee1"><div class="ttname"><a href="namespace_verarbeitung___libary___v4.html#a73ea7236a26e1bdc1d2cfd7c5e1beee1">Verarbeitung_Libary_V4._get_art</a></div><div class="ttdeci">_get_art(station_id, transportstation_daten)</div><div class="ttdef"><b>Definition</b> <a href="#l00078">Verarbeitung_Libary_V4.py:78</a></div></div>
+<div class="ttc" id="anamespace_verarbeitung___libary___v4_html_aaa806107718c9a566283940a113b099f"><div class="ttname"><a href="namespace_verarbeitung___libary___v4.html#aaa806107718c9a566283940a113b099f">Verarbeitung_Libary_V4.verarbeite_transport</a></div><div class="ttdeci">verarbeite_transport(transport_daten, temperatur_daten, company_daten, transportstation_daten, api_key=&quot;&quot;)</div><div class="ttdef"><b>Definition</b> <a href="#l00106">Verarbeitung_Libary_V4.py:106</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a href="dir_3b944cc121c075142008476ee0b37113.html">Phase_2_Kühlkettenüberwachung</a></li><li class="navelem"><a href="_verarbeitung___libary___v4_8py.html">Verarbeitung_Libary_V4.py</a></li>
+    <li class="navelem"><a href="dir_652fdab46b441faa167236ff152bb275.html">Phase_2_Kuehlkettenueberwachung</a></li><li class="navelem"><a href="_verarbeitung___libary___v4_8py.html">Verarbeitung_Libary_V4.py</a></li>
     <li class="footer">Erzeugt von <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.14.0 </li>
   </ul>
 </div>

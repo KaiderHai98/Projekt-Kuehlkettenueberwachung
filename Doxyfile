@@ -3,37 +3,27 @@
 # Dokumentiert Phase 1 und Phase 2 gemeinsam
 # ===========================================================================
 
-# --- Projekt-Infos ---
-PROJECT_NAME           = "Projekt-Kühlkettenüberwachung"
-PROJECT_BRIEF          = "Dokumentation der Kühlkettenüberwachung aus Phase 1 und Phase 2"
+PROJECT_NAME           = "Projekt-Kuehlkettenueberwachung"
+PROJECT_BRIEF          = "Dokumentation der Kuehlkettenueberwachung aus Phase 1 und Phase 2"
 OUTPUT_LANGUAGE        = German
 OUTPUT_DIRECTORY       = docs
 
-# --- Ausgabeformate ---
 GENERATE_HTML          = YES
 GENERATE_LATEX         = NO
 GENERATE_TREEVIEW      = YES
-HTML_TIMESTAMP         = NO
-OUTPUT_TEXT_DIRECTION  = LTR
 
-# --- Eingaben ---
 INPUT                  = .
 RECURSIVE              = YES
 FILE_PATTERNS          = *.py *.md
-EXCLUDE_PATTERNS       = */__pycache__/* */Tests/* */.venv/* */.env/*
+EXCLUDE_PATTERNS       = */__pycache__/* */Tests/* */.venv/* */.env/* */docs/*
 USE_MDFILE_AS_MAINPAGE = README
 MARKDOWN_SUPPORT       = YES
 
-# --- Python-Unterstützung ---
 EXTENSION_MAPPING      = py=Python
-OPTIMIZE_OUTPUT_JAVA   = YES
 JAVADOC_AUTOBRIEF      = YES
 MULTILINE_CPP_IS_BRIEF = YES
+PYTHON_DOCSTRING       = YES
 
-# --- doxypypy-Filter ---
-FILTER_PATTERNS        = *.py="C:/Users/hanne/AppData/Local/Packages/PythonSoftwareFoundation.Python.3.13_qbz5n2kfra8p0/LocalCache/local-packages/Python313/Scripts/doxypypy.exe -a -c"
-
-# --- Extraktion ---
 EXTRACT_ALL            = YES
 EXTRACT_PRIVATE        = YES
 EXTRACT_STATIC         = YES
@@ -46,21 +36,17 @@ INLINE_SOURCES         = YES
 REFERENCED_BY_RELATION = YES
 REFERENCES_RELATION    = YES
 
-# --- Warnungen ---
 WARNINGS               = YES
 WARN_IF_UNDOCUMENTED   = YES
 WARN_NO_PARAMDOC       = YES
 QUIET                  = NO
 WARN_LOGFILE           = docs/doxygen_warnings.txt
 
-# --- Diagramme ---
 HAVE_DOT               = NO
 CALL_GRAPH             = NO
 CALLER_GRAPH           = NO
 
-# --- Kodierung ---
 DOXYFILE_ENCODING      = UTF-8
-INPUT_ENCODING         = UTF-8
 
 # ===========================================================================
 # Ende der Konfiguration
