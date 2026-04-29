@@ -151,83 +151,11 @@ class TransportGUI:
 
         self.on_toggle_api_key_mode()
 
-    def on_toggle_api_key_mode(self):
+# def on_toggle_api_key_mode(self):
 
-        '''
-        @brief Schaltet zwischen Standard-API-Key und manuell eingegebenem API-Key um.
-        @details
-        Diese Methode reagiert auf den Haken in der Oberfläche.
+# def get_aktuellen_api_key(self):
 
-        Was an dieser Stelle passiert:
-        - Ist der Haken gesetzt, wird automatisch der Standard-API-Key verwendet.
-        - Gleichzeitig wird das Eingabefeld für den API-Key gesperrt,
-          damit klar ist, dass der Standardwert aktiv ist.
-        - Ist der Haken nicht gesetzt, wird das Eingabefeld wieder freigegeben,
-          damit der Benutzer einen eigenen API-Key eintragen kann.
-
-        Warum das gebraucht wird:
-        - Der Anwender soll schnell mit einem vordefinierten API-Key arbeiten können.
-        - Gleichzeitig bleibt die Möglichkeit erhalten, bei Bedarf einen
-          individuellen API-Key einzutragen.
-        '''
-
-        if self.use_default_api_key.get():
-            self.api_entry.config(state="normal")
-            self.api_entry.delete(0, tk.END)
-            self.api_entry.insert(0, DEFAULT_VISUAL_CROSSING_API_KEY)
-            self.api_entry.config(state="disabled")
-        else:
-            self.api_entry.config(state="normal")
-            self.api_entry.delete(0, tk.END)
-
-    def get_aktuellen_api_key(self):
-
-        '''
-        @brief Liefert den aktuell zu verwendenden API-Key zurück.
-        @details
-        Diese Methode entscheidet zentral, welcher API-Key tatsächlich an die
-        Verarbeitungslogik übergeben wird.
-
-        Was an dieser Stelle passiert:
-        - Wenn der Haken gesetzt ist, wird immer der Standard-API-Key zurückgegeben.
-        - Wenn der Haken nicht gesetzt ist, wird der Text aus dem Eingabefeld gelesen.
-
-        Warum das gebraucht wird:
-        - Dadurch muss die Unterscheidung zwischen Standardwert und Benutzereingabe
-          nicht mehrfach im Programm wiederholt werden.
-        - Die Methoden *on_pruefen()* und *on_alle_pruefen()* können einfach
-          denselben Helfer benutzen.
-
-        @return API-Key als String.
-        '''
-
-        if self.use_default_api_key.get():
-            return DEFAULT_VISUAL_CROSSING_API_KEY
-        return self.api_entry.get().strip()
-
-    def ausgabe_meldung_einfuegen(self, text):
-
-        '''
-        @brief Fügt eine Meldung farblich formatiert in das Ausgabefeld ein.
-        @details
-        - Nur das Wort "korrekt" wird grün dargestellt.
-        - Bei Fehlermeldungen bleiben Transport-ID, Pfeil und andere Bestandteile schwarz.
-        - Nur der eigentliche Meldungstext hinter dem Pfeil wird rot dargestellt.
-        '''
-
-        if " -> " in text:
-            prefix, meldung = text.split(" -> ", 1)
-            self.output.insert(tk.END, prefix + " -> ", "standard")
-
-            if meldung.strip().lower() == "korrekt":
-                self.output.insert(tk.END, meldung, "gruen")
-            else:
-                self.output.insert(tk.END, meldung, "rot")
-        else:
-            if text.strip().lower() == "korrekt":
-                self.output.insert(tk.END, text, "gruen")
-            else:
-                self.output.insert(tk.END, text, "standard")
+# def ausgabe_meldung_einfuegen(self, text):
 
     def on_pruefen(self):
 
@@ -369,32 +297,7 @@ class TransportGUI:
         except Exception as e:
             messagebox.showerror("Fehler", f"Ein Fehler ist aufgetreten:\n{e}")
 
-    def on_clear(self):
-        
-        '''
-        @brief Setzt die Benutzereingabe und die Anzeige wieder auf den Ausgangszustand zurück.
-        @details
-        Diese Methode ist die Reset-Funktion der Oberfläche.
-
-        Was an dieser Stelle passiert:
-        - Das Eingabefeld für die Transport-ID wird geleert.
-        - Das Ausgabefeld mit den bisherigen Meldungen wird gelöscht.
-        - Der Haken für den Standard-API-Key wird wieder gesetzt.
-        - Das API-Feld wird wieder mit dem Standardwert belegt und gesperrt.
-        - Die Statuszeile wird wieder auf *Bereit* gesetzt.
-
-        Warum das gebraucht wird:
-        - Der Anwender kann damit schnell einen neuen Prüfvorgang starten,
-          ohne alte Inhalte manuell entfernen zu müssen.
-
-        @return Kein Rückgabewert. Die GUI wird direkt zurückgesetzt.
-        '''
-
-        self.entry.delete(0, tk.END)
-        self.output.delete("1.0", tk.END)
-        self.use_default_api_key.set(True)
-        self.on_toggle_api_key_mode()
-        self.status.set("Bereit")
+# def on_clear(self):
 
 if __name__ == "__main__":
     root = tk.Tk()
