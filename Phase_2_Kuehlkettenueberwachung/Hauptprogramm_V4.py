@@ -180,7 +180,30 @@ class TransportGUI:
             self.api_entry.config(state="normal")
             self.api_entry.delete(0, tk.END)
 
-# def get_aktuellen_api_key(self):
+    def get_aktuellen_api_key(self):
+
+        '''
+        @brief Liefert den aktuell zu verwendenden API-Key zurück.
+        @details
+        Diese Methode entscheidet zentral, welcher API-Key tatsächlich an die
+        Verarbeitungslogik übergeben wird.
+
+        Was an dieser Stelle passiert:
+        - Wenn der Haken gesetzt ist, wird immer der Standard-API-Key zurückgegeben.
+        - Wenn der Haken nicht gesetzt ist, wird der Text aus dem Eingabefeld gelesen.
+
+        Warum das gebraucht wird:
+        - Dadurch muss die Unterscheidung zwischen Standardwert und Benutzereingabe
+          nicht mehrfach im Programm wiederholt werden.
+        - Die Methoden *on_pruefen()* und *on_alle_pruefen()* können einfach
+          denselben Helfer benutzen.
+
+        @return API-Key als String.
+        '''
+
+        if self.use_default_api_key.get():
+            return DEFAULT_VISUAL_CROSSING_API_KEY
+        return self.api_entry.get().strip()
 
 # def ausgabe_meldung_einfuegen(self, text):
 
