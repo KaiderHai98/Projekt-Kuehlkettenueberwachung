@@ -28,7 +28,39 @@ iv  = b'passwort-salzen!'                # 16 Byte Initialization Vektor
 # Hilfsfunktionen #################################################
 ###################################################################
 
-# def decrypt_value(encrypted_data):
+def decrypt_value(encrypted_data):
+
+    '''
+    @brief Entschlüsselt einen einzelnen Datenbankwert aus den verschlüsselten Tabellen.
+    @details
+    Diese Funktion wird immer dann benutzt, wenn Stammdaten nicht im Klartext,
+    sondern als verschlüsselte Bytefolge aus der Datenbank gelesen werden.
+
+    Was an dieser Stelle passiert:
+    - Zuerst wird geprüft, ob überhaupt ein Wert vorhanden ist.
+    - Danach wird ein AES-Cipher-Objekt mit dem vorgegebenen Passwort und
+      dem vorgegebenen Initialisierungsvektor aufgebaut.
+    - Anschließend wird der Binärwert entschlüsselt.
+    - Zum Schluss wird das Padding entfernt und der Klartext als normaler String
+      zurückgegeben.
+
+    Warum das gebraucht wird:
+    - Die Tabellen company_crypt und transportstation_crypt enthalten die Inhalte
+      nicht direkt lesbar.
+    - Die restliche Programmlogik benötigt aber lesbare Firmennamen, Stationsnamen,
+      Kategorien und Postleitzahlen.
+    - Ohne diese Entschlüsselung könnte das Hauptprogramm zwar Datensätze laden,
+      aber nicht sinnvoll weiterverarbeiten oder verständlich ausgeben.
+
+    @param encrypted_data Verschlüsselter Datenbankwert als Binärwert.
+    @return Entschlüsselter Klartext als String.
+    '''
+
+    if encrypted_data is None:
+        return ""
+
+    cipher = AES.new(key, AES.MODE_CBC, iv)  # Verschlüsselung initialisieren
+    return unpad(cipher.decrypt(encrypted_data), AES.block_size).decode()
 
 ###################################################################
 # Datenbank Zugriff - Transportdaten ##############################
