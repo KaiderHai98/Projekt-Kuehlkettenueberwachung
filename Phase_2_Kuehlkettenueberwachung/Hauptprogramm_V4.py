@@ -151,7 +151,34 @@ class TransportGUI:
 
         self.on_toggle_api_key_mode()
 
-# def on_toggle_api_key_mode(self):
+    def on_toggle_api_key_mode(self):
+
+        '''
+        @brief Schaltet zwischen Standard-API-Key und manuell eingegebenem API-Key um.
+        @details
+        Diese Methode reagiert auf den Haken in der Oberfläche.
+
+        Was an dieser Stelle passiert:
+        - Ist der Haken gesetzt, wird automatisch der Standard-API-Key verwendet.
+        - Gleichzeitig wird das Eingabefeld für den API-Key gesperrt,
+          damit klar ist, dass der Standardwert aktiv ist.
+        - Ist der Haken nicht gesetzt, wird das Eingabefeld wieder freigegeben,
+          damit der Benutzer einen eigenen API-Key eintragen kann.
+
+        Warum das gebraucht wird:
+        - Der Anwender soll schnell mit einem vordefinierten API-Key arbeiten können.
+        - Gleichzeitig bleibt die Möglichkeit erhalten, bei Bedarf einen
+          individuellen API-Key einzutragen.
+        '''
+
+        if self.use_default_api_key.get():
+            self.api_entry.config(state="normal")
+            self.api_entry.delete(0, tk.END)
+            self.api_entry.insert(0, DEFAULT_VISUAL_CROSSING_API_KEY)
+            self.api_entry.config(state="disabled")
+        else:
+            self.api_entry.config(state="normal")
+            self.api_entry.delete(0, tk.END)
 
 # def get_aktuellen_api_key(self):
 
