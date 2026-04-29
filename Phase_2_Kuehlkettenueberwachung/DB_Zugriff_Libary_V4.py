@@ -467,6 +467,91 @@ def get_alle_transport_ids(verbindungs_i):
 # Wetterdatenabfrage ##############################################
 ###################################################################
 
-# def get_wetter_temperatur(plz, datetime_obj, api_key):
+def get_wetter_temperatur(plz, datetime_obj, api_key):
+    
+    '''
+    @brief Ruft die Außentemperatur zu einem Ort und Zeitpunkt über die Visual-Crossing-API ab.
+    @details
+    Diese Funktion ergänzt einen gefundenen Kühlkettenverstoß um eine zusätzliche
+    Umweltinformation: Wie warm war es außen am Auslagerungsort, als die Ware dort
+    ohne Kühlung übergeben wurde?
+
+    Was an dieser Stelle passiert:
+    - Zuerst wird geprüft, ob überhaupt ein API-Key vorhanden ist.
+    - Danach wird *requests* erst innerhalb der Funktion importiert.
+      Dadurch startet das Gesamtprogramm auch dann noch, wenn die Bibliothek auf
+      dem System fehlt und die Wetterfunktion gerade nicht benutzt wird.
+    - Anschließend wird geprüft, ob eine sinnvolle PLZ vorhanden ist.
+      Für Transportwagen mit PLZ 0 gibt es keine ortsbezogene Wetterabfrage.
+    - Die Uhrzeit wird auf die nächste volle Stunde gerundet, weil die API mit
+      stündlichen Wetterwerten arbeitet.
+    - Danach wird die Anfrage-URL gebaut und an die Wetter-API gesendet.
+    - Wenn Daten vorhanden sind, wird daraus die Temperatur gelesen und zurückgegeben.
+
+    Wie das Programm das grob handhabt:
+    - Die Funktion liefert nicht nur Temperaturwerte zurück,
+      sondern im Fehlerfall auch eine verständliche Textmeldung.
+    - Dadurch kann die Verarbeitung später entscheiden,
+      ob eine Temperatur angezeigt oder stattdessen eine Hinweiszeile ausgegeben wird.
+
+    Warum das gebraucht wird:
+    - In Phase 2 soll bei einer zu langen Übergabezeit zusätzlich die Temperatur
+      am Auslagerungsort ausgegeben werden.
+    - Genau diese Information liefert diese Funktion an die Verarbeitungslogik.
+
+    @param plz Postleitzahl der Auslagerungsstation.
+    @param datetime_obj Zeitpunkt der Auslagerung als datetime-Objekt.
+    @param api_key API-Schlüssel für Visual Crossing.
+    @return Tuple aus Temperaturwert oder None und Status-/Fehlermeldung.
+    '''
+
+    if api_key is None or str(api_key).strip() == "":
+        return None, "Wetterdaten konnten nicht abgefragt werden (API-Key fehlt)"
+
+    try:
+        import requests
+    except ImportError:
+        return None, "Wetterdaten konnten nicht abgefragt werden (Bibliothek requests fehlt)"
+
+    plz_text = str(plz).strip()
+    if plz_text == "" or plz_text == "0":
+        return None, "Wetterdaten nicht verfügbar (keine PLZ für Transportwagen)"
+
+    datetime_gerundet = datetime_obj.replace(minute=0, second=0, microsecond=0)
+    if datetime_obj.minute >= 30:
+        datetime_gerundet = datetime_gerundet + timedelta(hours=1)
+
+    timestamp = datetime_gerundet.strftime('%Y-%m-%dT%H:%M:%S')
+    location = f"{plz_text},DE"
+
+    url = (
+        "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/"
+        f"{location}/{timestamp}"
+    )
+
+    try:
+        response = requests.get(
+            url,
+            params={'unitGroup': 'metric', 'key': api_key, 'include': 'hours'},
+            timeout=15,
+        )
+        response.raise_for_status()
+        data = response.json()
+
+        temperatur = None
+        if "days" in data and len(data["days"]) > 0:
+            if "hours" in data["days"][0] and len(data["days"][0]["hours"]) > 0:
+                temperatur = data["days"][0]["hours"][0].get("temp")
+            if temperatur is None:
+                temperatur = data["days"][0].get("temp")
+
+        if temperatur is None:
+            return None, "Wetterdaten konnten nicht ausgewertet werden"
+
+        return temperatur, "ok"
+
+    except Exception as e:
+        return None, "Wetterdaten konnten nicht abgefragt werden (" + str(e) + ")"
+
 
 
