@@ -205,7 +205,29 @@ class TransportGUI:
             return DEFAULT_VISUAL_CROSSING_API_KEY
         return self.api_entry.get().strip()
 
-# def ausgabe_meldung_einfuegen(self, text):
+    def ausgabe_meldung_einfuegen(self, text):
+
+        '''
+        @brief Fügt eine Meldung farblich formatiert in das Ausgabefeld ein.
+        @details
+        - Nur das Wort "korrekt" wird grün dargestellt.
+        - Bei Fehlermeldungen bleiben Transport-ID, Pfeil und andere Bestandteile schwarz.
+        - Nur der eigentliche Meldungstext hinter dem Pfeil wird rot dargestellt.
+        '''
+
+        if " -> " in text:
+            prefix, meldung = text.split(" -> ", 1)
+            self.output.insert(tk.END, prefix + " -> ", "standard")
+
+            if meldung.strip().lower() == "korrekt":
+                self.output.insert(tk.END, meldung, "gruen")
+            else:
+                self.output.insert(tk.END, meldung, "rot")
+        else:
+            if text.strip().lower() == "korrekt":
+                self.output.insert(tk.END, text, "gruen")
+            else:
+                self.output.insert(tk.END, text, "standard")
 
     def on_pruefen(self):
 
