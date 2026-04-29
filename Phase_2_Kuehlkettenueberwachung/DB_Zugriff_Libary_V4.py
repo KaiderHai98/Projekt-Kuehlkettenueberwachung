@@ -21,13 +21,46 @@ from Crypto.Util.Padding import unpad
 # Initialisierung #################################################
 ###################################################################
 
-
+key = b'mysecretpassword'                # 16 Byte Passwort
+iv  = b'passwort-salzen!'                # 16 Byte Initialization Vektor
 
 ###################################################################
 # Hilfsfunktionen #################################################
 ###################################################################
 
-# def decrypt_value(encrypted_data):
+def decrypt_value(encrypted_data):
+
+    '''
+    @brief Entschlüsselt einen einzelnen Datenbankwert aus den verschlüsselten Tabellen.
+    @details
+    Diese Funktion wird immer dann benutzt, wenn Stammdaten nicht im Klartext,
+    sondern als verschlüsselte Bytefolge aus der Datenbank gelesen werden.
+
+    Was an dieser Stelle passiert:
+    - Zuerst wird geprüft, ob überhaupt ein Wert vorhanden ist.
+    - Danach wird ein AES-Cipher-Objekt mit dem vorgegebenen Passwort und
+      dem vorgegebenen Initialisierungsvektor aufgebaut.
+    - Anschließend wird der Binärwert entschlüsselt.
+    - Zum Schluss wird das Padding entfernt und der Klartext als normaler String
+      zurückgegeben.
+
+    Warum das gebraucht wird:
+    - Die Tabellen company_crypt und transportstation_crypt enthalten die Inhalte
+      nicht direkt lesbar.
+    - Die restliche Programmlogik benötigt aber lesbare Firmennamen, Stationsnamen,
+      Kategorien und Postleitzahlen.
+    - Ohne diese Entschlüsselung könnte das Hauptprogramm zwar Datensätze laden,
+      aber nicht sinnvoll weiterverarbeiten oder verständlich ausgeben.
+
+    @param encrypted_data Verschlüsselter Datenbankwert als Binärwert.
+    @return Entschlüsselter Klartext als String.
+    '''
+
+    if encrypted_data is None:
+        return ""
+
+    cipher = AES.new(key, AES.MODE_CBC, iv)  # Verschlüsselung initialisieren
+    return unpad(cipher.decrypt(encrypted_data), AES.block_size).decode()
 
 ###################################################################
 # Datenbank Zugriff - Transportdaten ##############################
@@ -104,7 +137,107 @@ def get_transport_daten(transportid, verbindungs_i):
 # Datenbank Zugriff - Temperaturdaten #############################
 ###################################################################
 
-# def get_temperatur_daten(transport_daten, verbindungs_i):
+def get_temperatur_daten(transport_daten, verbindungs_i):
+
+    '''
+    @brief Liest die Temperaturmessungen der im Transport verwendeten Stationen aus *tempdata*.
+    @details
+    Diese Funktion ermittelt nicht einfach alle Temperaturwerte einer Station,
+    sondern gezielt nur die Messwerte aus dem Zeitraum, in dem sich die Ware
+    tatsächlich an der jeweiligen Station befand.
+
+    Was an dieser Stelle passiert:
+    - Zuerst werden die schon geladenen Transportdaten zeitlich sortiert.
+    - Danach läuft eine for-Schleife über alle Bewegungsereignisse.
+    - Für jeden Eintrag mit Status *in* beginnt ein möglicher Aufenthaltszeitraum.
+    - Anschließend sucht eine weitere Schleife den dazugehörigen nächsten *out*-Eintrag
+      derselben Station.
+    - Ist ein passendes *out* vorhanden, werden nur die Temperaturwerte zwischen
+      Einchecken und Auschecken geladen.
+    - Gibt es kein *out*, werden alle Werte ab dem Eincheck-Zeitpunkt geladen.
+
+    Wie das Programm das grob handhabt:
+    - Es werden also nur die Temperaturdaten mitgenommen, die wirklich zu dem
+      konkreten Aufenthalt des Produkts passen.
+    - Die Ergebnisse landen wieder gesammelt in einem Dictionary, damit die
+      spätere Verarbeitung einfach über alle Temperaturmessungen laufen kann.
+
+    Warum das gebraucht wird:
+    - Die Temperaturprüfung soll nicht die gesamte Station bewerten,
+      sondern den Abschnitt, in dem der geprüfte Transport dort gelagert war.
+    - Genau diese Daten werden später benötigt, um festzustellen,
+      ob die Temperaturgrenzen von +2 °C bis +4 °C eingehalten wurden.
+
+    @param transport_daten Bereits geladene Bewegungsdaten des Transports.
+    @param verbindungs_i SQL-Verbindungsstring für pyodbc.
+    @return Tuple aus Dictionary mit Temperaturdaten und Anzahl der Datensätze.
+    '''
+
+    temperatur_daten = {}
+
+    try:
+        conn = pyodbc.connect(verbindungs_i)
+        cursor = conn.cursor()
+
+        sql_ohne_end = """
+            SELECT *
+            FROM dbo.tempdata
+            WHERE transportstationID = ?
+              AND datetime >= ?
+            ORDER BY datetime
+        """
+        sql_mit_end = """
+            SELECT *
+            FROM dbo.tempdata
+            WHERE transportstationID = ?
+              AND datetime >= ?
+              AND datetime < ?
+            ORDER BY datetime
+        """
+
+        items = sorted(transport_daten.items(), key=lambda kv: kv[1][5])
+
+        idx = 1
+        for pos, (_, eintrag) in enumerate(items):
+            station_id = eintrag[3]
+            status = str(eintrag[4]).strip().strip("'").lower()
+            start_dt = eintrag[5]
+
+            if status != "in":
+                continue
+
+            end_dt = None
+            for _, next_entry in items[pos + 1:]:
+                if next_entry[3] == station_id:
+                    next_status = str(next_entry[4]).strip().strip("'").lower()
+                    if next_status == "out":
+                        end_dt = next_entry[5]
+                        break
+
+            if end_dt is None:
+                cursor.execute(sql_ohne_end, station_id, start_dt)
+            else:
+                cursor.execute(sql_mit_end, station_id, start_dt, end_dt)
+
+            zeilen = cursor.fetchall()
+            for zeile in zeilen:
+                temperatur_daten[idx] = list(zeile)
+                idx += 1
+
+        temperatur_daten_len = len(temperatur_daten)
+        return temperatur_daten, temperatur_daten_len
+
+    except Exception as e:
+        print("Fehler beim Datenbankzugriff - Temperaturdaten:", e)
+        return {}, 0
+
+    finally:
+        if 'cursor' in locals():
+            cursor.close()
+        if 'conn' in locals():
+            conn.close()
+
+        print(temperatur_daten)
 
 ###################################################################
 # Datenbank Zugriff - Company-Daten ###############################
