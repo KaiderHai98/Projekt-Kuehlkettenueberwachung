@@ -369,7 +369,32 @@ class TransportGUI:
         except Exception as e:
             messagebox.showerror("Fehler", f"Ein Fehler ist aufgetreten:\n{e}")
 
-# def on_clear(self):
+    def on_clear(self):
+        
+        '''
+        @brief Setzt die Benutzereingabe und die Anzeige wieder auf den Ausgangszustand zurück.
+        @details
+        Diese Methode ist die Reset-Funktion der Oberfläche.
+
+        Was an dieser Stelle passiert:
+        - Das Eingabefeld für die Transport-ID wird geleert.
+        - Das Ausgabefeld mit den bisherigen Meldungen wird gelöscht.
+        - Der Haken für den Standard-API-Key wird wieder gesetzt.
+        - Das API-Feld wird wieder mit dem Standardwert belegt und gesperrt.
+        - Die Statuszeile wird wieder auf *Bereit* gesetzt.
+
+        Warum das gebraucht wird:
+        - Der Anwender kann damit schnell einen neuen Prüfvorgang starten,
+          ohne alte Inhalte manuell entfernen zu müssen.
+
+        @return Kein Rückgabewert. Die GUI wird direkt zurückgesetzt.
+        '''
+
+        self.entry.delete(0, tk.END)
+        self.output.delete("1.0", tk.END)
+        self.use_default_api_key.set(True)
+        self.on_toggle_api_key_mode()
+        self.status.set("Bereit")
 
 if __name__ == "__main__":
     root = tk.Tk()
