@@ -21,7 +21,8 @@ from Crypto.Util.Padding import unpad
 # Initialisierung #################################################
 ###################################################################
 
-
+key = b'mysecretpassword'                # 16 Byte Passwort
+iv  = b'passwort-salzen!'                # 16 Byte Initialization Vektor
 
 ###################################################################
 # Hilfsfunktionen #################################################
