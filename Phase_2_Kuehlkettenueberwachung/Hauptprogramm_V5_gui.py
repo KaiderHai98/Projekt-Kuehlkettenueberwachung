@@ -105,7 +105,7 @@ class TransportGUI:
         frame_top.pack(fill="x", padx=12)
 
         ctk.CTkLabel(frame_top, text="Transport-ID:").pack(side="left")
-        self.entry = ctk.CTkEntry(frame_top, width=36)
+        self.entry = ctk.CTkEntry(frame_top, width=176)
         self.entry.pack(side="left", padx=(6, 8))
 
         self.check_btn = ctk.CTkButton(frame_top, text="Prüfen", command=self.on_pruefen)
