@@ -144,7 +144,11 @@ class TransportGUI:
         # Farben für Ausgaben definieren
         self.output.tag_config("gruen", foreground="green")
         self.output.tag_config("rot", foreground="red")
-        self.output.tag_config("standard", foreground="black")
+
+        # Ladebalken
+        self.progressbar = ctk.CTkProgressBar(root, mode="determinate")
+        self.progressbar.pack(fill="x", padx=15, pady=(0, 10))
+        self.progressbar.set(0) # Setzt den Balken am Anfang auf 0
 
         self.status = tk.StringVar()
         self.status.set("Bereit")
@@ -212,13 +216,13 @@ class TransportGUI:
         @brief Fügt eine Meldung farblich formatiert in das Ausgabefeld ein.
         @details
         - Nur das Wort "korrekt" wird grün dargestellt.
-        - Bei Fehlermeldungen bleiben Transport-ID, Pfeil und andere Bestandteile schwarz.
+        - Bei Fehlermeldungen bleiben Transport-ID, Pfeil und andere Bestandteile weiss.
         - Nur der eigentliche Meldungstext hinter dem Pfeil wird rot dargestellt.
         '''
 
         if " -> " in text:
             prefix, meldung = text.split(" -> ", 1)
-            self.output.insert(tk.END, prefix + " -> ", "standard")
+            self.output.insert(tk.END, prefix + " -> ")
 
             if meldung.strip().lower() == "korrekt":
                 self.output.insert(tk.END, meldung, "gruen")
@@ -228,7 +232,7 @@ class TransportGUI:
             if text.strip().lower() == "korrekt":
                 self.output.insert(tk.END, text, "gruen")
             else:
-                self.output.insert(tk.END, text, "standard")
+                self.output.insert(tk.END, text)
 
     def on_pruefen(self):
 
@@ -238,7 +242,7 @@ class TransportGUI:
         Diese Methode ist der zentrale Ablauf für die Einzelprüfung.
 
         Was an dieser Stelle passiert:
-        - Zuerst wird die Eingabe aus dem Feld gelesen und von Leerzeichen bereinigt.
+        - Zuerst wird die Eingabe aus dem Feld gelesen, auf Zeichenmenge/ Ziffern geprüft und von Leerzeichen bereinigt.
         - Zusätzlich wird der aktuell gültige API-Key ermittelt.
         - Wenn keine Transport-ID eingegeben wurde, bricht die Methode sofort
           mit einer Fehlermeldung ab.
@@ -265,6 +269,10 @@ class TransportGUI:
 
         transportid = self.entry.get().strip()
         api_key = self.get_aktuellen_api_key()
+
+        if not transportid.isdigit() or len(transportid) != 23:
+            messagebox.showwarning("Fehler", "Die Transport-ID muss aus exakt 23 Ziffern bestehen!")
+            return
 
         if not transportid:
             messagebox.showerror("Fehler", "Bitte eine Transport-ID eingeben!")
@@ -335,11 +343,17 @@ class TransportGUI:
         try:
             self.status.set("Bitte warten, alle Transporte werden geprüft ...")
             self.root.update_idletasks()
+            self.progressbar.set(0)
 
             alle_ids = get_alle_transport_ids(verbindungs_i)
             ergebnisse = []
 
-            for tid in alle_ids:
+            # Zähler für die Statistik
+            anzahl_korrekt = 0
+            anzahl_fehlerhaft = 0
+            total_ids = len(alle_ids)
+
+            for index, tid in enumerate(alle_ids):
                 transport_daten, _ = get_transport_daten(tid, verbindungs_i)
                 temperatur_daten, _ = get_temperatur_daten(transport_daten, verbindungs_i)
                 company_daten, _ = get_company_daten(transport_daten, verbindungs_i)
@@ -353,17 +367,36 @@ class TransportGUI:
                     api_key,
                 )
 
+                hat_fehler = False
                 for m in meldungen:
                     ergebnisse.append((tid, m))
+                    if m.strip().lower() != "korrekt":
+                        hat_fehler = True
+
+                # Zähler für Fehler erhöhen
+                if hat_fehler:
+                    anzahl_fehlerhaft += 1
+                else:
+                    anzahl_korrekt += 1
+
+                # Ladebalken aktualisieren (Aktueller Schritt geteilt durch Gesamtanzahl)
+                self.progressbar.set((index + 1) / total_ids)
+                self.root.update_idletasks()
 
             ergebnisse.sort(key=lambda x: (x[1], x[0]))
 
             self.output.delete("1.0", tk.END)
-            self.output.insert(tk.END, "Alle Transport-IDs - Prüfungen\n", "standard")
-            self.output.insert(tk.END, "==================================================\n", "standard")
+            self.output.insert(tk.END, "Alle Transport-IDs - Prüfungen\n")
+            self.output.insert(tk.END, "==================================================\n")
 
             for tid, m in ergebnisse:
                 self.ausgabe_meldung_einfuegen(f"{tid} -> {m}\n")
+
+            #Statistik am Ende
+            self.output.insert(tk.END, "\n==================================================\n")
+            self.output.insert(tk.END, f"Zusammenfassung: {total_ids} Transporte geprüft\n")
+            self.output.insert(tk.END, f"Korrekt: {anzahl_korrekt}\n", "gruen")
+            self.output.insert(tk.END, f"Fehlerhaft: {anzahl_fehlerhaft}\n", "rot")
 
             self.status.set(f"{len(alle_ids)} Transporte geprüft")
 
@@ -395,6 +428,7 @@ class TransportGUI:
         self.output.delete("1.0", tk.END)
         self.use_default_api_key.set(True)
         self.on_toggle_api_key_mode()
+        self.progressbar.set(0)
         self.status.set("Bereit")
 
 if __name__ == "__main__":
