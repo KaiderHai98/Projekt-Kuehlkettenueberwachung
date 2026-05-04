@@ -1,8 +1,8 @@
 # ##############################################################################################################
 # Hauptprogramm: CoolChainProjekt
-#  Datei: Hauptprogramm_V4.py
+#  Datei: Hauptprogramm_V5.py
 #
-# Version: 4 vom: 21.04.2026
+# Version: 5 vom: 28.04.2026
 # Autoren: Josie Woeste, Hannes Ruhe, Kai Meiners
 #
 # Zugehörige Libarys:
