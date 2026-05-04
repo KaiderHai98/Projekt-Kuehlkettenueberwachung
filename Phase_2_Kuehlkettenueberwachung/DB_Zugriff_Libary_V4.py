@@ -2,11 +2,11 @@
 ## Libary: CoolChainProjekt
 #  Datei: DB_Zugriff_Libary_V4.py
 #
-# Version: 4 vom: 21.04.2026
+# Version: 4 vom: 04.05.2026
 # Autoren: Josie Woeste, Hannes Ruhe, Kai Meiners
 #
 # Zugehöriges Hauptprogramm:
-# - Hauptprogramm_V4.py
+# - Hauptprogramm_V5.py
 # 
 # Funktionsbeschreibung: 
 # Libary zur einholung der Datenbankdaten
