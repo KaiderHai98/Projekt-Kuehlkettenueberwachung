@@ -77,7 +77,7 @@ class TransportGUI:
         - Das Hauptfenster bekommt Titel, Größe und Verhalten.
         - Danach werden nacheinander alle sichtbaren GUI-Elemente erzeugt:
           Eingabefeld, Buttons, API-Key-Feld, Haken für Standard-API-Key,
-          Ausgabefeld und Statuszeile.
+          Ausgabefeld, Ladebalken (Progressbar) und Statuszeile.
         - Die Widgets werden direkt mit ihren Funktionen verbunden,
           zum Beispiel der Button *Prüfen* mit der Methode *on_pruefen()*.
 
@@ -315,13 +315,16 @@ class TransportGUI:
         Diese Methode ist die Sammelprüfung des Programms.
 
         Was an dieser Stelle passiert:
-        - Zuerst wird der aktuell gültige API-Key gelesen.
+        - Zuerst wird der aktuell gültige API-Key gelesen und der Ladebalken zurückgesetzt..
         - Danach holt das Programm mit *get_alle_transport_ids()* eine Liste
           aller bekannten Transporte aus der Datenbank.
         - Anschließend läuft eine for-Schleife über jede einzelne ID.
+        - Während der Schleife: Der Ladebalken (Progressbar) wird kontinuierlich aktualisiert, 
+          damit der Anwender den Fortschritt sieht. Gleichzeitig wird für die Statistik mitgezählt.
         - Für jede ID werden wieder alle benötigten Daten geladen und an
           *verarbeite_transport()* übergeben.
         - Die gefundenen Meldungen werden gesammelt und am Ende sortiert ausgegeben.
+        - Zum Schluss wird eine Statistik (Anzahl Korrekt/Fehlerhaft) angehängt.
 
         Wie das Programm das grob handhabt:
         - Die Methode benutzt für alle Transporte denselben Prüfablauf wie bei
@@ -334,6 +337,7 @@ class TransportGUI:
         Warum das gebraucht wird:
         - Der Anwender soll nicht jede Transport-ID einzeln per Hand prüfen müssen.
         - Diese Methode ermöglicht eine vollständige Gesamtprüfung der Datenbank.
+        - Die zusätzliche Statistik und der Ladebalken verbessern die Benutzerfreundlichkeit.
 
         @return Kein Rückgabewert. Die Ergebnisse werden gesammelt in der GUI ausgegeben.
         '''
