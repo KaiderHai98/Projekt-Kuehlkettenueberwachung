@@ -118,7 +118,7 @@ Dieses Repository dokumentiert die Entwicklung des Projekts über mehrere Projek
 **Visual Studios starten, Folder Projekt-Hauptordner ("Projekt-Kuelkettenueberwachung") öffnen und folgendes im Terminal ausführen:**
 
 #### Befehl:
-$doxyfile = Get-ChildItem -Path . -Filter "Doxyfile" -File -Recurse | Select-Object -First 1
+```$doxyfile = Get-ChildItem -Path . -Filter "Doxyfile" -File -Recurse | Select-Object -First 1
 
 if (-not $doxyfile) {
     Write-Host "Keine Doxyfile gefunden. Bitte PowerShell im Projektordner oder einem übergeordneten Ordner öffnen."
