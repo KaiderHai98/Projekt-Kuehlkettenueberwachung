@@ -113,10 +113,32 @@ Dieses Repository dokumentiert die Entwicklung des Projekts über mehrere Projek
 5. Dort einen lokalen Python-Webserver starten
 6. Die Dokumentation im Browser unter `http://127.0.0.1:8000` öffnen
 
-### Beispielbefehle unter Windows
+### Beispielbefehl: Doxygen-Doku öffen unter Windows mit Automatischen Start
 
-```powershell
-rmdir /s /q docs
+**Visual Studios starten, Folder Projekt-Hauptordner ("Projekt-Kuelkettenueberwachung") öffnen und folgendes im Terminal ausführen:**
+
+$doxyfile = Get-ChildItem -Path . -Filter "Doxyfile" -File -Recurse | Select-Object -First 1
+
+if (-not $doxyfile) {
+    Write-Host "Keine Doxyfile gefunden. Bitte PowerShell im Projektordner oder einem übergeordneten Ordner öffnen."
+    exit
+}
+
+Set-Location $doxyfile.Directory.FullName
+
+if (Test-Path ".\docs") {
+    Remove-Item ".\docs" -Recurse -Force
+}
+
 doxygen Doxyfile
-cd .\docs\html
+
+if (-not (Test-Path ".\docs\html\index.html")) {
+    Write-Host "Doxygen wurde nicht korrekt erzeugt. docs/html/index.html fehlt."
+    exit
+}
+
+Set-Location ".\docs\html"
+
+Start-Process "http://127.0.0.1:8000/index.html"
+
 python -m http.server 8000
